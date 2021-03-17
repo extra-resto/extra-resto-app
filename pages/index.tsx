@@ -10,7 +10,7 @@ export default function Home() {
         <title>extra-resto - Home</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <div>Hello World</div>
+      <div>Hello from HomePage</div>
     </div>
     </Layout>
   );
