@@ -1,9 +1,10 @@
 import Link from 'next/link';
+import styles from './Navbar.module.scss';
 
 const Navbar = () => {
   return (
     <>
-      <nav className='Navbar'>
+      <nav className={styles.Navbar}>
       <Link href='/'>
 	      <a>Home </a>
       </Link>

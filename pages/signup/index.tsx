@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import Head from 'next/head';
-import Layout from '../components/Layout';
-
-import FormSignUp from '../components/FormSignUp';
+import Layout from '../../components/Layout';
+import FormSignUp from '../../components/FormSignUp';
 
 const SignUp: React.FunctionComponent = () => {
   return (
