@@ -25,8 +25,10 @@ const FormSignUp = () => {
 
   return (
     <form onSubmit={registerUser}>
-      <label htmlFor="name">Name</label>
-      <input id="name" name="name" type="text" autoComplete="name" required />
+      <label htmlFor="first_name">First Name</label>
+      <input id="first_name" name="first_name" type="text" autoComplete="first_name" required />
+      <label htmlFor="last_name">Last Name</label>
+      <input id="last_name" name="last_name" type="text" autoComplete="last_name" required />
       <label htmlFor="email">Email</label>
       <input id="email" name="email" type="email" autoComplete="email" required />
       <label htmlFor="password">Password</label>

@@ -10,6 +10,9 @@ const Navbar = () => {
       <Link href='/signup'>
 	      <a>SignUp</a>
       </Link>
+      <Link href='/login'>
+	      <a>Login</a>
+      </Link>
       </nav>
     </>
   )
