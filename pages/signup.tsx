@@ -2,19 +2,21 @@ import React, { FunctionComponent } from 'react';
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import styles from '../styles/Home.module.css';
+import FormSignUp from '../components/FormSignUp';
 
-const Home: React.FunctionComponent = () => {
+const SignUp: React.FunctionComponent = () => {
   return (
     <Layout>
     <div>
       <Head>
-        <title>extra-resto - Home</title>
+        <title>extra-resto - SignUp</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <div>Hello from HomePage</div>
+      <div>Hello from Signup</div>
+      <FormSignUp />
     </div>
     </Layout>
   );
 }
 
-export default Home;
+export default SignUp;
