@@ -1,4 +1,5 @@
-import Router from 'next/router'
+import Router from 'next/router';
+import styles from './FormLogin.module.scss';
 
 const FormLogin = () => {
   const handleLogin = async event => {
@@ -17,13 +18,12 @@ const FormLogin = () => {
       method: 'POST'
     })
 
-    const result = await res.json()
-    // result.user => 'Ada Lovelace'
+    const result = await res.json();
     Router.push('/');
   }
 
   return (
-    <form onSubmit={handleLogin}>
+    <form className={styles.FormLogin} onSubmit={handleLogin}>
       <label htmlFor="email">Email</label>
       <input id="email" name="email" type="email" autoComplete="email" required />
       <label htmlFor="password">Password</label>
