@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import Head from 'next/head';
 import Layout from '../../components/Layout';
-import FormSignUp from '../../components/FormSignUp';
+import FormLogin from '../../components/FormLogin';
 
 const Login: React.FunctionComponent = () => {
   return (
@@ -11,8 +11,8 @@ const Login: React.FunctionComponent = () => {
           <title>extra-resto - Login</title>
           <link rel='icon' href='/favicon.ico' />
         </Head>
-        <div>Hello from Login</div>
-        <FormSignUp />
+        <h1>Hello from Login</h1>
+        <FormLogin />
       </div>
     </Layout>
   );

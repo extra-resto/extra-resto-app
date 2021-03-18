@@ -1,12 +1,20 @@
 import Link from 'next/link';
 import styles from './Navbar.module.scss';
+import Image from 'next/image';
 
-const Navbar = () => {
+export const Navbar = () => {
   return (
     <>
       <nav className={styles.Navbar}>
       <Link href='/'>
-	      <a>Home </a>
+	      <a>
+        <Image 
+          src="/images/Navbar/eye.svg"
+          height={120} 
+          width={120} 
+          alt="Your Name"
+        />
+        </a>
       </Link>
       <Link href='/signup'>
 	      <a> SignUp </a>

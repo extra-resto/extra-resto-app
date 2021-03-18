@@ -1,7 +1,8 @@
+import styles from './Layout.module.scss';
 import Navbar from '../Navbar';
 
 const Layout = ({ children }) => (
-  <div>
+  <div className={styles.Layout}>
     <Navbar />
     {children}
   </div>
