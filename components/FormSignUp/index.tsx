@@ -2,7 +2,7 @@ import Router from 'next/router';
 import styles from './FormSignUp.module.scss';
 import { useState, useEffect } from 'react';
 
-const FormSignUp = () => {
+const FormSignUp = ({ setStep }) => {
   const [form, setForm] = useState({ 
     first_name: '',
     last_name: '',
@@ -35,6 +35,7 @@ const FormSignUp = () => {
           body: JSON.stringify({ user: form })
       })
       const result = await req.json();
+      setStep(2);
       console.log(result);
 
       Router.push('/');
