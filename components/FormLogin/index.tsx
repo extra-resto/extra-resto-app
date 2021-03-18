@@ -5,7 +5,7 @@ const FormLogin = () => {
   const handleLogin = async event => {
     event.preventDefault()
 
-    const res = await fetch('http://localhost:3000/api/login', {
+    const res = await fetch('https://extra-resto-api.herokuapp.com/api/login', {
       body: JSON.stringify({
         user: {
           email: event.target.email.value,

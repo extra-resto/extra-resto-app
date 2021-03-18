@@ -5,7 +5,7 @@ const FormSignUp = () => {
   const registerUser = async event => {
     event.preventDefault()
 
-    const res = await fetch('http://localhost:3000/api/signup', {
+    const res = await fetch('https://extra-resto-api.herokuapp.com/api/signup', {
       body: JSON.stringify({
         user: {
           first_name: event.target.first_name.value,
