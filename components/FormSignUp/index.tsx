@@ -1,6 +1,6 @@
-import Router from 'next/router';
 import styles from './FormSignUp.module.scss';
 import { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 const FormSignUp = ({ setStep }) => {
   const [form, setForm] = useState({ 
@@ -34,11 +34,29 @@ const FormSignUp = ({ setStep }) => {
           },
           body: JSON.stringify({ user: form })
       })
+      const token = req.headers.get('Authorization');
+      Cookies.set('token', token)
       const result = await req.json();
+      registerEmployer(token)
       setStep(2);
-      console.log(result);
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-      Router.push('/');
+  const registerEmployer = async (token) => {
+    console.log(token)
+    try {
+      const req = await fetch('http://localhost:3000/api/employers', {
+        method: 'POST',
+        headers: {
+          'Authorization': token,
+          'Content-Type': 'application/json'
+        }
+      })
+      const result = await req.json();
+      console.log(result)
+      
     } catch (error) {
       console.log(error)
     }
@@ -91,19 +109,19 @@ const FormSignUp = ({ setStep }) => {
         />
         <label htmlFor="last_name">Nom de Famille</label>
         <input 
-          name="last_name" 
-          type="text" 
-          autoComplete="last_name" 
-          onChange={handleChange} 
-          required 
+          name="last_name"
+          type="text"
+          autoComplete="last_name"
+          onChange={handleChange}
+          required
         />
         <label htmlFor="phone_number">n° de Téléphone</label>
         <input 
-          name="phone_number" 
-          type="text" 
-          autoComplete="phone_number" 
-          onChange={handleChange} 
-          required 
+          name="phone_number"
+          type="text"
+          autoComplete="phone_number"
+          onChange={handleChange}
+          required
         />
         <label htmlFor="email">Email</label>
         <input 
