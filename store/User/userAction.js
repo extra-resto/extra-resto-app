@@ -3,6 +3,11 @@ export const setUser = (token) => ({
   token
 });
 
+export const setEmployer = (id) => ({
+  type: "SET_EMPLOYER",
+  id
+});
+
 export const setLogout = () => ({
   type: "SET_LOGOUT"
 });

@@ -7,7 +7,9 @@ import Cookies from 'js-cookie';
 let store
 
 const initialState = {
-  token: Cookies.get('token')
+  token: Cookies.get('token'),
+  role: Cookies.get('role'),
+  id: Cookies.get('id')
 }
 
 function initStore(preloadedState = initialState) {

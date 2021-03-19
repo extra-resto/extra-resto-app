@@ -1,21 +1,25 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+
 
 const SignupEmployer = () => {
+  const employer = useSelector(state => state);
   const [form, setForm] = useState({ 
     name: '',
     adress: '',
     postal_code: '',
-    city: '',
+    city: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({name: ''});
+  const router = useRouter();
 
   useEffect(() => {
     if (isSubmitting) {
       if (errors.name === '') {
-        registerEmployer();
+        registerBusiness();
       }
       else {
         setIsSubmitting(false);
@@ -23,20 +27,19 @@ const SignupEmployer = () => {
     }
   }, [errors])
 
-  const registerEmployer = async () => {
-    const token = Cookies.get('token')
-    console.log(token)
+  const registerBusiness = async () => {
+    console.log(employer);
     try {
       const req = await fetch('http://localhost:3000/api/businesses', {
         method: 'POST',
         headers: {
-          'Authorization': token,
+          'Authorization': employer.token,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(form)
+        body: JSON.stringify({...form, employer_id: `${employer.id}`})
       })
       const result = await req.json();
-      console.log(result);
+      router.push("/");
       
     } catch (error) {
       console.log(error)

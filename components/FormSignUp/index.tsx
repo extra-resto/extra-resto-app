@@ -1,12 +1,10 @@
 import styles from './FormSignUp.module.scss';
 import { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
-import { setUser } from '../../store/User/userAction';
-import { useDispatch, useSelector } from 'react-redux';
+import { setUser, setEmployer } from '../../store/User/userAction';
+import { useDispatch } from 'react-redux';
 
 const FormSignUp = ({ setStep }) => {
   const dispatch = useDispatch();
-  const tokensel = useSelector(state => state.token)
   const [form, setForm] = useState({ 
     first_name: '',
     last_name: '',
@@ -42,9 +40,6 @@ const FormSignUp = ({ setStep }) => {
       dispatch(setUser(token))
       const result = await req.json();
       registerEmployer(token)
-      console.log("iciiiiiiiiii")
-      console.log(tokensel)
-
       setStep(2);
     } catch (error) {
       console.log(error)
@@ -61,8 +56,7 @@ const FormSignUp = ({ setStep }) => {
         }
       })
       const result = await req.json();
-      console.log(result)
-      
+      dispatch(setEmployer(result.id));
     } catch (error) {
       console.log(error)
     }
