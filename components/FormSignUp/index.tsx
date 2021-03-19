@@ -1,8 +1,12 @@
 import styles from './FormSignUp.module.scss';
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
+import { setUser } from '../../store/User/userAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 const FormSignUp = ({ setStep }) => {
+  const dispatch = useDispatch();
+  const tokensel = useSelector(state => state.token)
   const [form, setForm] = useState({ 
     first_name: '',
     last_name: '',
@@ -35,9 +39,12 @@ const FormSignUp = ({ setStep }) => {
           body: JSON.stringify({ user: form })
       })
       const token = req.headers.get('Authorization');
-      Cookies.set('token', token)
+      dispatch(setUser(token))
       const result = await req.json();
       registerEmployer(token)
+      console.log("iciiiiiiiiii")
+      console.log(tokensel)
+
       setStep(2);
     } catch (error) {
       console.log(error)
@@ -45,7 +52,6 @@ const FormSignUp = ({ setStep }) => {
   }
 
   const registerEmployer = async (token) => {
-    console.log(token)
     try {
       const req = await fetch('http://localhost:3000/api/employers', {
         method: 'POST',
