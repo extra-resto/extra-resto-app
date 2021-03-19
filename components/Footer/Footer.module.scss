@@ -1,11 +1,16 @@
+@import "../../styles/colors.scss";
+
 .Footer {
   margin-bottom: 0;
-  background-color: #c7efcf;
+  background-color: $green;
   height: 10vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
+  ul {
+    list-style: none;
+  }
   a:hover {
     color: red;
   }

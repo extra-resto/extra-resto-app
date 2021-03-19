@@ -1,11 +1,13 @@
+@import "../../styles/colors.scss";
+
 .Navbar {
-  background-color: lightgrey;
+  background-color: $green;
   height: 10vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
   a:hover {
-  	color: red;
+    color: red;
   }
 }

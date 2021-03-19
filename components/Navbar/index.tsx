@@ -10,11 +10,14 @@ export const Navbar = () => {
 	      <a>
         <Image 
           src="/images/Navbar/eye.svg"
-          height={120} 
-          width={120} 
-          alt="Your Name"
+          height={90} 
+          width={90} 
+          alt="extra-resto logo"
         />
         </a>
+      </Link>
+      <Link href='/concept'>
+	      <a> Le Concept</a>
       </Link>
       <Link href='/signup'>
 	      <a> SignUp </a>

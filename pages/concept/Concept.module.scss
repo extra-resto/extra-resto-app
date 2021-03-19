@@ -1,0 +1,42 @@
+@import "../../styles/colors.scss";
+
+.Concept {
+  min-height: 80vh;
+  max-width: 1200px;
+  &__Hero {
+    display: flex;
+    flex-direction: row;
+    &__image,
+    &__cta {
+      display: flex;
+      flex-direction: column;
+    }
+    &__cta {
+      width: 70%;
+      h1 {
+        line-height: 1.25;
+        font-size: 3rem;
+      }
+      h2 {
+        line-height: 1.625;
+        font-size: 1.5rem;
+      }
+      button {
+        background-color: $orange;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+      }
+      &__buttons {
+        text-align: center;
+      }
+    }
+  }
+}
