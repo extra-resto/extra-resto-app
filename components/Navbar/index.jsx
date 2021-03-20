@@ -3,7 +3,7 @@ import styles from './Navbar.module.scss';
 import Image from 'next/image';
 import Modal from 'react-modal';
 import React, { useState } from 'react';
-import Logout from '../Logout';
+import Logout from 'components/Logout';
 import { useSelector } from 'react-redux';
 
 const customStyles = {

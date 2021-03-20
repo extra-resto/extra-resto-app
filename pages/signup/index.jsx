@@ -1,12 +1,9 @@
-import React, { FunctionComponent, useState } from 'react';
+import Link from 'next/link';
 import Head from 'next/head';
 import Layout from 'components/Layout';
-import FormSignUp from 'components/FormSignUp';
 import styles from './SignUp.module.scss';
-import SignupEmployer from 'components/SignupEmployer';
 
 const SignUp = () => {
-  const [step, setStep] = useState(1)
 
   return (
     <Layout>
@@ -16,10 +13,8 @@ const SignUp = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <h1>S'enregistrer</h1>
-      {step === 1 ? 
-        <FormSignUp setStep={setStep} /> :
-        <SignupEmployer />
-      }
+      <a>Je suis employeur</a>
+      <a>Je suis candidat</a>
     </div>
     </Layout>
   );
