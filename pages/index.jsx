@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Layout from '../components/Layout';
 import styles from './Home.module.scss'
 
-const Home: React.FunctionComponent = () => {
+const Home = () => {
   return (
     <Layout>
     <div className={styles.Home}>

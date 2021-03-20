@@ -4,7 +4,7 @@ import Layout from '../../components/Layout';
 import styles from './Concept.module.scss';
 import Image from 'next/image';
 
-const Concept: React.FunctionComponent = () => {
+const Concept = () => {
   return (
     <Layout>
     <div className={styles.Concept}>

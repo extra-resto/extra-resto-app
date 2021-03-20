@@ -5,7 +5,7 @@ import FormSignUp from '../../components/FormSignUp';
 import styles from './SignUp.module.scss';
 import SignupEmployer from '../../components/SignupEmployer';
 
-const SignUp: React.FunctionComponent = () => {
+const SignUp = () => {
   const [step, setStep] = useState(1)
 
   return (
