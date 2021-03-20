@@ -3,6 +3,8 @@ import styles from './Navbar.module.scss';
 import Image from 'next/image';
 import Modal from 'react-modal';
 import React, { useState } from 'react';
+import Logout from '../Logout';
+import { useSelector } from 'react-redux';
 
 const customStyles = {
   content : {
@@ -19,6 +21,7 @@ Modal.setAppElement('#__next');
 
 export const Navbar = () => {
   const [modalIsOpen,setIsOpen] = React.useState(false);
+  const token = useSelector(state => state.token);
 
   function openModal() {
     setIsOpen(true);
@@ -30,6 +33,7 @@ export const Navbar = () => {
   function closeModal(){
     setIsOpen(false);
   }
+
 
   return (
     <>
@@ -47,30 +51,38 @@ export const Navbar = () => {
         <Link href='/concept'>
   	      <a>Le Concept</a>
         </Link>
-        <a onClick={openModal}>S'inscrire</a>
-        <Modal
-          isOpen={modalIsOpen}
-          onAfterOpen={afterOpenModal}
-          onRequestClose={closeModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-          <div className={styles.Modal}>
-            <div className={styles.Modal__candidate}>
-              <h2>Je cherche du travail</h2>
-              <h3>Je suis Candidat</h3>
-            </div>
-            <Link href='/signup/employer'>
-              <a className={styles.Modal__employer}>
-                <h2>Je possède une entreprise et je cherche à recruter</h2>
-                <h3>Je suis Employeur</h3>
-              </a>
+
+        {token ? (
+          <Logout />
+        ):
+        (
+          <>
+            <a onClick={openModal}>S'inscrire</a>
+            <Modal
+              isOpen={modalIsOpen}
+              onAfterOpen={afterOpenModal}
+              onRequestClose={closeModal}
+              style={customStyles}
+              contentLabel="Example Modal"
+            >
+              <div className={styles.Modal}>
+                <div className={styles.Modal__candidate}>
+                  <h2>Je cherche du travail</h2>
+                  <h3>Je suis Candidat</h3>
+                </div>
+                <Link href='/signup/employer'>
+                  <a className={styles.Modal__employer}>
+                    <h2>Je possède une entreprise et je cherche à recruter</h2>
+                    <h3>Je suis Employeur</h3>
+                  </a>
+                </Link>
+              </div>
+            </Modal>
+            <Link href='/login'>
+              <a>Se Connecter</a>
             </Link>
-          </div>
-        </Modal>
-        <Link href='/login'>
-          <a>Se Connecter</a>
-        </Link>
+          </>
+        )}
       </nav>
     </>
   )
