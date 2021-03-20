@@ -31,7 +31,7 @@ const FormLogin = () => {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ form })
+          body: JSON.stringify({ user: form })
       })
       const token = req.headers.get('Authorization');
       dispatch(setUser(token))
@@ -64,7 +64,7 @@ const FormLogin = () => {
     if(form.email.match(/^[A-z]+@[A-z]+.[A-z]+$/) === null) {
       err.email = 'Veuillez entrer une adresse email valide'
     }
-    
+
     return err;
   }
 
