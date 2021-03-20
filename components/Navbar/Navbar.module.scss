@@ -14,17 +14,28 @@
 
 .Modal {
   display: flex;
+  height: 70vh;
   &__employer,
   &__candidate {
     width: 70%;
-    text-align: center;
-    border-radius: 40px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &__text {
+      text-align: center;
+    }
+  }
+  &__candidate {
+    background-color: $green;
+  }
+  &__candidate:hover {
+    background-color: $lightgreen;
   }
   &__employer {
-    background-color: #ff8b36;
+    background-color: $orange;
   }
   &__employer:hover {
-    background-color: $orange;
-    box-shadow: 10px 10px 5px black;
+    background-color: $lightorange;
   }
 }
