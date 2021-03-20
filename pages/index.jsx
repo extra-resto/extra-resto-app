@@ -7,9 +7,13 @@ import { useSelector } from 'react-redux';
 const Home = () => {
   const user = useSelector(state => state);
 
+  const logState = () => {
+    console.log(user);
+  }
+
   return (
     <Layout>
-    <div className={styles.Home}>
+    <div className={styles.Home} onClick={logState}>
       <Head>
         <title>extra-resto - Home</title>
         <link rel='icon' href='/favicon.ico' />
