@@ -15,7 +15,7 @@ const SignUp = () => {
         <title>extra-resto - S'enregistrer</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <h1>S'enregistrer</h1>
+      <h1>Nouvel employeur</h1>
       {step === 1 ? 
         <FormSignUp setStep={setStep} /> :
         <SignupEmployer />

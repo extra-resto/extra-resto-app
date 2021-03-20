@@ -1,7 +1,8 @@
 import styles from './FormSignUp.module.scss';
 import { useState, useEffect } from 'react';
-import { setUser, setEmployer } from 'store/User/userAction';
+import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 
 const FormSignUp = ({ setStep }) => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const FormSignUp = ({ setStep }) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({password: '', phone_number: ''});
+  const router = useRouter();
 
   useEffect(() => {
     if (isSubmitting) {
@@ -39,8 +41,14 @@ const FormSignUp = ({ setStep }) => {
       const token = req.headers.get('Authorization');
       dispatch(setUser(token))
       const result = await req.json();
-      registerEmployer(token)
-      setStep(2);
+ 
+      if (step == 0) {
+        registerCandidate(token)
+      } else {
+        registerEmployer(token)
+        setStep(2);
+      }
+
     } catch (error) {
       console.log(error)
     }
@@ -57,6 +65,23 @@ const FormSignUp = ({ setStep }) => {
       })
       const result = await req.json();
       dispatch(setEmployer(result.id));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const registerCanadidate = async (token) => {
+    try {
+      const req = await fetch('http://localhost:3000/api/candidates', {
+        method: 'POST',
+        headers: {
+          'Authorization': token,
+          'Content-Type': 'application/json'
+        }
+      })
+      const result = await req.json();
+      dispatch(setCandidate(result.id));
+      router.push("/");
     } catch (error) {
       console.log(error)
     }
