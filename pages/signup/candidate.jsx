@@ -16,7 +16,7 @@ const SignUp = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <h1>Nouveau candidat</h1>
-        <FormSignUp setStep={setStep} />
+        <FormSignUp step={step} />
     </div>
     </Layout>
   );
