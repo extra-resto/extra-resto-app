@@ -13,14 +13,18 @@
 }
 
 .Modal {
-	display: flex;
-	&__employer, &__candidate {
-		width: 70%;
-	}
-	&__employer {
-		background-color: orange;
-	}
-	&__employer:hover {
-		background-color: red;
-	}
+  display: flex;
+  &__employer,
+  &__candidate {
+    width: 70%;
+    text-align: center;
+    border-radius: 40px;
+  }
+  &__employer {
+    background-color: #ff8b36;
+  }
+  &__employer:hover {
+    background-color: $orange;
+    box-shadow: 10px 10px 5px black;
+  }
 }
