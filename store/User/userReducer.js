@@ -22,6 +22,14 @@ const userReducer = (state = initialState, action) => {
         role: "employer",
         id: action.id
       }
+    case "SET_CANDIDATE":
+      Cookies.set('role', "candidate");
+      Cookies.set('id', action.id);
+      return {
+        ...state,
+        role: "candidate",
+        id: action.id
+      }
     case "SET_LOGOUT":
       Cookies.remove('token');
       Cookies.remove('role');
