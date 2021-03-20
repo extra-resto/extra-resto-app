@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-
+import styles from './SignupEmployer.module.scss';
 
 const SignupEmployer = () => {
   const employer = useSelector(state => state);
@@ -61,11 +61,8 @@ const SignupEmployer = () => {
   }
 
   const validate = () => {
-    type Err = {
-      name: string;
-    }
 
-    let err: Err = { name: '' };
+    let err = { name: '' };
 
     if(!form.name) {
       err.name = 'Password and confirmation password are different'
@@ -77,7 +74,8 @@ const SignupEmployer = () => {
   return (
     <>
       {errors.name ? <p>La confirmation de mot de passe est différente du mot de passse</p> : null}
-      <form onSubmit={handleSubmit}>
+      <h2>Mon entreprise</h2>
+      <form className={styles.SignupEmployer} onSubmit={handleSubmit}>
         <label htmlFor="name">Nom de l'établissement</label>
         <input 
           name="name" 
@@ -110,7 +108,7 @@ const SignupEmployer = () => {
           onChange={handleChange} 
           required 
         />
-        <button type="submit">Valider</button>
+        <button type="submit">Enregistrer</button>
       </form>
     </>
   )

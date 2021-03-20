@@ -1,6 +1,6 @@
 import styles from './FormSignUp.module.scss';
 import { useState, useEffect } from 'react';
-import { setUser, setEmployer } from '../../store/User/userAction';
+import { setUser, setEmployer } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
 
 const FormSignUp = ({ setStep }) => {
@@ -77,12 +77,8 @@ const FormSignUp = ({ setStep }) => {
   }
 
   const validate = () => {
-    type Err = {
-      password: string;
-      phone_number: string;
-    }
 
-    let err: Err = { password: '', phone_number: '' };
+    let err = { password: '', phone_number: '' };
 
     if(form.password !== form.password_confirmation) {
       err.password = 'Password and confirmation password are different'

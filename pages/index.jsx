@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import Head from 'next/head';
-import Layout from '../components/Layout';
+import Layout from 'components/Layout';
 import styles from './Home.module.scss'
 
 const Home = () => {

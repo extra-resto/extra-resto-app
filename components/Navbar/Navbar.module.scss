@@ -11,3 +11,16 @@
     color: red;
   }
 }
+
+.Modal {
+	display: flex;
+	&__employer, &__candidate {
+		width: 70%;
+	}
+	&__employer {
+		background-color: orange;
+	}
+	&__employer:hover {
+		background-color: red;
+	}
+}
