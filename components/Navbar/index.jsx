@@ -1,8 +1,12 @@
 import Link from 'next/link';
 import styles from './Navbar.module.scss';
 import Image from 'next/image';
+import Logout from '../Logout';
+import { useSelector } from 'react-redux';
 
 export const Navbar = () => {
+  const token = useSelector(state => state.token);
+
   return (
     <>
       <nav className={styles.Navbar}>
@@ -19,12 +23,21 @@ export const Navbar = () => {
       <Link href='/concept'>
 	      <a> Le Concept</a>
       </Link>
-      <Link href='/signup'>
-	      <a> SignUp </a>
-      </Link>
-      <Link href='/login'>
-	      <a> Login </a>
-      </Link>
+      {token ? (
+        <Logout />
+      ) :
+      ( 
+        <>
+          <Link href='/signup'>
+            <a> SignUp </a>
+          </Link>
+          <Link href='/login'>
+            <a> Login </a>
+          </Link>
+        </>
+      )}
+      
+      
       </nav>
     </>
   )
