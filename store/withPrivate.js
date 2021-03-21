@@ -1,18 +1,18 @@
-import { initialState } from './store';
-import Login from '../pages/login';
+import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
+import Login from '../pages/login';
 
 const withPrivate = Component => {
   const Auth = (props) => {
+    const token = useSelector(state => state.token)
     const router = useRouter();
     // Login data added to props via redux-store (or use react context for example)
-    const { token } = initialState;
 
     // If user is not logged in, return login component
     if (!token) {
-      return ()=>{
-        router.push('/')
-      }
+      return (
+        <Login />
+      )
     }
 
     // If user is logged in, return original component
