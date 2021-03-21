@@ -1,34 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# extra-resto API (MVP)
 
-First, run the development server:
+## The project
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+This project is a  dummy F&B temporary job platform, coded during THP Next bootcamp 2021.
+This repository hosts the dedicated client app.
+It works in pair with its own [API](https://github.com/extra-resto/extra-resto-API)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app allows business owners to post events, and fill their staff needs, and candidates to seek and apply to jobs.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Database structure
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+<p align="center">
+  <img alt="extra-resto database scheme" src="./public/images/extra-resto_min.png"/>
+</p>
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Accesses
 
-## Learn More
+|Role|Email|Password                                                  
+|-|-|-|
+| `Admin` | admin@test.fr | azerty     
+| `Employer` | employer@test.fr |azerty
+| `Candidate` |candidate@test.fr |azerty
 
-To learn more about Next.js, take a look at the following resources:
+## Try the app: [extra-resto.fr](https://www.extra-resto.fr)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [Next.js](https://github.com/vercel/next.js)
+- [React](https://github.com/facebook/react)
+- [Node Sass](https://github.com/sass/node-sass)
 
-## Deploy on Vercel
+## Potential Improvements
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contributors
+
+- [:cactus: Dylan Pecqueux](https://github.com/dylan-pecqueux)
+- [:deciduous_tree: Stephen Toulouse](https://github.com/stephen2790022)
+- [:evergreen_tree: Gaëtan Altier](https://github.com/Badgaga23)
+- [:seedling: Mathieu Joly](https://github.com/mathieu-superpose)
