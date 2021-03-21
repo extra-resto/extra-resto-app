@@ -1,9 +1,13 @@
 import React, { FunctionComponent, useState } from 'react';
+
+import styles from './SignUp.module.scss';
+
 import Head from 'next/head';
 import Layout from 'components/Layout';
-import FormSignUp from 'components/FormSignUp';
-import styles from './SignUp.module.scss';
-import SignupEmployer from 'components/SignupEmployer';
+import FormEmployerSignup from 'components/FormEmployerSignup';
+import FormBusinessSignup from 'components/FormBusinessSignup';
+
+
 
 const SignUp = () => {
   const [step, setStep] = useState(1)
@@ -17,8 +21,8 @@ const SignUp = () => {
       </Head>
       <h1>Nouvel employeur</h1>
       {step === 1 ? 
-        <FormSignUp setStep={setStep} step={step} /> :
-        <SignupEmployer />
+        <FormEmployerSignup setStep={setStep} /> :
+        <FormBusinessSignup />
       }
     </div>
     </Layout>

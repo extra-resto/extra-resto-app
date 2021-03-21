@@ -1,10 +1,10 @@
-import styles from './FormSignUp.module.scss';
+import styles from './FormEmployerSignup.module.scss';
 import { useState, useEffect } from 'react';
 import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 
-const FormSignUp = ({setStep}) => {
+const FormEmployerSignup = ({setStep}) => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({ 
     first_name: '',
@@ -41,14 +41,8 @@ const FormSignUp = ({setStep}) => {
       const token = req.headers.get('Authorization');
       dispatch(setUser(token))
       const result = await req.json();
- 
-      if (step == 0) {
-        registerCandidate(token)
-      } else {
-        registerEmployer(token)
-        setStep(2);
-      }
-
+      registerEmployer(token)
+      setStep(2);
     } catch (error) {
       console.log(error)
     }
@@ -65,23 +59,6 @@ const FormSignUp = ({setStep}) => {
       })
       const result = await req.json();
       dispatch(setEmployer(result.id));
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const registerCanadidate = async (token) => {
-    try {
-      const req = await fetch('http://localhost:3000/api/candidates', {
-        method: 'POST',
-        headers: {
-          'Authorization': token,
-          'Content-Type': 'application/json'
-        }
-      })
-      const result = await req.json();
-      dispatch(setCandidate(result.id));
-      router.push("/");
     } catch (error) {
       console.log(error)
     }
@@ -119,7 +96,7 @@ const FormSignUp = ({setStep}) => {
     <>
       {errors.password ? <p>La confirmation de mot de passe est différente du mot de passse</p> : null}
       {errors.phone_number ? <p>Veuillez entrer un numéro de téléphone valide</p> : null}
-      <form className={styles.FormSignUp} onSubmit={handleSubmit}>
+      <form className={styles.FormEmployerSignup} onSubmit={handleSubmit}>
         <label htmlFor="first_name">Prénom</label>
         <input 
           name="first_name" 
@@ -172,4 +149,4 @@ const FormSignUp = ({setStep}) => {
   )
 }
 
-export default FormSignUp;
+export default FormEmployerSignup;

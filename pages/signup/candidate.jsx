@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useState } from 'react';
+
+import styles from './SignUp.module.scss';
+
 import Head from 'next/head';
 import Layout from 'components/Layout';
-import FormSignUp from 'components/FormSignUp';
-import styles from './SignUp.module.scss';
-import SignupEmployer from 'components/SignupEmployer';
+import FormCandidateSignUp from 'components/FormCandidateSignUp';
 
 const SignUp = () => {
   const [step, setStep] = useState(0)

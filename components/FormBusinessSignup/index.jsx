@@ -2,9 +2,9 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import styles from './SignupEmployer.module.scss';
+import styles from './FormBusinessSignup.module.scss';
 
-const SignupEmployer = () => {
+const FormBusinessSignup = () => {
   const employer = useSelector(state => state);
   const [form, setForm] = useState({ 
     name: '',
@@ -114,4 +114,4 @@ const SignupEmployer = () => {
   )
 };
 
-export default SignupEmployer;
+export default FormBusinessSignup;
