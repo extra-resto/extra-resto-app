@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 
 let store
 
-const initialState = {
+export const initialState = {
   token: Cookies.get('token'),
   role: Cookies.get('role'),
   id: Cookies.get('id')
