@@ -1,9 +1,10 @@
-import styles from './FormSignUp.module.scss';
+import styles from './FormEmployerSignup.module.scss';
 import { useState, useEffect } from 'react';
-import { setUser, setEmployer } from '../../store/User/userAction';
+import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 
-const FormSignUp = ({ setStep }) => {
+const FormEmployerSignup = ({setStep}) => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({ 
     first_name: '',
@@ -15,6 +16,7 @@ const FormSignUp = ({ setStep }) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({password: '', phone_number: ''});
+  const router = useRouter();
 
   useEffect(() => {
     if (isSubmitting) {
@@ -77,12 +79,8 @@ const FormSignUp = ({ setStep }) => {
   }
 
   const validate = () => {
-    type Err = {
-      password: string;
-      phone_number: string;
-    }
 
-    let err: Err = { password: '', phone_number: '' };
+    let err = { password: '', phone_number: '' };
 
     if(form.password !== form.password_confirmation) {
       err.password = 'Password and confirmation password are different'
@@ -98,7 +96,7 @@ const FormSignUp = ({ setStep }) => {
     <>
       {errors.password ? <p>La confirmation de mot de passe est différente du mot de passse</p> : null}
       {errors.phone_number ? <p>Veuillez entrer un numéro de téléphone valide</p> : null}
-      <form className={styles.FormSignUp} onSubmit={handleSubmit}>
+      <form className={styles.FormEmployerSignup} onSubmit={handleSubmit}>
         <label htmlFor="first_name">Prénom</label>
         <input 
           name="first_name" 
@@ -151,4 +149,4 @@ const FormSignUp = ({ setStep }) => {
   )
 }
 
-export default FormSignUp;
+export default FormEmployerSignup;

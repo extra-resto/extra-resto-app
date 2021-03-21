@@ -8,6 +8,11 @@ export const setEmployer = (id) => ({
   id
 });
 
+export const setCandidate = (id) => ({
+  type: "SET_CANDIDATE",
+  id
+});
+
 export const setLogout = () => ({
   type: "SET_LOGOUT"
 });

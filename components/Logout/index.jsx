@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
-import { setLogout } from '../../store/User/userAction';
+import { setLogout } from 'store/User/userAction';
+import styles from './Logout.module.scss';
 
 const Logout = () => {
   const router = useRouter();
@@ -20,7 +21,9 @@ const Logout = () => {
     })
   }
   return (
+    <div className={styles.Logout}>
     <button type="button" onClick={userLogout}>Se deconnecter</button>
+    </div>
   );
 };
 

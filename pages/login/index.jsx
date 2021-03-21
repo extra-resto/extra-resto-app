@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import Head from 'next/head';
-import Layout from '../../components/Layout';
-import FormLogin from '../../components/FormLogin';
+import Layout from 'components/Layout';
+import FormLogin from 'components/FormLogin';
 import styles from './Login.module.scss';
 
-const Login: React.FunctionComponent = () => {
+const Login = () => {
   return (
     <Layout>
       <div className={styles.Login}>
