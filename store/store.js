@@ -4,9 +4,9 @@ import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import Cookies from 'js-cookie';
 
-let store
+export let store
 
-const initialState = {
+export const initialState = {
   token: Cookies.get('token'),
   role: Cookies.get('role')
 }

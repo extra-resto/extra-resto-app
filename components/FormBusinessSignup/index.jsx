@@ -8,7 +8,7 @@ const FormBusinessSignup = () => {
   const token = useSelector(state => state.token);
   const [form, setForm] = useState({ 
     name: '',
-    adress: '',
+    address: '',
     postal_code: '',
     city: ''
   });
@@ -83,11 +83,11 @@ const FormBusinessSignup = () => {
           onChange={handleChange} 
           required 
         />
-        <label htmlFor="adress">Adresse</label>
+        <label htmlFor="address">Adresse</label>
         <input 
-          name="adress"
+          name="address"
           type="text"
-          autoComplete="adress"
+          autoComplete="address"
           onChange={handleChange}
           required
         />
