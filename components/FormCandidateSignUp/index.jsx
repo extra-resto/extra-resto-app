@@ -12,7 +12,8 @@ const FormCandidateSignUp = () => {
     email: '',
     phone_number: '',
     password: '',
-    password_confirmation: ''
+    password_confirmation: '',
+    role: 0
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({password: '', phone_number: ''});
@@ -39,26 +40,8 @@ const FormCandidateSignUp = () => {
           body: JSON.stringify({ user: form })
       })
       const token = req.headers.get('Authorization');
-      dispatch(setUser(token))
       const result = await req.json();
-      registerCandidate(token)
-  
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const registerCanadidate = async (token) => {
-    try {
-      const req = await fetch('http://localhost:3000/api/candidates', {
-        method: 'POST',
-        headers: {
-          'Authorization': token,
-          'Content-Type': 'application/json'
-        }
-      })
-      const result = await req.json();
-      dispatch(setCandidate(result.id));
+      dispatch(setUser(token, result.data.attributes.role));
       router.push("/");
     } catch (error) {
       console.log(error)

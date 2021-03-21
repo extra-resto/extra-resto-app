@@ -34,8 +34,8 @@ const FormLogin = () => {
           body: JSON.stringify({ user: form })
       })
       const token = req.headers.get('Authorization');
-      dispatch(setUser(token))
       const result = await req.json();
+      dispatch(setUser(token, result.data.attributes.role));
       Router.push("/");
 
     } catch (error) {

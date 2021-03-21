@@ -2,7 +2,6 @@ import styles from './FormEmployerSignup.module.scss';
 import { useState, useEffect } from 'react';
 import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
 
 const FormEmployerSignup = ({setStep}) => {
   const dispatch = useDispatch();
@@ -12,11 +11,11 @@ const FormEmployerSignup = ({setStep}) => {
     email: '',
     phone_number: '',
     password: '',
-    password_confirmation: ''
+    password_confirmation: '',
+    role: 1
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({password: '', phone_number: ''});
-  const router = useRouter();
 
   useEffect(() => {
     if (isSubmitting) {
@@ -39,26 +38,9 @@ const FormEmployerSignup = ({setStep}) => {
           body: JSON.stringify({ user: form })
       })
       const token = req.headers.get('Authorization');
-      dispatch(setUser(token))
       const result = await req.json();
-      registerEmployer(token)
+      dispatch(setUser(token, result.data.attributes.role))
       setStep(2);
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const registerEmployer = async (token) => {
-    try {
-      const req = await fetch('http://localhost:3000/api/employers', {
-        method: 'POST',
-        headers: {
-          'Authorization': token,
-          'Content-Type': 'application/json'
-        }
-      })
-      const result = await req.json();
-      dispatch(setEmployer(result.id));
     } catch (error) {
       console.log(error)
     }
