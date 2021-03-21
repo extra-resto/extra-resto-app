@@ -66,14 +66,20 @@ export const Navbar = () => {
               contentLabel="Example Modal"
             >
               <div className={styles.Modal}>
-                <div className={styles.Modal__candidate}>
-                  <h2>Je cherche du travail</h2>
-                  <h3>Je suis Candidat</h3>
-                </div>
+                <Link href='/signup/candidate'>
+                <a className={styles.Modal__candidate}>
+                  <div className={styles.Modal__candidate__text}>
+                    <h2>Je cherche du travail</h2>
+                    <h3>Je suis Candidat</h3>
+                  </div>
+                </a>
+                </Link>
                 <Link href='/signup/employer'>
                   <a className={styles.Modal__employer}>
-                    <h2>Je possède une entreprise et je cherche à recruter</h2>
-                    <h3>Je suis Employeur</h3>
+                    <div className={styles.Modal__employer__text}>
+                      <h2>Je possède une entreprise et je cherche à recruter</h2>
+                      <h3>Je suis Employeur</h3>
+                    </div>
                   </a>
                 </Link>
               </div>
