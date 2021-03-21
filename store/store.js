@@ -4,12 +4,11 @@ import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import Cookies from 'js-cookie';
 
-let store
+export let store
 
 export const initialState = {
   token: Cookies.get('token'),
-  role: Cookies.get('role'),
-  id: Cookies.get('id')
+  role: Cookies.get('role')
 }
 
 function initStore(preloadedState = initialState) {

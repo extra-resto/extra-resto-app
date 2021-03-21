@@ -1,11 +1,7 @@
-export const setUser = (token) => ({
+export const setUser = (token, role) => ({
   type: "SET_USER",
-  token
-});
-
-export const setEmployer = (id) => ({
-  type: "SET_EMPLOYER",
-  id
+  token,
+  role
 });
 
 export const setLogout = () => ({

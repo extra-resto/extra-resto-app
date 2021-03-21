@@ -1,4 +1,4 @@
-@import "../../styles/colors.scss";
+@import "styles/colors.scss";
 
 .Navbar {
   background-color: $green;
@@ -9,5 +9,33 @@
   width: 100%;
   a:hover {
     color: red;
+  }
+}
+
+.Modal {
+  display: flex;
+  height: 70vh;
+  &__employer,
+  &__candidate {
+    width: 70%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &__text {
+      text-align: center;
+    }
+  }
+  &__candidate {
+    background-color: $green;
+  }
+  &__candidate:hover {
+    background-color: $lightgreen;
+  }
+  &__employer {
+    background-color: $orange;
+  }
+  &__employer:hover {
+    background-color: $lightorange;
   }
 }

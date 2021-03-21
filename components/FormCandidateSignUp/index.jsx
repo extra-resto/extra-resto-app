@@ -1,9 +1,10 @@
-import styles from './FormSignUp.module.scss';
+import styles from './FormCandidateSignUp.module.scss';
 import { useState, useEffect } from 'react';
-import { setUser, setEmployer } from '../../store/User/userAction';
+import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 
-const FormSignUp = ({ setStep }) => {
+const FormCandidateSignUp = () => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({ 
     first_name: '',
@@ -11,10 +12,12 @@ const FormSignUp = ({ setStep }) => {
     email: '',
     phone_number: '',
     password: '',
-    password_confirmation: ''
+    password_confirmation: '',
+    role: 0
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({password: '', phone_number: ''});
+  const router = useRouter();
 
   useEffect(() => {
     if (isSubmitting) {
@@ -37,26 +40,9 @@ const FormSignUp = ({ setStep }) => {
           body: JSON.stringify({ user: form })
       })
       const token = req.headers.get('Authorization');
-      dispatch(setUser(token))
       const result = await req.json();
-      registerEmployer(token)
-      setStep(2);
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const registerEmployer = async (token) => {
-    try {
-      const req = await fetch('http://localhost:3000/api/employers', {
-        method: 'POST',
-        headers: {
-          'Authorization': token,
-          'Content-Type': 'application/json'
-        }
-      })
-      const result = await req.json();
-      dispatch(setEmployer(result.id));
+      dispatch(setUser(token, result.data.attributes.role));
+      router.push("/");
     } catch (error) {
       console.log(error)
     }
@@ -77,12 +63,8 @@ const FormSignUp = ({ setStep }) => {
   }
 
   const validate = () => {
-    type Err = {
-      password: string;
-      phone_number: string;
-    }
 
-    let err: Err = { password: '', phone_number: '' };
+    let err = { password: '', phone_number: '' };
 
     if(form.password !== form.password_confirmation) {
       err.password = 'Password and confirmation password are different'
@@ -98,7 +80,7 @@ const FormSignUp = ({ setStep }) => {
     <>
       {errors.password ? <p>La confirmation de mot de passe est différente du mot de passse</p> : null}
       {errors.phone_number ? <p>Veuillez entrer un numéro de téléphone valide</p> : null}
-      <form className={styles.FormSignUp} onSubmit={handleSubmit}>
+      <form className={styles.FormCandidateSignUp} onSubmit={handleSubmit}>
         <label htmlFor="first_name">Prénom</label>
         <input 
           name="first_name" 
@@ -151,4 +133,4 @@ const FormSignUp = ({ setStep }) => {
   )
 }
 
-export default FormSignUp;
+export default FormCandidateSignUp;

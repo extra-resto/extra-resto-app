@@ -2,13 +2,13 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
+import styles from './FormBusinessSignup.module.scss';
 
-
-const SignupEmployer = () => {
-  const employer = useSelector(state => state);
+const FormBusinessSignup = () => {
+  const token = useSelector(state => state.token);
   const [form, setForm] = useState({ 
     name: '',
-    adress: '',
+    address: '',
     postal_code: '',
     city: ''
   });
@@ -28,15 +28,14 @@ const SignupEmployer = () => {
   }, [errors])
 
   const registerBusiness = async () => {
-    console.log(employer);
     try {
       const req = await fetch('http://localhost:3000/api/businesses', {
         method: 'POST',
         headers: {
-          'Authorization': employer.token,
+          'Authorization': token,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({...form, employer_id: `${employer.id}`})
+        body: JSON.stringify(form)
       })
       const result = await req.json();
       router.push("/");
@@ -61,11 +60,8 @@ const SignupEmployer = () => {
   }
 
   const validate = () => {
-    type Err = {
-      name: string;
-    }
 
-    let err: Err = { name: '' };
+    let err = { name: '' };
 
     if(!form.name) {
       err.name = 'Password and confirmation password are different'
@@ -77,7 +73,8 @@ const SignupEmployer = () => {
   return (
     <>
       {errors.name ? <p>La confirmation de mot de passe est différente du mot de passse</p> : null}
-      <form onSubmit={handleSubmit}>
+      <h2>Mon entreprise</h2>
+      <form className={styles.SignupEmployer} onSubmit={handleSubmit}>
         <label htmlFor="name">Nom de l'établissement</label>
         <input 
           name="name" 
@@ -86,11 +83,11 @@ const SignupEmployer = () => {
           onChange={handleChange} 
           required 
         />
-        <label htmlFor="adress">Adresse</label>
+        <label htmlFor="address">Adresse</label>
         <input 
-          name="adress"
+          name="address"
           type="text"
-          autoComplete="adress"
+          autoComplete="address"
           onChange={handleChange}
           required
         />
@@ -110,10 +107,10 @@ const SignupEmployer = () => {
           onChange={handleChange} 
           required 
         />
-        <button type="submit">Valider</button>
+        <button type="submit">Enregistrer</button>
       </form>
     </>
   )
 };
 
-export default SignupEmployer;
+export default FormBusinessSignup;

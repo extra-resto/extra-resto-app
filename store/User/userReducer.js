@@ -3,34 +3,25 @@ import Cookies from 'js-cookie';
 const initialState = {
   token: Cookies.get('token'),
   role: Cookies.get('role'),
-  id: Cookies.get('id')
 }
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_USER":
       Cookies.set('token', action.token);
+      Cookies.set('role', action.role);
       return {
         ...state,
         token: action.token,
-      }
-    case "SET_EMPLOYER":
-      Cookies.set('role', "employer");
-      Cookies.set('id', action.id);
-      return {
-        ...state,
-        role: "employer",
-        id: action.id
+        role: action.role
       }
     case "SET_LOGOUT":
       Cookies.remove('token');
       Cookies.remove('role');
-      Cookies.remove('id');
       return {
         ...state,
         token: null,
-        role: null,
-        id: null
+        role: null
       }
     default:
       return state;
