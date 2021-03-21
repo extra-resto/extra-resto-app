@@ -7,7 +7,6 @@ import Layout from 'components/Layout';
 import FormCandidateSignUp from 'components/FormCandidateSignUp';
 
 const SignUp = () => {
-  const [step, setStep] = useState(0)
 
   return (
     <Layout>
@@ -17,7 +16,7 @@ const SignUp = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <h1>Nouveau candidat</h1>
-        <FormCandidateSignUp step={step} />
+        <FormCandidateSignUp />
     </div>
     </Layout>
   );

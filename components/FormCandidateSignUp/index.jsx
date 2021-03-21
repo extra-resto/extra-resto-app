@@ -4,7 +4,7 @@ import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 
-const FormCandidateSignUp = ({setStep}) => {
+const FormCandidateSignUp = () => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({ 
     first_name: '',
