@@ -36,16 +36,15 @@ export const Navbar = () => {
 
 
   return (
-    <>
       <nav className={styles.Navbar}>
         <Link href='/'>
   	      <a>
-          <Image 
-            src="/images/Navbar/eye.svg"
-            height={90} 
-            width={90} 
-            alt="extra-resto logo"
-          />
+            <Image
+              src="/images/Navbar/eye.svg"
+              height={90} 
+              width={90} 
+              alt="extra-resto logo"
+            />
           </a>
         </Link>
         <Link href='/concept'>
@@ -53,10 +52,12 @@ export const Navbar = () => {
         </Link>
 
         {token ? (
-          <Logout />
+          <div>
+            <Logout />
+          </div>
         ):
         (
-          <>
+          <div>
             <a onClick={openModal}>S'inscrire</a>
             <Modal
               isOpen={modalIsOpen}
@@ -87,10 +88,9 @@ export const Navbar = () => {
             <Link href='/login'>
               <a>Se Connecter</a>
             </Link>
-          </>
+          </div>
         )}
       </nav>
-    </>
   )
 }
 

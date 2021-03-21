@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import styles from './FormBusinessSignup.module.scss';
 
 const FormBusinessSignup = () => {
-  const employer = useSelector(state => state);
+  const token = useSelector(state => state.token);
   const [form, setForm] = useState({ 
     name: '',
     adress: '',
@@ -28,15 +28,14 @@ const FormBusinessSignup = () => {
   }, [errors])
 
   const registerBusiness = async () => {
-    console.log(employer);
     try {
       const req = await fetch('http://localhost:3000/api/businesses', {
         method: 'POST',
         headers: {
-          'Authorization': employer.token,
+          'Authorization': token,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({...form, employer_id: `${employer.id}`})
+        body: JSON.stringify(form)
       })
       const result = await req.json();
       router.push("/");
