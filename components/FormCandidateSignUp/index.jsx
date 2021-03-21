@@ -97,7 +97,7 @@ const FormCandidateSignUp = ({setStep}) => {
     <>
       {errors.password ? <p>La confirmation de mot de passe est différente du mot de passse</p> : null}
       {errors.phone_number ? <p>Veuillez entrer un numéro de téléphone valide</p> : null}
-      <form className={styles.FormSignUp} onSubmit={handleSubmit}>
+      <form className={styles.FormCandidateSignUp} onSubmit={handleSubmit}>
         <label htmlFor="first_name">Prénom</label>
         <input 
           name="first_name" 

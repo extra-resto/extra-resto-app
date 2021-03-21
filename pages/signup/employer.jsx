@@ -7,8 +7,6 @@ import Layout from 'components/Layout';
 import FormEmployerSignup from 'components/FormEmployerSignup';
 import FormBusinessSignup from 'components/FormBusinessSignup';
 
-
-
 const SignUp = () => {
   const [step, setStep] = useState(1)
 
