@@ -1,10 +1,10 @@
-import styles from './FormSignUp.module.scss';
+import styles from './FormCandidateSignUp.module.scss';
 import { useState, useEffect } from 'react';
 import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 
-const FormSignUp = ({setStep}) => {
+const FormCandidateSignUp = ({setStep}) => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({ 
     first_name: '',
@@ -41,30 +41,8 @@ const FormSignUp = ({setStep}) => {
       const token = req.headers.get('Authorization');
       dispatch(setUser(token))
       const result = await req.json();
- 
-      if (step == 0) {
-        registerCandidate(token)
-      } else {
-        registerEmployer(token)
-        setStep(2);
-      }
-
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const registerEmployer = async (token) => {
-    try {
-      const req = await fetch('http://localhost:3000/api/employers', {
-        method: 'POST',
-        headers: {
-          'Authorization': token,
-          'Content-Type': 'application/json'
-        }
-      })
-      const result = await req.json();
-      dispatch(setEmployer(result.id));
+      registerCandidate(token)
+  
     } catch (error) {
       console.log(error)
     }
@@ -119,7 +97,7 @@ const FormSignUp = ({setStep}) => {
     <>
       {errors.password ? <p>La confirmation de mot de passe est différente du mot de passse</p> : null}
       {errors.phone_number ? <p>Veuillez entrer un numéro de téléphone valide</p> : null}
-      <form className={styles.FormSignUp} onSubmit={handleSubmit}>
+      <form className={styles.FormCandidateSignUp} onSubmit={handleSubmit}>
         <label htmlFor="first_name">Prénom</label>
         <input 
           name="first_name" 
@@ -172,4 +150,4 @@ const FormSignUp = ({setStep}) => {
   )
 }
 
-export default FormSignUp;
+export default FormCandidateSignUp;
