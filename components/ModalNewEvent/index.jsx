@@ -24,7 +24,7 @@ const ModalNewEvent = ({ userInfos, token }) => {
 
   const dispatch = useDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState({password: '', phone_number: ''});
+  const [errors, setErrors] = useState({name: '', date: '', description: ''});
   const router = useRouter();
   const [form, setForm] = useState({ 
     name: '',
@@ -35,13 +35,12 @@ const ModalNewEvent = ({ userInfos, token }) => {
 
   useEffect(() => {
     if (isSubmitting) {
-      registerEvent();
-      // if (errors.password === '' && errors.phone_number === '') {
-      //   registerEvent();
-      // }
-      // else {
-      //   setIsSubmitting(false);
-      // }
+      if (errors.name === '' && errors.date === '' && errors.description === '') {
+        registerEvent();
+      }
+      else {
+        setIsSubmitting(false);
+      }
     }
   }, [errors])
 	
@@ -74,7 +73,7 @@ const ModalNewEvent = ({ userInfos, token }) => {
 
   const validate = () => {
 
-    let err = { name: '' };
+    let err = {name: '', date: '', description: ''};
 
     if(!form.name) {
       err.name = 'Password and confirmation password are different'
@@ -103,7 +102,12 @@ const ModalNewEvent = ({ userInfos, token }) => {
 
   return (
   	<div className={styles.ModalNewEvent}>
-    	<button onClick={openModal}>Nouvel Evenement</button>
+
+      <div className={styles.ModalNewEvent__newEvent}>
+    	<button onClick={openModal}>Ajouter un Evenement</button>
+      </div>
+
+
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
@@ -113,7 +117,8 @@ const ModalNewEvent = ({ userInfos, token }) => {
         >
 
           <div className={styles.ModalNewEvent__Modal}>
-            <form className={styles.FormEmployerSignup} onSubmit={handleSubmit}>
+            <h2>Nouvel Evenement</h2>
+            <form className={styles.ModalNewEvent__Modal__form} onSubmit={handleSubmit}>
               <label htmlFor="name">Nom de l'évenement</label>
               <input 
                 name="name" 
@@ -131,9 +136,9 @@ const ModalNewEvent = ({ userInfos, token }) => {
                 required 
               />
               <label htmlFor="description">Description de l'évenement</label>
-              <input 
+              <textarea 
                 name="description" 
-                type="text" 
+                type="text"
                 autoComplete="description" 
                 onChange={handleChange} 
                 required 
