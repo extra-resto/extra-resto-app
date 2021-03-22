@@ -35,7 +35,7 @@ const FormLogin = () => {
       })
       const token = req.headers.get('Authorization');
       const result = await req.json();
-      dispatch(setUser(token, result.data.attributes.role));
+      dispatch(setUser(token, result.data.attributes.role, result.data.id));
       Router.push("/");
 
     } catch (error) {
@@ -61,7 +61,7 @@ const FormLogin = () => {
 
     let err = { email: '' };
 
-    if(form.email.match(/^[A-z]+@[A-z]+.[A-z]+$/) === null) {
+    if(form.email.match(/^[A-z-]+@[A-z-]+.[A-z]+$/) === null) {
       err.email = 'Veuillez entrer une adresse email valide'
     }
 
