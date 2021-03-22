@@ -18,8 +18,9 @@ const customStyles = {
 
 Modal.setAppElement('#__next');
 
-const ModalNewEvent = ({ userInfos }) => {
+const ModalNewEvent = ({ userInfos, token }) => {
   const [modalIsOpen,setIsOpen] = useState(false);
+
 
   const dispatch = useDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -64,6 +65,7 @@ const ModalNewEvent = ({ userInfos }) => {
   }
 
   const handleChange = (e) => {
+    console.log(form)
     setForm({
       ...form,
       [e.target.name]: e.target.value
@@ -83,14 +85,16 @@ const ModalNewEvent = ({ userInfos }) => {
 
   const registerEvent = async () => {
     try {
-      const req = await fetch(`${process.env.API_ROOT}events`, {
+      const req = await fetch(`http://localhost:3000/api/events`, {
           method: 'POST',
           headers: {
+            'Authorization': token,
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(form)
       })
       setIsOpen(false);
+      router.push("/employer_home");
     } catch (error) {
       console.log(error)
     }

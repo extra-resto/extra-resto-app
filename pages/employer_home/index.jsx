@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import cookie from 'cookie'
 import ModalNewEvent from 'components/ModalNewEvent';
 
-const EmployerHome = ({ userInfos }) => {
+const EmployerHome = ({ userInfos, token }) => {
 
   return (
     <Layout>
@@ -15,9 +15,8 @@ const EmployerHome = ({ userInfos }) => {
         <title>extra-resto - Employer Home</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-    
       <div className='main'>Hello from Employer Homepage</div>
-      <ModalNewEvent userInfos={userInfos} />
+      <ModalNewEvent userInfos={userInfos} token={token} />
       <ul>
       {userInfos && userInfos.events.map(event => (
         <li key={event.name}>{event.name}</li>
@@ -28,7 +27,6 @@ const EmployerHome = ({ userInfos }) => {
     </Layout>
   );
 }
-
 
 export const getServerSideProps = async ({req}) =>  {
 
@@ -46,7 +44,8 @@ export const getServerSideProps = async ({req}) =>  {
 
   return {
     props: {
-      userInfos
+      userInfos,
+      token
     }
   }
 }
