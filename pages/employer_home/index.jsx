@@ -4,8 +4,9 @@ import Layout from 'components/Layout';
 import styles from './EmployerHome.module.scss';
 import { useSelector } from 'react-redux';
 import cookie from 'cookie'
+import ModalNewEvent from 'components/ModalNewEvent';
 
-const EmployerHome = ({ events }) => {
+const EmployerHome = ({ userInfos }) => {
 
   return (
     <Layout>
@@ -16,8 +17,9 @@ const EmployerHome = ({ events }) => {
       </Head>
     
       <div className='main'>Hello from Employer Homepage</div>
+      <ModalNewEvent userInfos={userInfos} />
       <ul>
-      {events && events.events.map(event => (
+      {userInfos && userInfos.events.map(event => (
         <li key={event.name}>{event.name}</li>
         ))}
       </ul>
@@ -40,11 +42,11 @@ export const getServerSideProps = async ({req}) =>  {
     }
 
   })
-  const events = await eventResponse.json();
+  const userInfos = await eventResponse.json();
 
   return {
     props: {
-      events
+      userInfos
     }
   }
 }
