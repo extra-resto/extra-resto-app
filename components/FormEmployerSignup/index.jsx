@@ -39,7 +39,7 @@ const FormEmployerSignup = ({setStep}) => {
       })
       const token = req.headers.get('Authorization');
       const result = await req.json();
-      dispatch(setUser(token, result.data.attributes.role))
+      dispatch(setUser(token, result.data.attributes.role, result.data.id))
       setStep(2);
     } catch (error) {
       console.log(error)

@@ -19,8 +19,8 @@ const SignUp = () => {
       </Head>
       <h1>Nouvel employeur</h1>
       {step === 1 ? 
-        <FormEmployerSignup setStep={setStep} /> :
-        <FormBusinessSignup />
+        <FormEmployerSignUp setStep={setStep} /> :
+        <FormBusinessSignUp />
       }
     </div>
     </Layout>

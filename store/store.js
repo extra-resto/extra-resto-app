@@ -8,7 +8,8 @@ export let store
 
 export const initialState = {
   token: Cookies.get('token'),
-  role: Cookies.get('role')
+  role: Cookies.get('role'),
+  id: Cookies.get('id')
 }
 
 function initStore(preloadedState = initialState) {

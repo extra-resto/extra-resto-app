@@ -1,8 +1,10 @@
 import React, { FunctionComponent } from 'react';
+import styles from './Login.module.scss';
+
 import Head from 'next/head';
 import Layout from 'components/Layout';
 import FormLogin from 'components/FormLogin';
-import styles from './Login.module.scss';
+import ModalCandidateEmployer from 'components/ModalCandidateEmployer';
 
 const Login = () => {
   return (
@@ -14,6 +16,8 @@ const Login = () => {
         </Head>
         <h1>Se Connecter</h1>
         <FormLogin />
+        <h2>Pas encore de compte?</h2>
+        <ModalCandidateEmployer />
       </div>
     </Layout>
   );
