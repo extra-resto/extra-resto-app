@@ -4,7 +4,7 @@ import styles from './SignUp.module.scss';
 
 import Head from 'next/head';
 import Layout from 'components/Layout';
-import FormCandidateSignUp from 'components/FormCandidateSignUp';
+import FormCandidateSignup from 'components/FormCandidateSignup';
 
 const SignUp = () => {
 
@@ -16,7 +16,7 @@ const SignUp = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <h1>Nouveau candidat</h1>
-        <FormCandidateSignUp />
+        <FormCandidateSignup />
     </div>
     </Layout>
   );
