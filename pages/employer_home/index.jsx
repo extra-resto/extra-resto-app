@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Layout from 'components/Layout';
 import styles from './EmployerHome.module.scss';
 import { useSelector } from 'react-redux';
-import Cookie from 'js-cookie'
+import cookie from 'cookie'
 
 const EmployerHome = ({ events }) => {
 
@@ -16,7 +16,11 @@ const EmployerHome = ({ events }) => {
       </Head>
     
       <div className='main'>Hello from Employer Homepage</div>
-      {JSON.stringify(events)}
+      <ul>
+      {events && events.events.map(event => (
+        <li key={event.name}>{event.name}</li>
+        ))}
+      </ul>
      
     </div>
     </Layout>
@@ -25,10 +29,10 @@ const EmployerHome = ({ events }) => {
 
 
 export const getServerSideProps = async ({req}) =>  {
-  //Fetch the events
-  const user_id = req
-  const token = req.headers.cookie
-  const events_res = await fetch(`http://localhost:3000/api/users/10`, {
+
+  const {token, id} = cookie.parse(req.headers.cookie);
+  
+  const eventResponse = await fetch(`${process.env.API_ROOT}/users/${id}`, {
     method: 'get',
     headers: {
       'Authorization': token,
@@ -36,9 +40,8 @@ export const getServerSideProps = async ({req}) =>  {
     }
 
   })
-  const events = await events_res.json();
+  const events = await eventResponse.json();
 
-  //Return the events as props
   return {
     props: {
       events
