@@ -32,7 +32,7 @@ const EmployerHome = ({ events }) => {
 
 export async function getStaticProps() {
   //Fetch the events
-  const events_res = await fetch('http://localhost:3000/events')
+  const events_res = await fetch('http://localhost:3000/api/events')
   const events = await events_res.json()
 
   //Return the events as props
