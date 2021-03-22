@@ -1,10 +1,10 @@
-import styles from './FormCandidateSignUp.module.scss';
+import styles from './FormCandidateSignup.module.scss';
 import { useState, useEffect } from 'react';
 import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 
-const FormCandidateSignUp = () => {
+const FormCandidateSignup = () => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({ 
     first_name: '',
@@ -80,7 +80,7 @@ const FormCandidateSignUp = () => {
     <>
       {errors.password ? <p>La confirmation de mot de passe est différente du mot de passse</p> : null}
       {errors.phone_number ? <p>Veuillez entrer un numéro de téléphone valide</p> : null}
-      <form className={styles.FormCandidateSignUp} onSubmit={handleSubmit}>
+      <form className={styles.FormCandidateSignup} onSubmit={handleSubmit}>
         <label htmlFor="first_name">Prénom</label>
         <input 
           name="first_name" 
@@ -133,4 +133,4 @@ const FormCandidateSignUp = () => {
   )
 }
 
-export default FormCandidateSignUp;
+export default FormCandidateSignup;
