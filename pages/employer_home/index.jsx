@@ -3,9 +3,9 @@ import Head from 'next/head';
 import Layout from 'components/Layout';
 import styles from './EmployerHome.module.scss';
 import { useSelector } from 'react-redux';
+import Cookie from 'js-cookie'
 
 const EmployerHome = ({ events }) => {
-  const user = useSelector(state => state);
 
   return (
     <Layout>
@@ -14,8 +14,9 @@ const EmployerHome = ({ events }) => {
         <title>extra-resto - Employer Home</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      {JSON.stringify(events)}
+    
       <div className='main'>Hello from Employer Homepage</div>
+      {JSON.stringify(events)}
      
     </div>
     </Layout>
@@ -23,22 +24,24 @@ const EmployerHome = ({ events }) => {
 }
 
 
-export async function getStaticProps() {
+export const getServerSideProps = async ({req}) =>  {
   //Fetch the events
-  const events_res = await fetch(`http://localhost:3000/api/users/8`, {
-  method: 'get',
-  headers: {
-    'Authorization': user.token,
-    'Content-Type': 'application/json'
-  },
+  const user_id = req
+  const token = req.headers.cookie
+  const events_res = await fetch(`http://localhost:3000/api/users/10`, {
+    method: 'get',
+    headers: {
+      'Authorization': token,
+      'Content-Type': 'application/json'
+    }
 
   })
-  const events = await events_res.json()
+  const events = await events_res.json();
 
   //Return the events as props
   return {
     props: {
-    events
+      events
     }
   }
 }
