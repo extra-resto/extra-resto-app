@@ -1,13 +1,11 @@
 @import "styles/colors.scss";
 
 
-.ModalNewJob {
+.ModalUpdateBusiness {
   button {
     padding: 10px;
     margin: 10px;
-  }
-  &__newJob {
-    width: 100%;
+    background: orange;
   }
   &__Modal {
     height: 70vh;
@@ -17,7 +15,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
     &__form {
       display: flex;
       flex-direction: column;

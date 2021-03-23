@@ -1,4 +1,4 @@
-import styles from './ModalNewJob.module.scss';
+import styles from './ModalUpdateBusiness.module.scss';
 import Modal from 'react-modal';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -17,30 +17,27 @@ const customStyles = {
 
 Modal.setAppElement('#__next');
 
-const ModalNewEvent = ({ eventId, token, eventDate }) => {
+const ModalUpdateBusiness = ({ business, token }) => {
   const [modalIsOpen,setIsOpen] = useState(false);
 
 
   const dispatch = useDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState({name: '', date: '', description: ''});
+  const [errors, setErrors] = useState({name: '', address: '', postal_code: '', city:'', user_id:''});
   const router = useRouter();
-  const [form, setForm] = useState({ 
-    name: '',
-    description: '',
-    dresscode: '',
-    duration: '',
-    rate: '',
-    free_stead: '',
-    date: eventDate,
-    free_stead: '',
-    event_id: eventId, 
+  const [form, setForm] = useState({
+    name: business.name, 
+    address: business.address, 
+    postal_code: business.postal_code, 
+    city: business.city, 
+    user_id: business.user_id,
+    id: business.id
   });
 
   useEffect(() => {
     if (isSubmitting) {
-      if (errors.name === '' && errors.date === '' && errors.description === '') {
-        registerJob();
+      if (errors.name === '') {
+        updateBusiness();
       }
       else {
         setIsSubmitting(false);
@@ -85,10 +82,10 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
     return err;
   }
 
-  const registerJob = async () => {
+  const updateBusiness = async () => {
     try {
-      const req = await fetch(`http://localhost:3000/api/jobs`, {
-          method: 'POST',
+      const req = await fetch(`http://localhost:3000/api/businesses/${business.id}`, {
+          method: 'PUT',
           headers: {
             'Authorization': token,
             'Content-Type': 'application/json'
@@ -96,18 +93,17 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
           body: JSON.stringify(form)
       })
       setIsOpen(false);
-      router.push(`/employer_home/event/${eventId}`);
+      router.push(`/employer_home/`);
     } catch (error) {
       console.log(error)
     }
   }
 
-
   return (
-  	<div className={styles.ModalNewJob}>
+  	<div className={styles.ModalUpdateBusiness}>
 
-      <div className={styles.ModalNewJob__newJob}>
-    	<button onClick={openModal}>Ajouter un Job</button>
+      <div className={styles.ModalUpdateBusiness__updateButton}>
+    	 <button onClick={openModal}>Mettre à jour</button>
       </div>
 
         <Modal
@@ -118,55 +114,46 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
           contentLabel="Example Modal"
         >
 
-          <div className={styles.ModalNewJob__Modal}>
-            <h2>Nouvel Emploi</h2>
-            <form className={styles.ModalNewJob__Modal__form} onSubmit={handleSubmit}>
-                <label htmlFor="name">Nom de l'emploi</label>
-                <input 
+          <div className={styles.ModalUpdateBusiness__Modal}>
+            <h2>Modifier mon entreprise</h2>
+            <form className={styles.ModalUpdateBusiness__Modal__form} onSubmit={handleSubmit}>
+              <label htmlFor="name">Nom de l'établissement</label>
+              <input 
                 name="name" 
                 type="text" 
                 autoComplete="name" 
+                value={form.name}
                 onChange={handleChange} 
                 required 
-                />
-                <label htmlFor="description">Description de l'emploi</label>
-                <textarea 
-                name="description" 
+              />
+              <label htmlFor="address">Adresse</label>
+              <input 
+                name="address"
                 type="text"
-                autoComplete="description" 
-                onChange={handleChange} 
-                required 
-                />
-                <label htmlFor="dresscode">Dresscode de l'emploi</label>
-                <textarea 
-                name="dresscode" 
+                autoComplete="address"
+                value={form.address}
+                onChange={handleChange}
+                required
+              />
+              <label htmlFor="postal_code">Code postal</label>
+              <input 
+                name="postal_code"
                 type="text"
-                autoComplete="dresscode" 
+                autoComplete="postal_code"
+                value={form.postal_code}
+                onChange={handleChange}
+                required
+              />
+              <label htmlFor="city">Ville</label>
+              <input 
+                name="city"
+                type="city" 
+                autoComplete="city"
                 onChange={handleChange} 
+                value={form.city}
                 required 
-                />
-                <label htmlFor="duration">durée de l'emploi /h</label>
-                <input 
-                name="duration" 
-                type="number"
-                onChange={handleChange} 
-                required 
-                />
-                <label htmlFor="rate">Prix de l'heure /€</label>
-                <input 
-                name="rate" 
-                type="number"
-                onChange={handleChange} 
-                required 
-                />
-                <label htmlFor="free_stead">Place de disponible</label>
-                <input 
-                name="free_stead" 
-                type="number"
-                onChange={handleChange} 
-                required 
-                />
-              <button type="submit">Nouvelle emploi</button>
+              />
+              <button type="submit">Enregister</button>
             </form>
           </div>
         </Modal>
@@ -174,4 +161,4 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
   );
 };
 
-export default ModalNewEvent;
+export default ModalUpdateBusiness;

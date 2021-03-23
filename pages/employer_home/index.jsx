@@ -8,6 +8,7 @@ import cookie from 'cookie';
 import ModalNewEvent from 'components/ModalNewEvent';
 import CardEvent from 'components/CardEvent';
 import Link from 'next/link';
+import ModalUpdateBusiness from 'components/ModalUpdateBusiness';
 
 const EmployerHome = ({ userInfos, token }) => {
   const [eventList, setEventList] = useState([]);
@@ -54,7 +55,7 @@ const EmployerHome = ({ userInfos, token }) => {
           <h3>{userInfos.businesses[0].name}</h3>
           <h3>{userInfos.businesses[0].address}</h3>
           <h3>{userInfos.businesses[0].postal_code} {userInfos.businesses[0].city}</h3>
-          <button>mettre à jour</button>
+          <ModalUpdateBusiness business={userInfos.businesses[0]} token={token} />
         </div>
       </div>
       <div className={styles.EmployerHome__Modal}>
