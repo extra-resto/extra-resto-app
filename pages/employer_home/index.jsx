@@ -3,9 +3,40 @@ import Head from 'next/head';
 import Layout from 'components/Layout';
 import styles from './EmployerHome.module.scss';
 import { useSelector } from 'react-redux';
-import cookie from 'cookie'
+import { useState, useEffect } from 'react';
+import cookie from 'cookie';
+import ModalNewEvent from 'components/ModalNewEvent';
+import CardEvent from 'components/CardEvent';
 
-const EmployerHome = ({ events }) => {
+const EmployerHome = ({ userInfos, token }) => {
+  const [eventList, setEventList] = useState([]);
+
+  const getEventsList = () => {
+
+    //convert object into array without the key
+    const neweventsArr = [];
+    const eventsArr = Object.entries(userInfos.events);
+    eventsArr.map(event => neweventsArr.push(event[1]));
+    //sort array by date
+    neweventsArr.sort((a, b) => new Date(b.date) - new Date(a.date)).reverse()
+    //filter past events
+    setEventList(neweventsArr);
+  }
+
+  const formattedDate = (d = new Date) => {
+    let month = String(d.getMonth() + 1);
+    let day = String(d.getDate());
+    const year = String(d.getFullYear());
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return `${day}/${month}/${year}`;
+  }
+
+  useEffect(() => {
+    getEventsList()
+  }, [userInfos])
 
   return (
     <Layout>
@@ -14,19 +45,30 @@ const EmployerHome = ({ events }) => {
         <title>extra-resto - Employer Home</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-    
-      <div className='main'>Hello from Employer Homepage</div>
-      <ul>
-      {events && events.events.map(event => (
-        <li key={event.name}>{event.name}</li>
+      <div className={styles.EmployerHome__titlecontainer}>
+        <div className={styles.EmployerHome__titlebloc}>
+          <h1>Mon entreprise</h1>
+          <h3>{userInfos.businesses[0].name}</h3>
+          <h3>{userInfos.businesses[0].address}</h3>
+          <h3>{userInfos.businesses[0].postal_code} {userInfos.businesses[0].city}</h3>
+        </div>
+      </div>
+      <div className={styles.EmployerHome__Modal}>
+        <h2>Evenements à venir:</h2>
+        <ModalNewEvent userInfos={userInfos} token={token} />
+      </div>
+      <ul className={styles.EmployerHome__eventlist}>
+      {eventList && eventList.map(event => (
+        <li key={event.name}>
+          <p>{formattedDate(new Date(event.date))}</p>
+          <CardEvent event={event} />
+        </li>
         ))}
       </ul>
-     
     </div>
     </Layout>
   );
 }
-
 
 export const getServerSideProps = async ({req}) =>  {
 
@@ -40,11 +82,12 @@ export const getServerSideProps = async ({req}) =>  {
     }
 
   })
-  const events = await eventResponse.json();
+  const userInfos = await eventResponse.json();
 
   return {
     props: {
-      events
+      userInfos,
+      token
     }
   }
 }
