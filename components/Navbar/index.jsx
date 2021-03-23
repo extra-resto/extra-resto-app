@@ -13,9 +13,9 @@ export const Navbar = () => {
         <Link href='/'>
   	      <a>
             <Image
-              src="/images/Navbar/eye.svg"
-              height={90} 
-              width={90} 
+              src="/images/Navbar/extra-logo.png"
+              height={70} 
+              width={210} 
               alt="extra-resto logo"
             />
           </a>

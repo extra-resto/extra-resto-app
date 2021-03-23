@@ -24,7 +24,7 @@ const EmployerHome = ({ userInfos, token }) => {
     setEventList(neweventsArr);
   }
 
-  const formattedDate = (d = new Date) => {
+  const formattedDate = (d) => {
     let month = String(d.getMonth() + 1);
     let day = String(d.getDate());
     const year = String(d.getFullYear());
@@ -61,7 +61,7 @@ const EmployerHome = ({ userInfos, token }) => {
       </div>
       <ul className={styles.EmployerHome__eventlist}>
       {eventList && eventList.map(event => (
-        <li key={event.name} className={styles.EmployerHome__eventlist__item}>
+        <li key={event.id} className={styles.EmployerHome__eventlist__item}>
           <p>{formattedDate(new Date(event.date))}</p>
           <Link href="/employer_home/event/[id]" as={`/employer_home/event/${event.id}`}>
             <a>
