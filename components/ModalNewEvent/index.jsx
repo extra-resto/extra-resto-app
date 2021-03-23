@@ -64,7 +64,6 @@ const ModalNewEvent = ({ userInfos, token }) => {
   }
 
   const handleChange = (e) => {
-    console.log(form)
     setForm({
       ...form,
       [e.target.name]: e.target.value
