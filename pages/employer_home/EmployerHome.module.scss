@@ -8,17 +8,33 @@
   	width: 100vw;
   	display: flex;
   	justify-content: center;
-  	&__titleblock {
-
-  	}
+    button {
+      margin-bottom: 10px;
+      padding: 10px;
+      background: orange;
+    }
   }
   &__Modal {
   	width: 100vw;
   	text-align: center;
   }
   &__eventlist {
-  	li {
+  	&__item {
   		list-style: none;
+      &__buttons {
+        display: flex;
+        justify-content: center;
+        &__modify, &__delete {
+          margin: 0 10px;
+          padding: 10px;
+        }
+        &__modify {
+          background: orange;
+        }
+        &__delete {
+          background: red;
+        }
+      }
   	}
   }
 }

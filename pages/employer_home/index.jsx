@@ -48,11 +48,11 @@ const EmployerHome = ({ userInfos, token }) => {
       </Head>
       <div className={styles.EmployerHome__titlecontainer}>
         <div className={styles.EmployerHome__titlebloc}>
-          {console.log(userInfos)}
           <h1>Mon entreprise</h1>
           <h3>{userInfos.businesses[0].name}</h3>
           <h3>{userInfos.businesses[0].address}</h3>
           <h3>{userInfos.businesses[0].postal_code} {userInfos.businesses[0].city}</h3>
+          <button>mettre à jour</button>
         </div>
       </div>
       <div className={styles.EmployerHome__Modal}>
@@ -61,11 +61,17 @@ const EmployerHome = ({ userInfos, token }) => {
       </div>
       <ul className={styles.EmployerHome__eventlist}>
       {eventList && eventList.map(event => (
-        <li key={event.name}>
+        <li key={event.name} className={styles.EmployerHome__eventlist__item}>
           <p>{formattedDate(new Date(event.date))}</p>
-        <Link href="/employer_home/event/[id]" as={`/employer_home/event/${event.id}`}>
-          <a><CardEvent event={event} /></a>
-        </Link>
+          <Link href="/employer_home/event/[id]" as={`/employer_home/event/${event.id}`}>
+            <a>
+              <CardEvent event={event} />
+            </a>
+          </Link>
+          <div className={styles.EmployerHome__eventlist__item__buttons}>
+            <button className={styles.EmployerHome__eventlist__item__buttons__modify}>modifier<br />l'évenement</button>
+            <button className={styles.EmployerHome__eventlist__item__buttons__delete}>supprimer<br />l'évenement</button>
+          </div>
         </li>
         ))}
       </ul>
