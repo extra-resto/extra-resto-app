@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import styles from './Navbar.module.scss';
 import Image from 'next/image';
-import React, { useState } from 'react';
 import Logout from 'components/Logout';
 import { useSelector } from 'react-redux';
 
