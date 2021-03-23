@@ -6,7 +6,8 @@ import Logout from 'components/Logout';
 import { useSelector } from 'react-redux';
 
 export const Navbar = () => {
-  const token = useSelector(state => state.token);
+  const {token, role} = useSelector(state => state);
+  
 
   return (
       <nav className={styles.Navbar}>
@@ -23,6 +24,13 @@ export const Navbar = () => {
         <Link href='/concept'>
   	      <a>Le Concept</a>
         </Link>
+
+        {role === 'employer' && 
+          <Link href='/employer_home'>
+            <a>Mon espace</a>
+          </Link>
+        }
+        
 
         {token ? (
           <div>
