@@ -10,8 +10,6 @@ import CardEvent from 'components/CardEvent';
 
 const EmployerHome = ({ userInfos, token }) => {
   const [eventList, setEventList] = useState([]);
-  const [futureEventList, setFutureEventList] = useState([]);
-  const [pastEventList, setPastEventList] = useState([]);
 
   const getEventsList = () => {
 
@@ -38,7 +36,7 @@ const EmployerHome = ({ userInfos, token }) => {
 
   useEffect(() => {
     getEventsList()
-  }, [])
+  }, [userInfos])
 
   return (
     <Layout>
