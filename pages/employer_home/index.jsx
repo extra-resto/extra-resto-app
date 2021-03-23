@@ -3,11 +3,42 @@ import Head from 'next/head';
 import Layout from 'components/Layout';
 import styles from './EmployerHome.module.scss';
 import { useSelector } from 'react-redux';
-import cookie from 'cookie'
+import { useState, useEffect } from 'react';
+import cookie from 'cookie';
 import ModalNewEvent from 'components/ModalNewEvent';
 import CardEvent from 'components/CardEvent';
 
 const EmployerHome = ({ userInfos, token }) => {
+  const [eventList, setEventList] = useState([]);
+  const [futureEventList, setFutureEventList] = useState([]);
+  const [pastEventList, setPastEventList] = useState([]);
+
+  const getEventsList = () => {
+
+    //convert object into array without the key
+    const neweventsArr = [];
+    const eventsArr = Object.entries(userInfos.events);
+    eventsArr.map(event => neweventsArr.push(event[1]));
+    //sort array by date
+    neweventsArr.sort((a, b) => new Date(b.date) - new Date(a.date)).reverse()
+    //filter past events
+    setEventList(neweventsArr);
+  }
+
+  const formattedDate = (d = new Date) => {
+    let month = String(d.getMonth() + 1);
+    let day = String(d.getDate());
+    const year = String(d.getFullYear());
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return `${day}/${month}/${year}`;
+  }
+
+  useEffect(() => {
+    getEventsList()
+  }, [])
 
   return (
     <Layout>
@@ -29,8 +60,9 @@ const EmployerHome = ({ userInfos, token }) => {
         <ModalNewEvent userInfos={userInfos} token={token} />
       </div>
       <ul className={styles.EmployerHome__eventlist}>
-      {userInfos && userInfos.events.map(event => (
+      {eventList && eventList.map(event => (
         <li key={event.name}>
+          <p>{formattedDate(new Date(event.date))}</p>
           <CardEvent event={event} />
         </li>
         ))}
