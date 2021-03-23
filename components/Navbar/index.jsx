@@ -30,7 +30,11 @@ export const Navbar = () => {
             <a>Mon espace</a>
           </Link>
         }
-        
+        {role === 'candidate' && 
+          <Link href='/candidate_home'>
+            <a>Mon espace</a>
+          </Link>
+        }
 
         {token ? (
           <div>
