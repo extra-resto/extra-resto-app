@@ -48,6 +48,7 @@ const EmployerHome = ({ userInfos, token }) => {
       </Head>
       <div className={styles.EmployerHome__titlecontainer}>
         <div className={styles.EmployerHome__titlebloc}>
+          {console.log(userInfos)}
           <h1>Mon entreprise</h1>
           <h3>{userInfos.businesses[0].name}</h3>
           <h3>{userInfos.businesses[0].address}</h3>

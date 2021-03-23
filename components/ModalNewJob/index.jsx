@@ -17,7 +17,7 @@ const customStyles = {
 
 Modal.setAppElement('#__next');
 
-const ModalNewEvent = ({ userInfos, token }) => {
+const ModalNewEvent = ({ eventId, token, eventDate }) => {
   const [modalIsOpen,setIsOpen] = useState(false);
 
 
@@ -28,12 +28,13 @@ const ModalNewEvent = ({ userInfos, token }) => {
   const [form, setForm] = useState({ 
     name: '',
     description: '',
-    desscode: '',
+    dresscode: '',
     duration: '',
     rate: '',
     free_stead: '',
-    date: '',
-    business_id: userInfos.businesses[0].id
+    date: eventDate,
+    free_stead: '',
+    event_id: eventId, 
   });
 
   useEffect(() => {
@@ -87,7 +88,7 @@ const ModalNewEvent = ({ userInfos, token }) => {
 
   const registerJob = async () => {
     try {
-      const req = await fetch(`http://localhost:3000/api/events`, {
+      const req = await fetch(`http://localhost:3000/api/jobs`, {
           method: 'POST',
           headers: {
             'Authorization': token,
@@ -96,7 +97,7 @@ const ModalNewEvent = ({ userInfos, token }) => {
           body: JSON.stringify(form)
       })
       setIsOpen(false);
-      router.push("/employer_home");
+      router.push(`/employer_home/event/${eventId}`);
     } catch (error) {
       console.log(error)
     }
@@ -107,9 +108,8 @@ const ModalNewEvent = ({ userInfos, token }) => {
   	<div className={styles.ModalNewJob}>
 
       <div className={styles.ModalNewJob__newJob}>
-    	<button onClick={openModal}>Ajouter un Evenement</button>
+    	<button onClick={openModal}>Ajouter un Job</button>
       </div>
-
 
         <Modal
           isOpen={modalIsOpen}
@@ -120,9 +120,9 @@ const ModalNewEvent = ({ userInfos, token }) => {
         >
 
           <div className={styles.ModalNewJob__Modal}>
-            <h2>Nouvel Evenement</h2>
+            <h2>Nouvel Emploi</h2>
             <form className={styles.ModalNewJob__Modal__form} onSubmit={handleSubmit}>
-                <label htmlFor="name">Nom de l'évenement</label>
+                <label htmlFor="name">Nom de l'emploi</label>
                 <input 
                 name="name" 
                 type="text" 
@@ -138,32 +138,32 @@ const ModalNewEvent = ({ userInfos, token }) => {
                 onChange={handleChange} 
                 required 
                 />
-                <label htmlFor="desscode">desscode de l'emploi</label>
+                <label htmlFor="dresscode">Dresscode de l'emploi</label>
                 <textarea 
-                name="desscode" 
+                name="dresscode" 
                 type="text"
-                autoComplete="desscode" 
+                autoComplete="dresscode" 
                 onChange={handleChange} 
                 required 
                 />
-                <label htmlFor="duration">durée de l'emploi</label>
+                <label htmlFor="duration">durée de l'emploi /h</label>
                 <input 
                 name="duration" 
                 type="number"
                 onChange={handleChange} 
                 required 
                 />
-                <label htmlFor="rate">Prix pour de l'heure</label>
+                <label htmlFor="rate">Prix de l'heure /€</label>
                 <input 
                 name="rate" 
                 type="number"
                 onChange={handleChange} 
                 required 
                 />
-                <label htmlFor="date">Date de l'emploi</label>
+                <label htmlFor="free_stead">Place de disponible</label>
                 <input 
-                name="date" 
-                type="date"
+                name="free_stead" 
+                type="number"
                 onChange={handleChange} 
                 required 
                 />
