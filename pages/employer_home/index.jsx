@@ -18,10 +18,12 @@ const EmployerHome = ({ userInfos, token }) => {
     const neweventsArr = [];
     const eventsArr = Object.entries(userInfos.events);
     eventsArr.map(event => neweventsArr.push(event[1]));
+    
     //sort array by date
     neweventsArr.sort((a, b) => new Date(b.date) - new Date(a.date)).reverse()
+  
     //filter past events
-    setEventList(neweventsArr);
+    setEventList(neweventsArr.filter(event => new Date(event.date) > new Date()));
   }
 
   const formattedDate = (d) => {
@@ -63,14 +65,19 @@ const EmployerHome = ({ userInfos, token }) => {
       {eventList && eventList.map(event => (
         <li key={event.id} className={styles.EmployerHome__eventlist__item}>
           <p>{formattedDate(new Date(event.date))}</p>
-          <Link href="/employer_home/event/[id]" as={`/employer_home/event/${event.id}`}>
+          <Link
+          href={{
+            pathname: '/employer_home/event/[slug]',
+            query: { slug: event.id },
+          }}
+          >
             <a>
               <CardEvent event={event} />
             </a>
           </Link>
           <div className={styles.EmployerHome__eventlist__item__buttons}>
-            <button className={styles.EmployerHome__eventlist__item__buttons__modify}>modifier<br />l'évenement</button>
-            <button className={styles.EmployerHome__eventlist__item__buttons__delete}>supprimer<br />l'évenement</button>
+            <button className={styles.EmployerHome__eventlist__item__buttons__modify} >modifier<br />l'évenement</button>
+            <button className={styles.EmployerHome__eventlist__item__buttons__delete} >supprimer<br />l'évenement</button>
           </div>
         </li>
         ))}
