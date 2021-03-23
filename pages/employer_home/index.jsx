@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import cookie from 'cookie';
 import ModalNewEvent from 'components/ModalNewEvent';
 import CardEvent from 'components/CardEvent';
+import Link from 'next/link';
 
 const EmployerHome = ({ userInfos, token }) => {
   const [eventList, setEventList] = useState([]);
@@ -61,7 +62,9 @@ const EmployerHome = ({ userInfos, token }) => {
       {eventList && eventList.map(event => (
         <li key={event.name}>
           <p>{formattedDate(new Date(event.date))}</p>
-          <CardEvent event={event} />
+        <Link href="/employer_home/event/[id]" as={`/employer_home/event/${event.id}`}>
+          <a><CardEvent event={event} /></a>
+        </Link>
         </li>
         ))}
       </ul>
