@@ -3,11 +3,13 @@ import Layout from 'components/Layout';
 import Head from 'next/head';
 import cookie from 'cookie';
 import styles from './event.module.scss';
+import ModalNewJob from 'components/ModalNewJob'
 
 const Event = ({ eventInfos }) => {
   return (
     
     <Layout>
+      <ModalNewJob />
       {eventInfos &&
         <div className={styles.Event}>
           <Head>
