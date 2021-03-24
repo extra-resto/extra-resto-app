@@ -101,7 +101,7 @@ const ModalUpdateEvent = ({ event, token }) => {
   	<div className={styles.ModalUpdateEvent}>
 
       <div className={styles.ModalUpdateEvent__updateButton}>
-    	 <button onClick={openModal}>Mettre à jour</button>
+    	 <button onClick={openModal}>Mettre<br/>à jour</button>
       </div>
 
         <Modal

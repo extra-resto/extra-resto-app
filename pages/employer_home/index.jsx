@@ -10,6 +10,7 @@ import CardEvent from 'components/CardEvent';
 import Link from 'next/link';
 import ModalUpdateBusiness from 'components/ModalUpdateBusiness';
 import ModalUpdateEvent from 'components/ModalUpdateEvent';
+import ModalDeleteEvent from 'components/ModalDeleteEvent';
 
 const EmployerHome = ({ userInfos, token }) => {
   const [eventList, setEventList] = useState([]);
@@ -79,7 +80,7 @@ const EmployerHome = ({ userInfos, token }) => {
           </Link>
           <div className={styles.EmployerHome__eventlist__item__buttons}>
             <ModalUpdateEvent event={event} token={token} />
-            <button className={styles.EmployerHome__eventlist__item__buttons__delete} >supprimer<br />l'évenement</button>
+            <ModalDeleteEvent event={event} token={token} />
           </div>
         </li>
         ))}
