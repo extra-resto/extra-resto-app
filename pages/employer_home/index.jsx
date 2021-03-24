@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import Head from 'next/head';
 import Layout from 'components/Layout';
 import styles from './EmployerHome.module.scss';
-import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import cookie from 'cookie';
 import ModalNewEvent from 'components/ModalNewEvent';
