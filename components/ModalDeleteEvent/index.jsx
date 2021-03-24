@@ -40,8 +40,7 @@ const ModalDeleteEvent = ({ event, token }) => {
           headers: {
             'Authorization': token,
             'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(form)
+          }
       })
       setIsOpen(false);
       router.push(`/employer_home/`);
