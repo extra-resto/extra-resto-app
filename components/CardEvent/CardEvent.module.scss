@@ -1,5 +1,29 @@
 .CardEvent {
-	border: 2px solid black;
-	margin: 10px;
-	padding: 10px;
+	&__head {
+		padding: 10px;
+		min-width: 350px;
+		background-color: white;
+		border-radius: 15px 15px 0 0;
+		height: 5vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+	&__body {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		min-height: 10vh;
+		
+		background-color: lightgrey;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			li {
+				margin: 5px;
+				padding: 5px;
+				list-style: none;
+			}
+		
+	}
 }

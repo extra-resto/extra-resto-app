@@ -1,7 +1,6 @@
-import styles from './ModalNewEvent.module.scss';
+import styles from './ModalUpdateBusiness.module.scss';
 import Modal from 'react-modal';
 import { useState, useEffect } from 'react';
-import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 
@@ -18,25 +17,27 @@ const customStyles = {
 
 Modal.setAppElement('#__next');
 
-const ModalNewEvent = ({ userInfos, token }) => {
+const ModalUpdateBusiness = ({ business, token }) => {
   const [modalIsOpen,setIsOpen] = useState(false);
 
 
   const dispatch = useDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState({name: '', date: '', description: ''});
+  const [errors, setErrors] = useState({name: '', address: '', postal_code: '', city:'', user_id:''});
   const router = useRouter();
-  const [form, setForm] = useState({ 
-    name: '',
-    date: new Date(),
-    description: '',
-    business_id: userInfos.businesses[0].id
+  const [form, setForm] = useState({
+    name: business.name, 
+    address: business.address, 
+    postal_code: business.postal_code, 
+    city: business.city, 
+    user_id: business.user_id,
+    id: business.id
   });
 
   useEffect(() => {
     if (isSubmitting) {
-      if (errors.name === '' && errors.date === '' && errors.description === '') {
-        registerEvent();
+      if (errors.name === '') {
+        updateBusiness();
       }
       else {
         setIsSubmitting(false);
@@ -75,16 +76,16 @@ const ModalNewEvent = ({ userInfos, token }) => {
     let err = {name: '', date: '', description: ''};
 
     if(!form.name) {
-      err.name = 'Password and confirmation password are different'
+      err.name = 'Name is not correct'
     }
     
     return err;
   }
 
-  const registerEvent = async () => {
+  const updateBusiness = async () => {
     try {
-      const req = await fetch(`http://localhost:3000/api/events`, {
-          method: 'POST',
+      const req = await fetch(`http://localhost:3000/api/businesses/${business.id}`, {
+          method: 'PUT',
           headers: {
             'Authorization': token,
             'Content-Type': 'application/json'
@@ -92,20 +93,18 @@ const ModalNewEvent = ({ userInfos, token }) => {
           body: JSON.stringify(form)
       })
       setIsOpen(false);
-      router.push("/employer_home");
+      router.push(`/employer_home/`);
     } catch (error) {
       console.log(error)
     }
   }
 
-
   return (
-  	<div className={styles.ModalNewEvent}>
+  	<div className={styles.ModalUpdateBusiness}>
 
-      <div className={styles.ModalNewEvent__newEvent}>
-    	<button onClick={openModal}>Ajouter un Evenement</button>
+      <div className={styles.ModalUpdateBusiness__updateButton}>
+    	 <button onClick={openModal}>Mettre à jour</button>
       </div>
-
 
         <Modal
           isOpen={modalIsOpen}
@@ -115,34 +114,46 @@ const ModalNewEvent = ({ userInfos, token }) => {
           contentLabel="Example Modal"
         >
 
-          <div className={styles.ModalNewEvent__Modal}>
-            <h2>Nouvel Evenement</h2>
-            <form className={styles.ModalNewEvent__Modal__form} onSubmit={handleSubmit}>
-              <label htmlFor="name">Nom de l'évenement</label>
+          <div className={styles.ModalUpdateBusiness__Modal}>
+            <h2>Modifier mon entreprise</h2>
+            <form className={styles.ModalUpdateBusiness__Modal__form} onSubmit={handleSubmit}>
+              <label htmlFor="name">Nom de l'établissement</label>
               <input 
                 name="name" 
                 type="text" 
                 autoComplete="name" 
+                value={form.name}
                 onChange={handleChange} 
                 required 
               />
-              <label htmlFor="date">Date de l'évenement</label>
+              <label htmlFor="address">Adresse</label>
               <input 
-                name="date" 
-                type="date" 
-                autoComplete="name"
-                onChange={handleChange} 
-                required 
-              />
-              <label htmlFor="description">Description de l'évenement</label>
-              <textarea 
-                name="description" 
+                name="address"
                 type="text"
-                autoComplete="description" 
+                autoComplete="address"
+                value={form.address}
+                onChange={handleChange}
+                required
+              />
+              <label htmlFor="postal_code">Code postal</label>
+              <input 
+                name="postal_code"
+                type="text"
+                autoComplete="postal_code"
+                value={form.postal_code}
+                onChange={handleChange}
+                required
+              />
+              <label htmlFor="city">Ville</label>
+              <input 
+                name="city"
+                type="city" 
+                autoComplete="city"
                 onChange={handleChange} 
+                value={form.city}
                 required 
               />
-              <button type="submit">Nouvel evenement</button>
+              <button type="submit">Enregister</button>
             </form>
           </div>
         </Modal>
@@ -150,4 +161,4 @@ const ModalNewEvent = ({ userInfos, token }) => {
   );
 };
 
-export default ModalNewEvent;
+export default ModalUpdateBusiness;

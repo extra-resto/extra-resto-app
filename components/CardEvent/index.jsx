@@ -4,7 +4,16 @@ const CardEvent = ({ event }) => {
   return (
     
     <div className={styles.CardEvent}>
-      <p>{event.name}</p>
+	    <div className={styles.CardEvent__head}>
+	      <h3>{event.name}</h3>
+	    </div>
+	    <div className={styles.CardEvent__body}>
+	    	<ul className={styles.CardEvent__body}>
+	    		{event.jobs && event.jobs.map(job => (
+					<li>{job.free_stead} x {job.name}</li>
+	    		))}
+	      	</ul>
+	    </div>
     </div>
   );
 }
