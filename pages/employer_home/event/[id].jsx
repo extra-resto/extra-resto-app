@@ -7,6 +7,7 @@ import styles from './event.module.scss';
 import ModalNewJob from 'components/ModalNewJob'
 import ModalUpdateEvent from 'components/ModalUpdateEvent';
 import ModalDeleteJob from 'components/ModalDeleteJob';
+import ModalUpdateJob from 'components/ModalUpdateJob';
 
 const Event = ({ eventInfos, id }) => {
   const { token } = useSelector(state => state);
@@ -27,15 +28,18 @@ const Event = ({ eventInfos, id }) => {
             </div>
           </div>
             <ModalNewJob eventId={id} eventDate={eventInfos.date} />
-          <ul>
+          <ul className={styles.Event__joblist}>
             {eventInfos && 
             eventInfos.jobs.map((job) => (
-              <li key={job.id}>
+              <li className={styles.Event__joblist__item} key={job.id}>
                 <h2>Nom de l'emploi: {job.name}</h2>
                 <p>Description: {job.description}</p>
                 <p>Dresscode: {job.dresscode}</p>
                 <p>Durée: {job.duration}</p>
-                <ModalDeleteJob event={eventInfos} job={job} token={token} />
+                <div className={styles.Event__joblist__item__buttons}>
+                  <ModalDeleteJob event={eventInfos} job={job} token={token} />
+                  <ModalUpdateJob event={eventInfos} job={job} token={token} />
+                </div>
               </li>
             ))
             }
