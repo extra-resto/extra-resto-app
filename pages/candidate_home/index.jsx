@@ -3,20 +3,40 @@ import Layout from 'components/Layout';
 import Head from 'next/head';
 import cookie from 'cookie';
 import styles from './CandidateHome.module.scss';
+import { useRouter } from 'next/router';
 
-const CandidateHome = ({jobListe, token}) => {
-
+const CandidateHome = ({jobListe, token, id}) => {
+  const router = useRouter();
   const handleCandidateApply = async (jobId) => {
-    
-    const response = await fetch(`${process.env.API_ROOT}candidatures`, {
+    const data = {
+      jobs_id: jobId
+    }
+    const response = await fetch(`http://localhost:3000/api/candidatures`, {
       method: 'POST',
       headers: {
         'Authorization': token,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({jobs_id: jobId})
+      body: JSON.stringify(data)
     })
+    const data2 = await response.json()
+    router.replace(router.asPath)
   }
+  
+  const handleCandidateRemove = async (candidatures) => {
+    const cadidatureId = candidatures.filter(candidature => candidature.user_id === parseInt(id))
+    console.log(cadidatureId)
+
+    const response = await fetch(`http://localhost:3000/api/candidatures/${cadidatureId[0].id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': token,
+        'Content-Type': 'application/json'
+      },
+    })
+    router.replace(router.asPath)
+  }
+
 
     return (
         <Layout>
@@ -24,18 +44,23 @@ const CandidateHome = ({jobListe, token}) => {
                 <title>Candidate home page</title>
             </Head>
         <div className={styles.CandidateHome}>
+          {console.log(jobListe)}
             <h1>Liste des emplois</h1>
             <ul>
                 {jobListe && 
                 jobListe.map((job) => (
-                    <li key={job.id}>
-                        <h1> Nom: {job.name}</h1>
-                        <p>Description: {job.description}</p>
-                        <p>Dresscode: {job.dresscode}</p>
-                        <p>Nombre de place restante{job.free_stead}</p>
-                        <p>Commence le {job.date}</p>
-                        <button onClick={() => handleCandidateApply(job.id)}>Apply</button>
-                    </li>
+                  <li key={job.id}>
+                  <h1> Nom: {job.name}</h1>
+                  <p>Description: {job.description}</p>
+                  <p>Dresscode: {job.dresscode}</p>
+                  <p>Nombre de place restante{job.free_stead}</p>
+                  <p>Commence le {job.date}</p>
+                  {job.candidatures.some(candidature => candidature.user_id == id.toString()) ?  
+                  <button onClick={() => handleCandidateRemove(job.candidatures)}>Annuler</button>
+                  : 
+                  <button onClick={() => handleCandidateApply(job.id)}>Participer</button>}
+                  
+              </li>
                 ))
                 }
             </ul>
@@ -46,7 +71,7 @@ const CandidateHome = ({jobListe, token}) => {
 };
 
 export const getServerSideProps = async ({req}) =>  {
-    const { token } = cookie.parse(req.headers.cookie);
+    const { token, id } = cookie.parse(req.headers.cookie);
     const jobResponse = await fetch(`${process.env.API_ROOT}/jobs`, {
       method: 'get',
       headers: {
@@ -60,7 +85,8 @@ export const getServerSideProps = async ({req}) =>  {
     return {
       props: {
         jobListe,
-        token
+        token,
+        id
       }
     }
   }
