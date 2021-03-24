@@ -1,4 +1,4 @@
-import styles from './ModalNewJob.module.scss';
+import styles from './ModalUpdateJob.module.scss';
 import Modal from 'react-modal';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -17,7 +17,7 @@ const customStyles = {
 
 Modal.setAppElement('#__next');
 
-const ModalNewEvent = ({ eventId, token, eventDate }) => {
+const ModalUpdateJob = ({ event, job, token }) => {
   const [modalIsOpen,setIsOpen] = useState(false);
 
 
@@ -26,21 +26,20 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
   const [errors, setErrors] = useState({name: '', date: '', description: ''});
   const router = useRouter();
   const [form, setForm] = useState({ 
-    name: '',
-    description: '',
-    dresscode: '',
-    duration: '',
-    rate: '',
-    free_stead: '',
-    date: eventDate,
-    free_stead: '',
-    event_id: eventId, 
+    name: job.name,
+    description: job.description,
+    dresscode: job.dresscode,
+    duration: job.duration,
+    rate: job.rate,
+    free_stead: job.free_stead,
+    date: event.date,
+    event_id: event.id, 
   });
 
   useEffect(() => {
     if (isSubmitting) {
-      if (errors.name === '' && errors.date === '' && errors.description === '') {
-        registerJob();
+      if (errors.name === '') {
+        updateJob();
       }
       else {
         setIsSubmitting(false);
@@ -85,10 +84,10 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
     return err;
   }
 
-  const registerJob = async () => {
+  const updateJob = async () => {
     try {
-      const req = await fetch(`http://localhost:3000/api/jobs`, {
-          method: 'POST',
+      const req = await fetch(`http://localhost:3000/api/jobs/${job.id}`, {
+          method: 'PUT',
           headers: {
             'Authorization': token,
             'Content-Type': 'application/json'
@@ -96,18 +95,17 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
           body: JSON.stringify(form)
       })
       setIsOpen(false);
-      router.push(`/employer_home/event/${eventId}`);
+      router.push(`/employer_home/event/${event.id}`);
     } catch (error) {
       console.log(error)
     }
   }
 
-
   return (
-  	<div className={styles.ModalNewJob}>
+  	<div className={styles.ModalUpdateJob}>
 
-      <div className={styles.ModalNewJob__newJob}>
-    	<button onClick={openModal}>Ajouter un Job</button>
+      <div className={styles.ModalUpdateJob__updateButton}>
+    	 <button onClick={openModal}>Mettre<br/>à jour</button>
       </div>
 
         <Modal
@@ -118,14 +116,15 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
           contentLabel="Example Modal"
         >
 
-          <div className={styles.ModalNewJob__Modal}>
-            <h2>Nouvel Emploi</h2>
+          <div className={styles.ModalUpdateJob__Modal}>
+            <h2>Modifier le job</h2>
             <form className={styles.ModalNewJob__Modal__form} onSubmit={handleSubmit}>
                 <label htmlFor="name">Nom de l'emploi</label>
                 <input 
                 name="name" 
                 type="text" 
-                autoComplete="name" 
+                autoComplete="name"
+                value={form.name}
                 onChange={handleChange} 
                 required 
                 />
@@ -133,7 +132,8 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
                 <textarea 
                 name="description" 
                 type="text"
-                autoComplete="description" 
+                autoComplete="description"
+                value={form.description}
                 onChange={handleChange} 
                 required 
                 />
@@ -141,7 +141,8 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
                 <textarea 
                 name="dresscode" 
                 type="text"
-                autoComplete="dresscode" 
+                autoComplete="dresscode"
+                value={form.dresscode}
                 onChange={handleChange} 
                 required 
                 />
@@ -149,6 +150,7 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
                 <input 
                 name="duration" 
                 type="number"
+                value={form.duration}
                 onChange={handleChange} 
                 required 
                 />
@@ -156,6 +158,7 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
                 <input 
                 name="rate" 
                 type="number"
+                value={form.rate}
                 onChange={handleChange} 
                 required 
                 />
@@ -163,10 +166,11 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
                 <input 
                 name="free_stead" 
                 type="number"
+                value={form.free_stead}
                 onChange={handleChange} 
                 required 
                 />
-              <button type="submit">Nouvel emploi</button>
+              <button type="submit">Modifier le job</button>
             </form>
           </div>
         </Modal>
@@ -174,4 +178,4 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
   );
 };
 
-export default ModalNewEvent;
+export default ModalUpdateJob;
