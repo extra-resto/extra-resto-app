@@ -3,6 +3,8 @@ import Head from 'next/head';
 import Layout from 'components/Layout';
 import styles from './Concept.module.scss';
 import Image from 'next/image';
+import Button from 'components/Button';
+import Link from 'next/link';
 
 const Concept = () => {
   return (
@@ -30,9 +32,10 @@ const Concept = () => {
               en Extra ou CDI en moins de 3 minutes
           </h2>
           <div className={styles.Concept__Hero__cta__buttons}>
-            <button>Espace Candidat</button>
-            <button>Espace Recruteur</button>
+          <Button content="Espace Candidat"></Button>
+          <Button content="Espace Recruteur"></Button>
           </div>
+
         </div>
         <div className={styles.Concept__Hero__image}>
           <Image src="/images/icons/barman-waiter.svg" alt="barman waiter drawing" height={500} width={200} />
