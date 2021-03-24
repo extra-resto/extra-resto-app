@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import { fileChecksum } from 'lib/checksum';
 
 const FormCandidateSignup = () => {
   const dispatch = useDispatch();
@@ -15,9 +16,34 @@ const FormCandidateSignup = () => {
     password_confirmation: '',
     role: 0
   });
+  const [pdf, setPdf] = useState(null)
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({password: '', phone_number: ''});
   const router = useRouter();
+  
+  const createPresignedUrl = async(file, byte_size, checksum) => {
+    let options = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        file: {
+          filename: file.name,
+          byte_size: byte_size,
+          checksum: checksum,
+          content_type: 'application/pdf',
+          metadata: {
+            'message': 'resume for parsing'
+          }
+        }
+      })
+    }
+    let res = await fetch("http://localhost:3000/api/presigned_url", options)
+    if (res.status !== 200) return res
+    return await res.json()
+  }
 
   useEffect(() => {
     if (isSubmitting) {
@@ -31,21 +57,39 @@ const FormCandidateSignup = () => {
   }, [errors])
 
   const registerUser = async () => {
-    try {
-      const req = await fetch('http://localhost:3000/api/signup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ user: form })
-      })
-      const token = req.headers.get('Authorization');
-      const result = await req.json();
-      dispatch(setUser(token, result.data.attributes.role));
-      router.push("/");
-    } catch (error) {
-      console.log(error)
+  
+    // To upload pdf file to S3, we need to do three steps:
+    // 1) request a pre-signed PUT request (for S3) from the backend
+  
+    const checksum = await fileChecksum(pdf)
+    const presignedFileParams = await createPresignedUrl(pdf, pdf.size, checksum)
+    
+    // 2) send file to said PUT request (to S3)
+    const s3PutOptions = {
+      method: 'PUT',
+      headers: presignedFileParams.direct_upload.headers,
+      body: pdf,
     }
+    let awsRes = await fetch(presignedFileParams.direct_upload.url, s3PutOptions)
+    if (awsRes.status !== 200) return awsRes
+    console.log({ ...form, resume: presignedFileParams.blob_signed_id })
+  
+    // 3) confirm & create user with backend
+    const usersPostOptions = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ user: {...form, resume: presignedFileParams.blob_signed_id} })
+    }
+    let res = await fetch('http://localhost:3000/api/signup', usersPostOptions)
+    if (res.status !== 200) return res
+    const token = res.headers.get('Authorization');
+    const result = await res.json();
+    console.log(result)
+    dispatch(setUser(token, result.role, result.id));
+    router.push("/");
   }
 
   const handleSubmit = (e) => {
@@ -53,6 +97,11 @@ const FormCandidateSignup = () => {
     let errs = validate();
     setErrors(errs);
     setIsSubmitting(true);
+  }
+
+  const handleFile = (e) => {
+    console.log(e.target.files[0])
+    setPdf(e.target.files[0])
   }
 
   const handleChange = (e) => {
@@ -111,6 +160,13 @@ const FormCandidateSignup = () => {
           type="email" 
           autoComplete="email" 
           onChange={handleChange} 
+          required 
+        />
+        <label htmlFor="cv">CV</label>
+        <input 
+          name="cv" 
+          type="file"
+          onChange={handleFile} 
           required 
         />
         <label htmlFor="password">Mot de passe</label>
