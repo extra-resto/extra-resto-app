@@ -2,7 +2,6 @@ import styles from './CardEvent.module.scss';
 
 const CardEvent = ({ event }) => {
   return (
-
     <div className={styles.CardEvent}>
 	    <div className={styles.CardEvent__head}>
 	      <h3>{event.name}</h3>

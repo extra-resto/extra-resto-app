@@ -8,20 +8,31 @@
   	width: 100vw;
   	display: flex;
   	justify-content: center;
-    button {
-      margin-bottom: 10px;
+    &__titlebloc {
+      margin: 10px;
       padding: 10px;
-      background: orange;
+      border: 2px solid black;
+      border-radius: 15px;
+      &__title {
+        display: flex;
+        align-items: center;
+      }
     }
   }
   &__Modal {
   	width: 100vw;
   	text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   &__eventlist {
   	&__item {
   		list-style: none;
       &__buttons {
+        position: relative;
+        top: 100px;
+        left: 120px;
         display: flex;
         justify-content: center;
         &__modify, &__delete {

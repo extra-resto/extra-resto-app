@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 const customStyles = {
   content : {
@@ -53,7 +54,14 @@ const ModalDeleteEvent = ({ event, token }) => {
   	<div className={styles.ModalDeleteEvent}>
 
       <div className={styles.ModalDeleteEvent__updateButton}>
-    	 <button onClick={openModal}>Supprimer<br/> l'évenement</button>
+    	 <button onClick={openModal}>
+        <Image
+          src="/images/Button/delete.svg"
+          height={20} 
+          width={20} 
+          alt="extra-resto logo"
+        />
+       </button>
       </div>
 
         <Modal

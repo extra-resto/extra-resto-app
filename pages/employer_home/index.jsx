@@ -51,14 +51,15 @@ const EmployerHome = ({ userInfos, token }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <div className={styles.EmployerHome__titlecontainer}>
-        {console.log(userInfos)}
-        <div className={styles.EmployerHome__titlebloc}>
-          {console.log(userInfos)}
-          <h1>Mon entreprise</h1>
+        <div className={styles.EmployerHome__titlecontainer__titlebloc}>
+          <div className={styles.EmployerHome__titlecontainer__titlebloc__title}>
+            <h1>Mon entreprise</h1>
+            <ModalUpdateBusiness business={userInfos.businesses[0]} token={token} />
+          </div>
           <h3>{userInfos.businesses[0].name}</h3>
           <h3>{userInfos.businesses[0].address}</h3>
           <h3>{userInfos.businesses[0].postal_code} {userInfos.businesses[0].city}</h3>
-          <ModalUpdateBusiness business={userInfos.businesses[0]} token={token} />
+          
         </div>
       </div>
       <div className={styles.EmployerHome__Modal}>
@@ -68,6 +69,10 @@ const EmployerHome = ({ userInfos, token }) => {
       <ul className={styles.EmployerHome__eventlist}>
       {eventList && eventList.map(event => (
         <li key={event.id} className={styles.EmployerHome__eventlist__item}>
+          <div className={styles.EmployerHome__eventlist__item__buttons}>
+            <ModalUpdateEvent event={event} token={token} />
+            <ModalDeleteEvent event={event} token={token} />
+          </div>
           <p>{formattedDate(new Date(event.date))}</p>
           <Link
           href={{
@@ -79,10 +84,6 @@ const EmployerHome = ({ userInfos, token }) => {
               <CardEvent event={event} />
             </a>
           </Link>
-          <div className={styles.EmployerHome__eventlist__item__buttons}>
-            <ModalUpdateEvent event={event} token={token} />
-            <ModalDeleteEvent event={event} token={token} />
-          </div>
         </li>
         ))}
       </ul>

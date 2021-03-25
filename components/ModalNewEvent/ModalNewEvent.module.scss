@@ -3,9 +3,19 @@
 
 .ModalNewEvent {
   button {
-    padding: 10px;
-    margin: 10px;
-    background: green;
+    border-radius: 50%;
+    width: 35px;
+    padding: 7px;
+    margin: 5px;
+    margin-left: 20px;
+    border: 0.5px solid lightgrey;
+    background: white;
+    text-align: center;
+    font-size : 20px;
+  }
+  button:hover {
+    background: lightgrey;
+    cursor: pointer;
   }
   &__newEvent {
     width: 100%;

@@ -103,7 +103,7 @@ const ModalNewEvent = ({ userInfos, token }) => {
   	<div className={styles.ModalNewEvent}>
 
       <div className={styles.ModalNewEvent__newEvent}>
-    	<button onClick={openModal}>Ajouter un Evenement</button>
+    	<button onClick={openModal}>+</button>
       </div>
 
 
