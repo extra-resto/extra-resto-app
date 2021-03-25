@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './ModalCandidateEmployer.module.scss';
 import Link from 'next/link';
 import Modal from 'react-modal';
+import Button from 'components/Button';
 
 const customStyles = {
   content : {
@@ -32,7 +33,7 @@ const ModalCandidateEmployer = () => {
 
   return (
   	<div className={styles.ModalCandidateEmployer}>
-    	<button onClick={openModal}>S'inscrire</button>
+      <Button content="S'inscrire" href={openModal}/>
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}

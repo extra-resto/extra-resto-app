@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import Button from 'components/Button';
 
 const FormCandidateSignup = () => {
   const dispatch = useDispatch();
@@ -127,7 +128,7 @@ const FormCandidateSignup = () => {
           onChange={handleChange} 
           required 
         />
-        <button type="submit">S'enregistrer</button>
+        <Button type="submit" content="S'enregistrer"/>
       </form>
     </>
   )
