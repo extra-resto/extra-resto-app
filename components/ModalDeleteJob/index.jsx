@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 const customStyles = {
   content : {
@@ -53,7 +54,14 @@ const ModalDeleteJob = ({ event, job, token }) => {
   	<div className={styles.ModalDeleteJob}>
 
       <div className={styles.ModalDeleteJob__updateButton}>
-    	 <button onClick={openModal}>Supprimer<br/> le job</button>
+    	 <button onClick={openModal}>
+        <Image
+          src="/images/Button/delete.svg"
+          height={20} 
+          width={20} 
+          alt="delete cross"
+        />
+       </button>
       </div>
 
         <Modal

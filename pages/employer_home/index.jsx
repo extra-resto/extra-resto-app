@@ -15,7 +15,6 @@ const EmployerHome = ({ userInfos, token }) => {
   const [eventList, setEventList] = useState([]);
 
   const getEventsList = () => {
-
     //convert object into array without the key
     const neweventsArr = [];
     const eventsArr = Object.entries(userInfos.businesses[0].events);
