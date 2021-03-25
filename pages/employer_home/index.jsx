@@ -51,6 +51,7 @@ const EmployerHome = ({ userInfos, token }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <div className={styles.EmployerHome__titlecontainer}>
+
         {console.log(userInfos)}
         <div className={styles.EmployerHome__titlebloc}>
           <h1>Mon entreprise</h1>
