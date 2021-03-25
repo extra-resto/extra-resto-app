@@ -20,9 +20,6 @@ export const Navbar = () => {
             />
           </a>
         </Link>
-        <Link href='/concept'>
-  	      <a>Le Concept</a>
-        </Link>
 
         {role === 'employer' && 
           <Link href='/employer_home'>
