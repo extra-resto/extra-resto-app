@@ -4,9 +4,20 @@ import Layout from 'components/Layout';
 import styles from './Concept.module.scss';
 import Image from 'next/image';
 import Button from 'components/Button';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Concept = () => {
+  const router = useRouter()
+
+  const goToCandidate = (e) => {
+    e.preventDefault()
+    router.push("/signup/candidate")
+  }
+
+  const goToEmployer = (e) => {
+    e.preventDefault()
+    router.push("/signup/employer")
+  }
   return (
     <Layout>
     <div className={styles.Concept}>
@@ -32,8 +43,8 @@ const Concept = () => {
               en Extra ou CDI en moins de 3 minutes
           </h2>
           <div className={styles.Concept__Hero__cta__buttons}>
-          <Button content="Espace Candidat"></Button>
-          <Button content="Espace Recruteur"></Button>
+          <Button content="Espace Candidat" href={goToCandidate}/>
+          <Button content="Espace Recruteur" href={goToEmployer}/>
           </div>
 
         </div>
