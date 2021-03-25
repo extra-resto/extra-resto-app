@@ -4,6 +4,7 @@ import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { fileChecksum } from 'lib/checksum';
+import Button from 'components/Button';
 
 const FormCandidateSignup = () => {
   const dispatch = useDispatch();
@@ -72,7 +73,6 @@ const FormCandidateSignup = () => {
     }
     let awsRes = await fetch(presignedFileParams.direct_upload.url, s3PutOptions)
     if (awsRes.status !== 200) return awsRes
-    console.log({ ...form, resume: presignedFileParams.blob_signed_id })
   
     // 3) confirm & create user with backend
     const usersPostOptions = {
@@ -87,7 +87,6 @@ const FormCandidateSignup = () => {
     if (res.status !== 200) return res
     const token = res.headers.get('Authorization');
     const result = await res.json();
-    console.log(result)
     dispatch(setUser(token, result.role, result.id));
     router.push("/");
   }
@@ -100,7 +99,6 @@ const FormCandidateSignup = () => {
   }
 
   const handleFile = (e) => {
-    console.log(e.target.files[0])
     setPdf(e.target.files[0])
   }
 
@@ -183,7 +181,7 @@ const FormCandidateSignup = () => {
           onChange={handleChange} 
           required 
         />
-        <button type="submit">S'enregistrer</button>
+        <Button type="submit" content="S'enregistrer"/>
       </form>
     </>
   )

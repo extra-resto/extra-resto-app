@@ -2,6 +2,7 @@ import styles from './FormEmployerSignup.module.scss';
 import { useState, useEffect } from 'react';
 import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
+import Button from 'components/Button';
 
 const FormEmployerSignup = ({setStep}) => {
   const dispatch = useDispatch();
@@ -125,7 +126,7 @@ const FormEmployerSignup = ({setStep}) => {
           onChange={handleChange} 
           required 
         />
-        <button type="submit">S'enregistrer</button>
+        <Button type="submit" content="S'enregistrer"/>
       </form>
     </>
   )
