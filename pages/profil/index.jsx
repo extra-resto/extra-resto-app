@@ -1,7 +1,16 @@
 import cookie from "cookie";
 
 const Profil = ({ userProfil }) => {
-  return <div>userProfil.id</div>;
+  console.log(userProfil)
+  return (
+    <div>
+      <h1>Votre profil</h1>
+      <h2>{userProfil.first_name}</h2>
+      <h2>{userProfil.last_name}</h2>
+      <h2>{userProfil.email}</h2>
+      <h2>{userProfil.phone_number}</h2>
+    </div>
+  )
 };
 
 export const getServerSideProps = async ({ req }) => {
