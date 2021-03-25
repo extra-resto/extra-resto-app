@@ -1,11 +1,9 @@
 import styles from './Button.module.scss';
 
-const Button = ({content}) => {
+const Button = ({content, href}) => {
     
     return (
-        <>
-        <button className={styles.btn10}>{content}</button>
-        </>
+        <button className={styles.btn10} onClick={href}>{content}</button>
         
     )
 }
