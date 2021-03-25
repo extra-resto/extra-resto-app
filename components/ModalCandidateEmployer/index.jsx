@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styles from './ModalCandidateEmployer.module.scss';
 import Link from 'next/link';
 import Modal from 'react-modal';
-import { useRouter } from 'next/router';
 import Button from 'components/Button';
 
 const customStyles = {
