@@ -61,7 +61,7 @@ const FormLogin = () => {
 
     let err = { email: '' };
 
-    if(form.email.match(/^[A-z-]+@[A-z-]+.[A-z]+$/) === null) {
+    if(form.email.match(/^[A-z-.]+@[A-z-]+.[A-z-.]+$/) === null) {
       err.email = 'Veuillez entrer une adresse email valide'
     }
 

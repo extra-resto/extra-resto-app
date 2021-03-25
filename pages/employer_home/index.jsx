@@ -18,7 +18,7 @@ const EmployerHome = ({ userInfos, token }) => {
 
     //convert object into array without the key
     const neweventsArr = [];
-    const eventsArr = Object.entries(userInfos.events);
+    const eventsArr = Object.entries(userInfos.businesses[0].events);
     eventsArr.map(event => neweventsArr.push(event[1]));
     
     //sort array by date
@@ -52,6 +52,7 @@ const EmployerHome = ({ userInfos, token }) => {
       </Head>
       <div className={styles.EmployerHome__titlecontainer}>
         <div className={styles.EmployerHome__titlebloc}>
+          {console.log(userInfos)}
           <h1>Mon entreprise</h1>
           <h3>{userInfos.businesses[0].name}</h3>
           <h3>{userInfos.businesses[0].address}</h3>
