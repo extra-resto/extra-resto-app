@@ -22,12 +22,19 @@ const CandidateHome = ({jobListe}) => {
                 jobListe.map((job) => (
                   
                 <li key={job.id} className={styles.card}>
-                  <h2>{job.name}</h2>
-                  <p>Nombre de place restante: {job.free_stead}</p>
+                  <div className={styles.card__header}>
+                    <h2>{job.name}</h2>
+                  </div>
 
-                  <Link  href="/candidate_home/job/[id]" as={`/candidate_home/job/${job.id}`} passHref >
-                    <button>Voir le job</button>
-                  </Link>
+                  <div className={styles.card__body}>
+                    <p>Nombre de place restante: {job.free_stead}</p>
+                  </div>
+                  
+                  <div className={styles.card__footer}>
+                    <Link  href="/candidate_home/job/[id]" as={`/candidate_home/job/${job.id}`} passHref >
+                      <button>Voir le job</button>
+                    </Link>
+                  </div>
                 </li>
           
                 ))
