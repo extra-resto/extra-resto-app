@@ -19,8 +19,8 @@ const Home = () => {
     <Layout>
     <div className={styles.Home}>
       <Head>
-        <title>extra-resto - Home</title>
-        <link rel='icon' href='/favicon.ico' />
+        <title>bla</title>
+        <link rel='icon' type='image/png' href='images/Navbar/extra-logo.png' />
       </Head>
     </div>
     </Layout>
