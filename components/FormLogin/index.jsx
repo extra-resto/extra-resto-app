@@ -3,6 +3,7 @@ import styles from './FormLogin.module.scss';
 import { useState, useEffect } from 'react';
 import { setUser, setEmployer } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
+import Button from 'components/Button';
 
 const FormLogin = () => {
   const dispatch = useDispatch();
@@ -88,7 +89,7 @@ const FormLogin = () => {
         onChange={handleChange}
         required
       />
-      <button type="submit">Se connecter</button>
+      <Button type="submit" content="Se connecter" className={styles.ButtonLogin}></Button>
     </form>
     </>
   )
