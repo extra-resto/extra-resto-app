@@ -59,7 +59,7 @@ const Job = ({jobInfos, id, token}) => {
                 <p>Description: {jobInfos.description}</p>
                 <p>Le desscode: {jobInfos.dresscode}</p>
                 <p>Nombre de place restante: {jobInfos.free_stead}</p>
-                {jobInfos.candidatures.some(candidature => candidature.user_id == parseInt(id)) ?  
+                {jobInfos.candidatures && jobInfos.candidatures.some(candidature => candidature.user_id == parseInt(id)) ?  
                 <button onClick={() => handleCandidateRemove(jobInfos.candidatures)}>Annuler</button>
                 : 
                 <button onClick={() => handleCandidateApply(jobInfos.id)}>Participer</button>}
