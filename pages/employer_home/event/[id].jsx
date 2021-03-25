@@ -1,29 +1,45 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Layout from 'components/Layout';
 import Head from 'next/head';
 import cookie from 'cookie';
 import styles from './event.module.scss';
 import ModalNewJob from 'components/ModalNewJob'
+import ModalUpdateEvent from 'components/ModalUpdateEvent';
+import ModalDeleteJob from 'components/ModalDeleteJob';
+import ModalUpdateJob from 'components/ModalUpdateJob';
 
 const Event = ({ eventInfos, id }) => {
+  const { token } = useSelector(state => state);
+
   return (
     
     <Layout>
-      <ModalNewJob eventId={id} eventDate={eventInfos.date} />
       {eventInfos &&
         <div className={styles.Event}>
           <Head>
             <title>{eventInfos.name}</title>
           </Head>
-            <h1>{eventInfos.description}</h1>
-          <ul>
+          <div className={styles.Event__presentation}>
+            <div className={styles.Event__presentation__container}>
+              <h1>{eventInfos.name}</h1>
+              <h2>{eventInfos.description}</h2>
+              <ModalUpdateEvent event={eventInfos} token={token} />
+            </div>
+          </div>
+            <ModalNewJob eventId={id} eventDate={eventInfos.date} />
+          <ul className={styles.Event__joblist}>
             {eventInfos && 
             eventInfos.jobs.map((job) => (
-              <li key={job.id}>
+              <li className={styles.Event__joblist__item} key={job.id}>
                 <h2>Nom de l'emploi: {job.name}</h2>
                 <p>Description: {job.description}</p>
                 <p>Dresscode: {job.dresscode}</p>
                 <p>Durée: {job.duration}</p>
+                <div className={styles.Event__joblist__item__buttons}>
+                  <ModalDeleteJob event={eventInfos} job={job} token={token} />
+                  <ModalUpdateJob event={eventInfos} job={job} token={token} />
+                </div>
               </li>
             ))
             }

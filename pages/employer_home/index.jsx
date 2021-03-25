@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import Head from 'next/head';
 import Layout from 'components/Layout';
 import styles from './EmployerHome.module.scss';
-import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import cookie from 'cookie';
 import ModalNewEvent from 'components/ModalNewEvent';
@@ -52,6 +51,7 @@ const EmployerHome = ({ userInfos, token }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <div className={styles.EmployerHome__titlecontainer}>
+        {console.log(userInfos)}
         <div className={styles.EmployerHome__titlebloc}>
           <h1>Mon entreprise</h1>
           <h3>{userInfos.businesses[0].name}</h3>
