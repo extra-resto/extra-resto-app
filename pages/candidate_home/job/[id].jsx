@@ -1,13 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import Layout from 'components/Layout';
 import Head from 'next/head';
 import cookie from 'cookie';
-import styles from './job.module.scss'
-import {useRouter} from 'next/router'
-
+import styles from './job.module.scss';
+import {useRouter} from 'next/router';
 
 const Job = ({jobInfos, id, token}) => {
+
+
     const router = useRouter();
     const handleCandidateApply = async (jobId) => {
         const data = {
@@ -39,8 +39,8 @@ const Job = ({jobInfos, id, token}) => {
       }
 
   return (
-    
-    <Layout>
+      <Layout>
+       
           <Head>
             <title>show job</title>
           </Head>
