@@ -25,7 +25,6 @@ const CandidateHome = ({jobListe, token, id}) => {
   
   const handleCandidateRemove = async (candidatures) => {
     const cadidatureId = candidatures.filter(candidature => candidature.user_id === parseInt(id))
-    console.log(cadidatureId)
 
     const response = await fetch(`http://localhost:3000/api/candidatures/${cadidatureId[0].id}`, {
       method: 'DELETE',
