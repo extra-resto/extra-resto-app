@@ -40,7 +40,7 @@ const EmployerHome = ({ userInfos, token }) => {
   }
 
   useEffect(() => {
-    getEventsList()
+    if(userInfos.events) getEventsList()
   }, [userInfos])
 
   return (
