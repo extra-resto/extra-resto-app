@@ -22,7 +22,7 @@ const Candidature = ({ event, candidature, candidate, token }) => {
           },
           body: JSON.stringify(form)
       })
-      Router.push(`employer_home/event/${event.id}`)
+      Router.push(`../event/${event.id}`)
     } catch (error) {
       console.log(error)
     }
