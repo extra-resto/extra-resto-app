@@ -11,7 +11,6 @@ const Concept = () => {
 
   const goToCandidate = (e) => {
     e.preventDefault()
-    console.log("coucou");
     router.push("/signup/candidate")
   }
 
@@ -19,7 +18,6 @@ const Concept = () => {
     e.preventDefault()
     router.push("/signup/employer")
   }
-
   return (
     <Layout>
     <div className={styles.Concept}>
@@ -45,8 +43,8 @@ const Concept = () => {
               en Extra ou CDI en moins de 3 minutes
           </h2>
           <div className={styles.Concept__Hero__cta__buttons}>
-          <Button content="Espace Candidat" onClick={goToCandidate}></Button>
-          <Button content="Espace Recruteur" onClick={goToEmployer}></Button>
+          <Button content="Espace Candidat" href={goToCandidate}/>
+          <Button content="Espace Recruteur" href={goToEmployer}/>
           </div>
 
         </div>
