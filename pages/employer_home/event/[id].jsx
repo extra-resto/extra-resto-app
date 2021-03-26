@@ -47,7 +47,7 @@ const Event = ({ event, id }) => {
                   <div className={styles.Event__joblist__item__title__buttons}>
                     <ModalUpdateJob event={event} job={job} token={token} />
                     <ModalDeleteJob event={event} job={job} token={token} />
-                </div>
+                  </div>
                 </div>
                 <div className={styles.Event__joblist__item__body}>
                   <p>Description: {job.description}</p>
