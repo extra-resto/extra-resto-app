@@ -16,7 +16,7 @@ const Login = () => {
         </Head>
         <h1>Se Connecter</h1>
         <FormLogin />
-        <h2>Pas encore de compte?</h2>
+        <h2>Pas encore de compte ?</h2>
         <ModalCandidateEmployer />
       </div>
     </Layout>
