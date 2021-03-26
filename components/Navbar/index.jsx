@@ -14,8 +14,9 @@ export const Navbar = () => {
   	      <a>
             <Image
               src="/images/Navbar/extra-logo.png"
-              height={70} 
-              width={210} 
+              height="73px"
+              width="189px"
+              quality="100"
               alt="extra-resto logo"
             />
           </a>
