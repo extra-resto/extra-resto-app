@@ -13,10 +13,11 @@ const CandidateHome = ({jobListe}) => {
             <Head>
                 <title>Candidate home page</title>
             </Head>
+            <div className={styles.bg}></div>
         <div className={styles.CandidateHome}>
           {console.log(jobListe)}
             <h1>Liste des emplois</h1>
-            <ul >
+            <ul>
 
           <div className={styles.main}>
                 {jobListe && 
