@@ -16,39 +16,49 @@
 
 .card {
         list-style: none;
-        width: 180px;
-        height: 50;
+        width: 300px;
+        height: 250px;
         padding: 15px;
         display: flex;
         margin: 0 auto;
         border: 0.2px solid black;
-        border-radius: 3px;
-        margin: 5px;
+        border-radius: 5px;
+        margin: 10px;
         flex-direction: column;
         justify-content: center;
-        &:hover {
-            box-shadow: 10px 5px 5px black;
-            transition: 0.5s;
-          }
-    &__header {
-        height: 40px;
-        display: flex;
-        justify-content: center;
+        transition-duration: 1s; 
         h2 {
-            font-size: 15px;
+            font-size: 20px;
             width: 100%;
         }
+        p {
+            font-size: 20px;
+            width: 100%;
+        }
+        &:hover {
+            box-shadow: 10px 5px 5px black;
+            transform: scale(1.1);
+          }
+    &__header {
+        height: 50px;
+        width: 100%;
+        margin: 5px;
+        display: flex;
+        text-align: center;
+        justify-content: center;
     }
     &__body {
         height: 50px;
+        margin: 5px;
         display: flex;
         justify-content: center;
+        text-align: center;
     }
     &__footer {
         height: 20px;
         width: 100%;
         margin: 10px 0 0 0;
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
     }
 }
