@@ -9,7 +9,7 @@ const Logout = () => {
   const token = useSelector(state => state.token);
 
   const userLogout = () => {
-    fetch(`http://localhost:3000/api/logout`, {
+    fetch(`${process.env.API_ROOT}logout`, {
       method: 'delete',
       headers: {
         'Authorization': token,

@@ -87,7 +87,7 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
 
   const registerJob = async () => {
     try {
-      const req = await fetch(`http://localhost:3000/api/jobs`, {
+      const req = await fetch(`${process.env.API_ROOT}jobs`, {
           method: 'POST',
           headers: {
             'Authorization': token,
