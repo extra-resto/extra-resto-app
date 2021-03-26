@@ -4,14 +4,13 @@
 .ModalUpdateEvent {
   button {
     border-radius: 50%;
-    padding: 5px;
-    margin: 5px;
+    
     border: 0.5px solid lightgrey;
     background: white;
     text-align: center;
     font-size : 10px;
-    heigth: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
   }
   button:hover {
     background: lightgrey;
