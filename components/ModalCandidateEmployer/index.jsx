@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './ModalCandidateEmployer.module.scss';
 import Link from 'next/link';
 import Modal from 'react-modal';

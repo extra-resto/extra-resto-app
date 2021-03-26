@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import config from 'config/config.json';
 
 const customStyles = {
   content : {
@@ -82,7 +83,7 @@ const ModalUpdateEvent = ({ event, token }) => {
 
   const updateEvent = async () => {
     try {
-      const req = await fetch(`${process.env.API_ROOT}events/${event.id}`, {
+      const req = await fetch(`${config.SERVER_URL}events/${event.id}`, {
           method: 'PUT',
           headers: {
             'Authorization': token,
