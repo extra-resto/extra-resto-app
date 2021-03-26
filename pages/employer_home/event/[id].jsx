@@ -8,38 +8,60 @@ import ModalNewJob from 'components/ModalNewJob'
 import ModalUpdateEvent from 'components/ModalUpdateEvent';
 import ModalDeleteJob from 'components/ModalDeleteJob';
 import ModalUpdateJob from 'components/ModalUpdateJob';
+import Candidature from 'components/Candidature';
 import config from 'config/config.json';
 
-const Event = ({ eventInfos, id }) => {
+
+const Event = ({ event, id }) => {
   const { token } = useSelector(state => state);
 
   return (
     
     <Layout>
-      {eventInfos &&
+      {event &&
         <div className={styles.Event}>
           <Head>
-            <title>{eventInfos.name}</title>
+            <title>{event.name}</title>
           </Head>
           <div className={styles.Event__presentation}>
             <div className={styles.Event__presentation__container}>
-              <h1>{eventInfos.name}</h1>
-              <h2>{eventInfos.description}</h2>
-              <ModalUpdateEvent event={eventInfos} token={token} />
+              <div className={styles.Event__presentation__container__button}>
+                <ModalUpdateEvent event={event} token={token} />
+              </div>
+              <div className={styles.Event__presentation__container__details}>
+                <h1>{event.name}</h1>
+                <h3>{event.description}</h3>
+              </div>
             </div>
           </div>
-            <ModalNewJob eventId={id} eventDate={eventInfos.date} />
+          <div className={styles.Event__jobtitle}>
+            <h2>Jobs</h2>
+            <ModalNewJob eventId={id} eventDate={event.date} />
+          </div>
           <ul className={styles.Event__joblist}>
-            {eventInfos && 
-            eventInfos.jobs.map((job) => (
+            {event && 
+            event.jobs.map((job) => (
               <li className={styles.Event__joblist__item} key={job.id}>
-                <h2>Nom de l'emploi: {job.name}</h2>
-                <p>Description: {job.description}</p>
-                <p>Dresscode: {job.dresscode}</p>
-                <p>Durée: {job.duration}</p>
-                <div className={styles.Event__joblist__item__buttons}>
-                  <ModalDeleteJob event={eventInfos} job={job} token={token} />
-                  <ModalUpdateJob event={eventInfos} job={job} token={token} />
+                <div className={styles.Event__joblist__item__title}>
+                  <h2>{job.free_stead} x {job.name}</h2>
+                  <div className={styles.Event__joblist__item__title__buttons}>
+                    <ModalUpdateJob event={event} job={job} token={token} />
+                    <ModalDeleteJob event={event} job={job} token={token} />
+                </div>
+                </div>
+                <div className={styles.Event__joblist__item__body}>
+                  <p>Description: {job.description}</p>
+                  <p>Dresscode: {job.dresscode}</p>
+                  <p>Durée: {job.duration}h</p>
+                  <p>Tarif horaire: {job.rate}€</p>
+                  <p>Total mission: {job.duration*job.rate}€</p>
+                </div>
+                
+                <div className={styles.Event__joblist__item__candidates}>
+                  <h2>Candidatures:</h2>
+                  {job.candidatures && job.candidatures.map((candidature) => (
+                    <Candidature event={event} candidature={candidature} candidate={candidature.user} token={token} />
+                  ))}
                 </div>
               </li>
             ))
@@ -62,11 +84,11 @@ export const getServerSideProps = async ({params, req}) =>  {
       }
   
     })
-    const eventInfos = await eventResponse.json();
+    const event = await eventResponse.json();
   
     return {
       props: {
-        eventInfos,
+        event,
         id
       }
     }

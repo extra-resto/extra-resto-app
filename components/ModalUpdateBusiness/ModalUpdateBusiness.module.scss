@@ -1,11 +1,19 @@
 @import "styles/colors.scss";
 
-
 .ModalUpdateBusiness {
   button {
-    padding: 10px;
+    border-radius: 50%;
+    padding: 7px;
     margin: 10px;
-    background: orange;
+    border: 0.5px solid lightgrey;
+    background: none;
+    text-align: center;
+    vertical-align: center;
+    font-size : 15px;
+  }
+  button:hover {
+    background: lightgrey;
+    cursor: pointer;
   }
   &__Modal {
     height: 70vh;

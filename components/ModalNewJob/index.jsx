@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import { motion } from "framer-motion";
 import config from 'config/config.json';
 
 const customStyles = {
@@ -106,11 +107,16 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
 
   return (
   	<div className={styles.ModalNewJob}>
-
       <div className={styles.ModalNewJob__newJob}>
-    	<button onClick={openModal}>Ajouter un Job</button>
+    	 <button onClick={openModal}>
+        <motion.p
+          whileHover={{ scale: 1.5 }}
+          whileTap={{ scale: 0.8 }}
+        >
+          +
+        </motion.p>
+       </button>
       </div>
-
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
@@ -118,7 +124,6 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
           style={customStyles}
           contentLabel="Example Modal"
         >
-
           <div className={styles.ModalNewJob__Modal}>
             <h2>Nouvel Emploi</h2>
             <form className={styles.ModalNewJob__Modal__form} onSubmit={handleSubmit}>

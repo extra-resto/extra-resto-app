@@ -12,13 +12,59 @@
 	    align-items: center;
     	&__container {
     		width: 500px;
+            margin: 10px;
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 15px;
+            &__button {
+                position: relative;
+                left: 430px;
+            }
+            &__details {
+                position: relative;
+                top: -50px;
+            }
     	}
+    }
+    &__jobtitle {
+        width: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        border-radius: 15px;
+        background-color: white;
+        margin: 10px;
     }
     &__joblist {
         list-style: none;
         &__item {
-            &__buttons {
+            border-radius: 15px;
+            position: relative;
+            right: 20px;
+            background-color: lightgrey;
+            width: 500px;
+            &__title {
+                padding: 10px;
+                background-color: white;
+                border-radius: 15px 15px 0 0;
                 display: flex;
+                justify-content: center;
+                align-items: center;
+                &__buttons {
+                    position: absolute;
+                    right: 20px;
+                    top: 15px;
+                    display: flex;
+                }
+            }
+            &__body {
+                padding: 10px;
+            }
+            &__candidates {
+                padding: 10px;
+                background-color: white;
+                margin-bottom: 20px;
+                border-radius: 0 0 15px 15px;
             }
         }
     }

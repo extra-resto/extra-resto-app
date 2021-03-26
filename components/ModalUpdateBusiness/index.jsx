@@ -104,7 +104,7 @@ const ModalUpdateBusiness = ({ business, token }) => {
   	<div className={styles.ModalUpdateBusiness}>
 
       <div className={styles.ModalUpdateBusiness__updateButton}>
-    	 <button onClick={openModal}>Mettre à jour</button>
+    	 <button onClick={openModal}>…</button>
       </div>
 
         <Modal

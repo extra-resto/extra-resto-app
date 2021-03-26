@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import config from 'config/config.json';
 
 const customStyles = {
@@ -100,11 +101,16 @@ const ModalUpdateEvent = ({ event, token }) => {
 
   return (
   	<div className={styles.ModalUpdateEvent}>
-
       <div className={styles.ModalUpdateEvent__updateButton}>
-    	 <button onClick={openModal}>Mettre<br/>à jour</button>
+    	 <button onClick={openModal}>
+        <Image
+          src="/images/Button/website.svg"
+          height={20} 
+          width={20} 
+          alt="extra-resto logo"
+        />
+       </button>
       </div>
-
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}

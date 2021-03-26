@@ -41,12 +41,9 @@ const Job = ({jobInfos, id, token}) => {
 
   return (
       <Layout>
-       
-          <Head>
-            <title>show job</title>
-          </Head>
-        {console.log(jobInfos)}
-
+        <Head>
+          <title>show job</title>
+        </Head>
         <div className={styles.main}>
             <div className={styles.business}>
                 <h1>Entreprise: {jobInfos.businesses[0].name}</h1>
