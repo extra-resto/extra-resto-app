@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import { motion } from "framer-motion";
 
 const customStyles = {
   content : {
@@ -103,10 +104,15 @@ const ModalNewEvent = ({ userInfos, token }) => {
   	<div className={styles.ModalNewEvent}>
 
       <div className={styles.ModalNewEvent__newEvent}>
-    	<button onClick={openModal}>+</button>
+    	 <button onClick={openModal}>
+        <motion.p
+          whileHover={{ scale: 1.5 }}
+          whileTap={{ scale: 0.8 }}
+        >
+          +
+        </motion.p>
+       </button>
       </div>
-
-
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
@@ -114,7 +120,6 @@ const ModalNewEvent = ({ userInfos, token }) => {
           style={customStyles}
           contentLabel="Example Modal"
         >
-
           <div className={styles.ModalNewEvent__Modal}>
             <h2>Nouvel Evenement</h2>
             <form className={styles.ModalNewEvent__Modal__form} onSubmit={handleSubmit}>
