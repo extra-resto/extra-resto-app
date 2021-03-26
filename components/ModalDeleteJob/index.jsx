@@ -1,8 +1,8 @@
 import styles from './ModalDeleteJob.module.scss';
 import Modal from 'react-modal';
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
+import config from 'config/config.json';
 
 const customStyles = {
   content : {
@@ -35,7 +35,7 @@ const ModalDeleteJob = ({ event, job, token }) => {
   const deleteJob = async (e) => {
     e.preventDefault();
     try {
-      const req = await fetch(`${process.env.API_ROOT}jobs/${job.id}`, {
+      const req = await fetch(`${config.SERVER_URL}jobs/${job.id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': token,

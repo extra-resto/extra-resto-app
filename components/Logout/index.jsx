@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { setLogout } from 'store/User/userAction';
 import styles from './Logout.module.scss';
+import config from 'config/config.json';
 
 const Logout = () => {
   const router = useRouter();
@@ -9,7 +10,7 @@ const Logout = () => {
   const token = useSelector(state => state.token);
 
   const userLogout = () => {
-    fetch(`${process.env.API_ROOT}logout`, {
+    fetch(`${config.SERVER_URL}logout`, {
       method: 'delete',
       headers: {
         'Authorization': token,
