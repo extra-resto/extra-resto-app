@@ -44,7 +44,7 @@ const Home = () => {
         <div className={styles.Concept__Hero__cta}>
           <h2 className={styles.Concept__Hero__cta__title}>
             Trouvez votre personnel ou un emploi
-            avec Extra-Resto
+            avec <span className={styles.Concept__Hero__cta__title__blue}>Extra-</span><span className={styles.Concept__Hero__cta__title__orange}>Resto</span>
           </h2>
           <h3>Extra-Resto
               Met en relation de profils qualifiés
@@ -64,7 +64,7 @@ const Home = () => {
       </div>
       <div className={styles.Concept__Explanation}>
         <div className={styles.Concept__Explanation__text}>
-          <h2>Extracadabra, la meilleure solution pour recruter des Extras ou CDI</h2>
+          <h2>Extra-Resto, la meilleure solution pour recruter des Extras ou CDI</h2>
           <h3>« Recevez une réponse de profil en 3 min en moyenne  »</h3>
           <h3>« Taux de satisfaction de 92% des managers sur les jobs effectués »</h3>
           <p>Pour vos recrutements en hôtellerie-restauration, Extra-Resto est la solution idéale ! Vous avez besoin d’une serveuse en CDI, d’un cuisinier en extra pour ce soir ou d’un préparateur de commande pour la semaine prochaine ? Nous vous proposons du personnel qualifié à tous les postes en salle, bar, et cuisine. Inscrivez-vous sur notre site pour trouver du personnel en France en un claquement de doigts !</p>
@@ -78,9 +78,9 @@ const Home = () => {
         <div className={styles.Concept__thumbnail__cards}>
           <div className={styles.Concept__thumbnail__cards__image}>
           <Image 
-            src="/images/icons/waiter-svgrepo-com.svg"
-            height={120} 
-            width={120} 
+            src="/images/icons/chef-svgrepo-com (2).svg"
+            height={150} 
+            width={150} 
             alt="extra-resto logo"
             />
             <h3>Besoin de personnel en extra ?</h3>
@@ -89,9 +89,9 @@ const Home = () => {
             </div>
           <div className={styles.Concept__thumbnail__cards__image}>
             <Image 
-              src="/images/icons/chef-svgrepo-com (2).svg"
-              height={120} 
-              width={120} 
+              src="/images/Navbar/eye.svg"
+              height={150} 
+              width={150} 
               alt="extra-resto logo"
             />
             <h3>Des profils vérifiés</h3>
@@ -99,13 +99,13 @@ const Home = () => {
           </div>
           <div className={styles.Concept__thumbnail__cards__image}>
             <Image 
-            src="/images/Navbar/eye.svg"
-            height={120} 
-            width={120} 
+            src="/images/icons/barman-waiter.svg"
+            height={150} 
+            width={150} 
             alt="extra-resto logo"
             />
-            <h3>Des profils vérifiés</h3>
-            <h4>Nous vérifions une à une leurs expériences avant de les valider</h4>
+            <h3>En recherche de job ?</h3>
+            <h4>Touver un extra qui vous correspond parmis nos nombreuses propositions d'extra ou CDI</h4>
           </div>
         </div>
       </div>
