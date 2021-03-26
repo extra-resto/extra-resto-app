@@ -1,0 +1,18 @@
+.FormEmployerSignup {
+	width: 500px;
+	display: flex;
+	flex-direction: column;
+
+	input {
+		margin: 0 10px 10px 10px;
+		padding: 10px;
+	}
+	label {
+		margin-left: 10px;
+	}
+	button {
+		width: 150px;
+		padding: 10px;
+		align-self: center;
+	}
+}

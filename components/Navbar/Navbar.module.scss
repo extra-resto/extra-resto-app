@@ -1,0 +1,16 @@
+@import "styles/colors.scss";
+
+.Navbar {
+  background-color: $green;
+  height: 88px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  a:hover {
+    color: $orange;
+  }
+  a {
+    font-size: 20px;
+  }
+}
