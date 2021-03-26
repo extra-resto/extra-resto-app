@@ -29,7 +29,7 @@ const FormBusinessSignup = () => {
 
   const registerBusiness = async () => {
     try {
-      const req = await fetch('http://localhost:3000/api/businesses', {
+      const req = await fetch(`${process.env.API_ROOT}businesses`, {
         method: 'POST',
         headers: {
           'Authorization': token,

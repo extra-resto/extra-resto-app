@@ -84,7 +84,7 @@ const ModalUpdateBusiness = ({ business, token }) => {
 
   const updateBusiness = async () => {
     try {
-      const req = await fetch(`http://localhost:3000/api/businesses/${business.id}`, {
+      const req = await fetch(`${process.env.API_ROOT}businesses/${business.id}`, {
           method: 'PUT',
           headers: {
             'Authorization': token,

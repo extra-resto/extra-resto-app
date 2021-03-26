@@ -9,15 +9,17 @@ import ModalCandidateEmployer from 'components/ModalCandidateEmployer';
 const Login = () => {
   return (
     <Layout>
-      <div className={styles.Login}>
         <Head>
           <title>extra-resto - Login</title>
           <link rel='icon' href='/favicon.ico' />
         </Head>
-        <h1>Se Connecter</h1>
-        <FormLogin />
-        <h2>Pas encore de compte ?</h2>
-        <ModalCandidateEmployer />
+      <div className={styles.Login}>
+        <div className={styles.Login__background}>
+          <h1>Se Connecter</h1>
+          <FormLogin />
+          <h3>Pas encore de compte ?</h3>
+          <ModalCandidateEmployer />
+        </div>
       </div>
     </Layout>
   );
