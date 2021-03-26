@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import config from 'config/config.json';
 
 const customStyles = {
   content : {
@@ -83,7 +84,7 @@ const ModalNewEvent = ({ userInfos, token }) => {
 
   const registerEvent = async () => {
     try {
-      const req = await fetch(`${process.env.API_ROOT}events`, {
+      const req = await fetch(`${config.SERVER_URL}events`, {
           method: 'POST',
           headers: {
             'Authorization': token,
