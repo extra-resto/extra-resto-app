@@ -35,7 +35,7 @@ const ModalDeleteEvent = ({ event, token }) => {
   const deleteEvent = async (e) => {
     e.preventDefault();
     try {
-      const req = await fetch(`http://localhost:3000/api/events/${event.id}`, {
+      const req = await fetch(`${process.env.API_ROOT}events/${event.id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': token,

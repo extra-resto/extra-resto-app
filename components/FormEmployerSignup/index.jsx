@@ -31,7 +31,7 @@ const FormEmployerSignup = ({setStep}) => {
 
   const registerUser = async () => {
     try {
-      const req = await fetch('http://localhost:3000/api/signup', {
+      const req = await fetch(`${process.env.API_ROOT}signup`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

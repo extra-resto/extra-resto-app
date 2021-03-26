@@ -86,7 +86,7 @@ const ModalUpdateJob = ({ event, job, token }) => {
 
   const updateJob = async () => {
     try {
-      const req = await fetch(`http://localhost:3000/api/jobs/${job.id}`, {
+      const req = await fetch(`${process.env.API_ROOT}jobs/${job.id}`, {
           method: 'PUT',
           headers: {
             'Authorization': token,
