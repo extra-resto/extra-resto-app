@@ -1,8 +1,9 @@
 import styles from './FormEmployerSignup.module.scss';
 import { useState, useEffect } from 'react';
-import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
+import { setUser } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
 import Button from 'components/Button';
+import config from 'config/config.json';
 
 const FormEmployerSignup = ({setStep}) => {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const FormEmployerSignup = ({setStep}) => {
 
   const registerUser = async () => {
     try {
-      const req = await fetch('http://localhost:3000/api/signup', {
+      const req = await fetch(`${config.SERVER_URL}signup`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

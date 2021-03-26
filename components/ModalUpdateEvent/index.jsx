@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import config from 'config/config.json';
 
 const customStyles = {
   content : {
@@ -83,7 +84,7 @@ const ModalUpdateEvent = ({ event, token }) => {
 
   const updateEvent = async () => {
     try {
-      const req = await fetch(`http://localhost:3000/api/events/${event.id}`, {
+      const req = await fetch(`${config.SERVER_URL}events/${event.id}`, {
           method: 'PUT',
           headers: {
             'Authorization': token,

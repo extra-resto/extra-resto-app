@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { fileChecksum } from 'lib/checksum';
 import Button from 'components/Button';
+import config from 'config/config.json';
 
 const FormCandidateSignup = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const FormCandidateSignup = () => {
         }
       })
     }
-    let res = await fetch("http://localhost:3000/api/presigned_url", options)
+    let res = await fetch(`${config.SERVER_URL}presigned_url`, options)
     if (res.status !== 200) return res
     return await res.json()
   }
@@ -83,7 +84,7 @@ const FormCandidateSignup = () => {
       },
       body: JSON.stringify({ user: {...form, resume: presignedFileParams.blob_signed_id} })
     }
-    let res = await fetch('http://localhost:3000/api/signup', usersPostOptions)
+    let res = await fetch(`${config.SERVER_URL}signup`, usersPostOptions)
     if (res.status !== 200) return res
     const token = res.headers.get('Authorization');
     const result = await res.json();

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { motion } from "framer-motion";
+import config from 'config/config.json';
 
 const customStyles = {
   content : {
@@ -88,7 +89,7 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
 
   const registerJob = async () => {
     try {
-      const req = await fetch(`http://localhost:3000/api/jobs`, {
+      const req = await fetch(`${config.SERVER_URL}jobs`, {
           method: 'POST',
           headers: {
             'Authorization': token,

@@ -9,6 +9,7 @@ import ModalUpdateEvent from 'components/ModalUpdateEvent';
 import ModalDeleteJob from 'components/ModalDeleteJob';
 import ModalUpdateJob from 'components/ModalUpdateJob';
 import Candidature from 'components/Candidature';
+import config from 'config/config.json';
 
 
 const Event = ({ event, id }) => {
@@ -75,7 +76,7 @@ const Event = ({ event, id }) => {
 export const getServerSideProps = async ({params, req}) =>  {
     const id = params.id
     const {token} = cookie.parse(req.headers.cookie);
-    const eventResponse = await fetch(`${process.env.API_ROOT}/events/${id}`, {
+    const eventResponse = await fetch(`${config.SERVER_URL}/events/${id}`, {
       method: 'get',
       headers: {
         'Authorization': token,

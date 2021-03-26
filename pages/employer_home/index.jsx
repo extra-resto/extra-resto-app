@@ -10,6 +10,7 @@ import Link from 'next/link';
 import ModalUpdateBusiness from 'components/ModalUpdateBusiness';
 import ModalUpdateEvent from 'components/ModalUpdateEvent';
 import ModalDeleteEvent from 'components/ModalDeleteEvent';
+import config from 'config/config.json';
 
 const EmployerHome = ({ userInfos, token }) => {
   const [eventList, setEventList] = useState([]);
@@ -95,7 +96,7 @@ export const getServerSideProps = async ({req}) =>  {
 
   const {token, id} = cookie.parse(req.headers.cookie);
   
-  const eventResponse = await fetch(`${process.env.API_ROOT}/users/${id}`, {
+  const eventResponse = await fetch(`${config.SERVER_URL}/users/${id}`, {
     method: 'get',
     headers: {
       'Authorization': token,

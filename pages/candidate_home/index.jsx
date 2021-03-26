@@ -4,6 +4,7 @@ import Head from 'next/head';
 import cookie from 'cookie';
 import styles from './CandidateHome.module.scss';
 import Link from 'next/link';
+import config from 'config/config.json';
 
 const CandidateHome = ({jobListe}) => {
   
@@ -12,10 +13,11 @@ const CandidateHome = ({jobListe}) => {
             <Head>
                 <title>Candidate home page</title>
             </Head>
+            <div className={styles.bg}></div>
         <div className={styles.CandidateHome}>
           {console.log(jobListe)}
             <h1>Liste des emplois</h1>
-            <ul >
+            <ul>
 
           <div className={styles.main}>
                 {jobListe && 
@@ -49,7 +51,7 @@ const CandidateHome = ({jobListe}) => {
 
 export const getServerSideProps = async ({ req }) => {
   const { token, id } = cookie.parse(req.headers.cookie);
-  const jobResponse = await fetch(`${process.env.API_ROOT}/jobs`, {
+  const jobResponse = await fetch(`${config.SERVER_URL}/jobs`, {
     method: "get",
     headers: {
       Authorization: token,

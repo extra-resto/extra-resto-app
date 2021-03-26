@@ -1,9 +1,10 @@
 import Router from 'next/router';
 import styles from './FormLogin.module.scss';
 import { useState, useEffect } from 'react';
-import { setUser, setEmployer } from 'store/User/userAction';
+import { setUser } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
 import Button from 'components/Button';
+import config from 'config/config.json';
 
 const FormLogin = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const FormLogin = () => {
 
   const handleLogin = async () => {
     try {
-      const req = await fetch('http://localhost:3000/api/login', {
+      const req = await fetch(`${config.SERVER_URL}login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

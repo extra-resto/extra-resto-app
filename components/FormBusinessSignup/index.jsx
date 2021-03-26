@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import styles from './FormBusinessSignup.module.scss';
+import config from 'config/config.json';
 
 const FormBusinessSignup = () => {
   const token = useSelector(state => state.token);
@@ -29,7 +30,7 @@ const FormBusinessSignup = () => {
 
   const registerBusiness = async () => {
     try {
-      const req = await fetch('http://localhost:3000/api/businesses', {
+      const req = await fetch(`${config.SERVER_URL}businesses`, {
         method: 'POST',
         headers: {
           'Authorization': token,
