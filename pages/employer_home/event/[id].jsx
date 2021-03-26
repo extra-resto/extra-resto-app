@@ -25,12 +25,12 @@ const Event = ({ event, id }) => {
           </Head>
           <div className={styles.Event__presentation}>
             <div className={styles.Event__presentation__container}>
-              <div className={styles.Event__presentation__container__button}>
-                <ModalUpdateEvent event={event} token={token} />
-              </div>
               <div className={styles.Event__presentation__container__details}>
                 <h1>{event.name}</h1>
                 <h3>{event.description}</h3>
+              </div>
+              <div className={styles.Event__presentation__container__button}>
+                <ModalUpdateEvent event={event} token={token} />
               </div>
             </div>
           </div>

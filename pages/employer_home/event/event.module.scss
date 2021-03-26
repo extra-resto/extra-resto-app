@@ -5,7 +5,7 @@
     align-items: center;
     width: 100%;
     &__presentation {
-    	width: 100vw;
+    	width: 100%;
     	background-color: white;
     	display: flex;
 	    flex-direction: column;
@@ -16,13 +16,15 @@
             padding: 10px;
             border: 2px solid black;
             border-radius: 15px;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+
             &__button {
-                position: relative;
-                left: 430px;
+                
             }
             &__details {
-                position: relative;
-                top: -50px;
+                
             }
     	}
     }
