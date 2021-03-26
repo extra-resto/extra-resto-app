@@ -27,7 +27,7 @@ const FormLogin = () => {
 
   const handleLogin = async () => {
     try {
-      const req = await fetch('http://localhost:3000/api/login', {
+      const req = await fetch(`${process.env.API_ROOT}login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

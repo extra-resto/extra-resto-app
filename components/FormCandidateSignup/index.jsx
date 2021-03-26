@@ -41,7 +41,7 @@ const FormCandidateSignup = () => {
         }
       })
     }
-    let res = await fetch("http://localhost:3000/api/presigned_url", options)
+    let res = await fetch(`${process.env.API_ROOT}presigned_url`, options)
     if (res.status !== 200) return res
     return await res.json()
   }
@@ -83,7 +83,7 @@ const FormCandidateSignup = () => {
       },
       body: JSON.stringify({ user: {...form, resume: presignedFileParams.blob_signed_id} })
     }
-    let res = await fetch('http://localhost:3000/api/signup', usersPostOptions)
+    let res = await fetch(`${process.env.API_ROOT}signup`, usersPostOptions)
     if (res.status !== 200) return res
     const token = res.headers.get('Authorization');
     const result = await res.json();

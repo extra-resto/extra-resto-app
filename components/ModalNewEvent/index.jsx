@@ -83,7 +83,7 @@ const ModalNewEvent = ({ userInfos, token }) => {
 
   const registerEvent = async () => {
     try {
-      const req = await fetch(`http://localhost:3000/api/events`, {
+      const req = await fetch(`${process.env.API_ROOT}events`, {
           method: 'POST',
           headers: {
             'Authorization': token,
