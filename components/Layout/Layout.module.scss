@@ -1,10 +1,9 @@
+@import "styles/colors";
+
 .Layout {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: wheat;
-  Footer {
-  	bottom: 0;
-  }
+  background-color: #8abbbc;
 }

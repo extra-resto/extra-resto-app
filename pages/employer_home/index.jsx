@@ -48,7 +48,7 @@ const EmployerHome = ({ userInfos, token }) => {
     <div className={styles.EmployerHome}>
       <Head>
         <title>extra-resto - Employer Home</title>
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/favicon.svg' />
       </Head>
       <div className={styles.EmployerHome__titlecontainer}>
         <div className={styles.EmployerHome__titlecontainer__titlebloc}>

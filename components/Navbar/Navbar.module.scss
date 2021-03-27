@@ -1,6 +1,7 @@
 @import "styles/colors.scss";
 
 .Navbar {
+  border-bottom: solid 2px rgb(252, 249, 237);
   background-color: $green;
   height: 88px;
   display: flex;
