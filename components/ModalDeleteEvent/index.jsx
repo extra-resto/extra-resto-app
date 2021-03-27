@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import config from 'config/config.json';
+import Button from 'components/Button';
 
 const customStyles = {
   content : {
@@ -73,11 +74,18 @@ const ModalDeleteEvent = ({ event, token }) => {
         >
 
           <div className={styles.ModalDeleteEvent__Modal}>
+            <Image src="/images/icons/bill-svgrepo-com (1).svg" height={250} width={250} />
             <h2>Supprimer l'évenement</h2>
             <h3>Êtes-vous sûre de vouloir supprimer l'évenement?</h3>
-            <div>
-              <button onClick={deleteEvent}>Oui, je supprime</button>
-              <button onClick={closeModal}>Non, je retourne à la liste</button>
+            <div className={styles.ModalDeleteEvent__Modal__choices}>
+              <div className={styles.ModalDeleteEvent__Modal__choices__cancel}>
+                <Image src="/images/Button/back.svg" height={50} width={50} alt="extra-resto logo" />
+                <Button href={closeModal} content="Non, je retourne à la liste" />
+              </div>
+              <div className={styles.ModalDeleteEvent__Modal__choices__delete}>
+                <Image src="/images/Button/trash.svg" height={50} width={50} alt="extra-resto logo" />
+                <Button href={deleteEvent} content="Oui, je supprime" />
+              </div>
             </div>
           </div>
         </Modal>

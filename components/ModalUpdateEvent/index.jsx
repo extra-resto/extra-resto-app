@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import config from 'config/config.json';
+import Button from 'components/Button';
 
 const customStyles = {
   content : {
@@ -120,36 +121,37 @@ const ModalUpdateEvent = ({ event, token }) => {
         >
 
           <div className={styles.ModalUpdateEvent__Modal}>
+            <Image src="/images/icons/bill-svgrepo-com (1).svg" height={250} width={250} />
             <h2>Modifier l'évenement</h2>
             <form className={styles.ModalUpdateEvent__Modal__form} onSubmit={handleSubmit}>
-              <label htmlFor="name">Nom de l'évenement</label>
               <input 
                 name="name" 
                 type="text" 
                 autoComplete="name"
                 value={form.name}
+                placeHolder="Nom de l'évenement"
                 onChange={handleChange} 
                 required 
               />
-              <label htmlFor="date">Date de l'évenement</label>
               <input 
                 name="date" 
                 type="date" 
                 autoComplete="name"
                 value={form.date}
+                placeHolder="Date de l'évenement"
                 onChange={handleChange} 
                 required 
               />
-              <label htmlFor="description">Description de l'évenement</label>
               <textarea 
                 name="description" 
                 type="text"
                 autoComplete="description"
                 value={form.description}
+                placeHolder="Description de l'évenement"
                 onChange={handleChange} 
                 required 
               />
-              <button type="submit">Enregistrer</button>
+              <Button type="submit" content="Enregistrer" />
             </form>
           </div>
         </Modal>

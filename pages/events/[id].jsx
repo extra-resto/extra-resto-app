@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Layout from 'components/Layout';
 import Head from 'next/head';
 import cookie from 'cookie';
-import styles from './event.module.scss';
+import styles from './Event.module.scss';
 import ModalNewJob from 'components/ModalNewJob'
 import ModalUpdateEvent from 'components/ModalUpdateEvent';
 import ModalDeleteJob from 'components/ModalDeleteJob';
