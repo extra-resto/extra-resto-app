@@ -1,7 +1,7 @@
 @import "../../styles/colors.scss";
 
 .FormLogin {
-  width: 500px;
+  width: 400px;
   display: flex;
   flex-direction: column;
 
@@ -9,18 +9,20 @@
     box-sizing: content-box;
     margin: 15px 10px 30px 10px;
     border: none;
+    border-bottom: 2px solid $green;
     border-radius: 10px;
     padding: 10px;
     &:focus {
       box-sizing: content-box;
       outline: none;
-      box-shadow: 0px 0px 24px 6px rgba(142, 213, 232, 0.75);
-      -webkit-box-shadow: 0px 0px 24px 6px rgba(142, 213, 232, 0.75);
-      -moz-box-shadow: 0px 0px 24px 6px rgba(142, 213, 232, 0.75);
+      box-shadow: 0px 0px 24px 6px rgba(138, 187, 188, 0.75);
+      -webkit-box-shadow: 0px 0px 24px 6px rgba(138, 187, 188, 0.75);
+      -moz-box-shadow: 0px 0px 24px 6px rgba(138, 187, 188, 0.75);
     }
   }
   label {
     margin-left: 15px;
+    color: $lightgreen;
   }
   button {
     width: 150px;

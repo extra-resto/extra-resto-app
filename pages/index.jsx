@@ -34,7 +34,7 @@ const Home = () => {
     <Layout>
       <Head>
         <title>extra-resto - Home</title>
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/favicon.svg' />
       </Head>
       <div className={styles.Home}>
           <h1 className={styles.Home__title}>Le recrutement en
@@ -79,9 +79,9 @@ const Home = () => {
             </div>
           <div className={styles.Concept__thumbnail__cards__image}>
             <Image 
-              src="/images/Navbar/eye.svg"
-              height={150} 
-              width={150} 
+              src="/images/icons/tick.svg"
+              height={145} 
+              width={145} 
               alt="extra-resto logo"
             />
             <h3>Des profils vérifiés</h3>
