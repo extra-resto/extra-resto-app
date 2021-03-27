@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import Head from 'next/head';
 import Layout from 'components/Layout';
-import styles from './EmployerHome.module.scss';
+import styles from './Events.module.scss';
 import { useState, useEffect } from 'react';
 import cookie from 'cookie';
 import ModalNewEvent from 'components/ModalNewEvent';
@@ -13,14 +13,14 @@ import ModalDeleteEvent from 'components/ModalDeleteEvent';
 import config from 'config/config.json';
 import { useRouter } from 'next/router';
 
-const EmployerHome = ({ userInfos, token }) => {
-  const [eventList, setEventList] = useState([]);
+const Events = ({ events, token }) => {
+  const [eventList, setEventList] = useState([]); 
   const router = useRouter();
 
   const getEventsList = () => {
     //convert object into array without the key
     const neweventsArr = [];
-    const eventsArr = Object.entries(userInfos.businesses[0].events);
+    const eventsArr = Object.entries(events);
     eventsArr.map(event => neweventsArr.push(event[1]));
     
     //sort array by date
@@ -42,44 +42,35 @@ const EmployerHome = ({ userInfos, token }) => {
   }
 
   useEffect(() => {
-    if (userInfos === undefined) router.push('/');
+    if (events === undefined) router.push('/');
     getEventsList()
-  }, [userInfos])
+  }, [events])
 
   return (
     <Layout>
-    <div className={styles.EmployerHome}>
+    <div className={styles.Events}>
       <Head>
-        <title>extra-resto - Employer Home</title>
+        <title>Opportunités en cours</title>
         <link rel='icon' href='/favicon.svg' />
       </Head>
-      <div className={styles.EmployerHome__titlecontainer}>
-        <div className={styles.EmployerHome__titlecontainer__titlebloc}>
-          <div className={styles.EmployerHome__titlecontainer__titlebloc__title}>
-            <h1>Mon entreprise</h1>
-            <ModalUpdateBusiness business={userInfos.businesses[0]} token={token} />
+      <div className={styles.Events__titlecontainer}>
+        <div className={styles.Events__titlecontainer__titlebloc}>
+          <div className={styles.Events__titlecontainer__titlebloc__title}>
+            <h1>Liste des évenements</h1>
           </div>
-          <h3>{userInfos.businesses[0].name}</h3>
-          <h3>{userInfos.businesses[0].address}</h3>
-          <h3>{userInfos.businesses[0].postal_code} {userInfos.businesses[0].city}</h3>
-          
         </div>
       </div>
-      <div className={styles.EmployerHome__Modal}>
-        <h2>Evenements à venir:</h2>
-        <ModalNewEvent userInfos={userInfos} token={token} />
+      <div className={styles.Events__Modal}>
+        <h2>Opportunités en cours:</h2>
       </div>
-      <ul className={styles.EmployerHome__eventlist}>
+      <ul className={styles.Events__eventlist}>
       {eventList && eventList.map(event => (
-        <li key={event.id} className={styles.EmployerHome__eventlist__item}>
-          <div className={styles.EmployerHome__eventlist__item__buttons}>
-            <ModalUpdateEvent event={event} token={token} />
-            <ModalDeleteEvent event={event} token={token} />
-          </div>
+        <li key={event.id} className={styles.Events__eventlist__item}>
+          {console.log(event)}
           <p>{formattedDate(new Date(event.date))}</p>
           <Link
           href={{
-            pathname: '/employer_home/event/[slug]',
+            pathname: '/events/[slug]',
             query: { slug: event.id },
           }}
           >
@@ -97,11 +88,9 @@ const EmployerHome = ({ userInfos, token }) => {
 
 export const getServerSideProps = async ({req, res}) =>  {
 
-  if (!req.headers.cookie) return res.writeHead(302, { Location: '/api/login' });
-
   const {token, id} = cookie.parse(req.headers.cookie);
   
-  const eventResponse = await fetch(`${config.SERVER_URL}/users/${id}`, {
+  const eventResponse = await fetch(`${config.SERVER_URL}/events`, {
     method: 'get',
     headers: {
       'Authorization': token,
@@ -109,14 +98,14 @@ export const getServerSideProps = async ({req, res}) =>  {
     }
 
   })
-  const userInfos = await eventResponse.json();
+  const events = await eventResponse.json();
 
   return {
     props: {
-      userInfos,
+      events,
       token
     }
   }
 }
 
-export default EmployerHome;
+export default Events;

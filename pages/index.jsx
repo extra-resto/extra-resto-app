@@ -11,11 +11,10 @@ import Image from 'next/image';
 
 const Home = () => {
   const [role, setRole] = useState(Cookie.get('role'));
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     if (role == 'employer') router.push('/employer_home');
-    if (role == null) router.push('/');
   }, [role])
 
   
