@@ -150,7 +150,7 @@ const ModalNewEvent = ({ userInfos, token }) => {
                 onChange={handleChange} 
                 required 
               />
-              <Button type="submit" content="Nouvel evenement" />
+              <Button type="submit" content="Poster" />
             </form>
           </div>
         </Modal>

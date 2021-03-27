@@ -4,7 +4,6 @@ const Button = ({content, href}) => {
     
     return (
         <button className={styles.Button} onClick={href}>{content}</button>
-        
     )
 }
 
