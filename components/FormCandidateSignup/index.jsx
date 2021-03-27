@@ -161,13 +161,16 @@ const FormCandidateSignup = () => {
           onChange={handleChange} 
           required 
         />
-        <label htmlFor="cv">CV</label>
-        <input 
-          name="cv" 
-          type="file"
-          onChange={handleFile} 
-          required 
-        />
+        <label htmlFor="cv" className={styles.FormCandidateSignup__CV}>
+          <input  
+            name="cv" 
+            id="cv"
+            type="file"
+            onChange={handleFile} 
+            required 
+          />
+          Ajouter votre CV
+        </label>
         <label htmlFor="password">Mot de passe</label>
         <input 
           name="password" 

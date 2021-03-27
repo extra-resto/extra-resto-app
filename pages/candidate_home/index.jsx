@@ -6,7 +6,7 @@ import styles from './CandidateHome.module.scss';
 import Link from 'next/link';
 import config from 'config/config.json';
 
-const CandidateHome = ({jobListe}) => {
+const CandidateHome = ({ jobListe }) => {
   
     return (
         <Layout>

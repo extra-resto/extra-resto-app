@@ -62,18 +62,8 @@ const Home = () => {
         </div>
       </div>
       </div>
-      <div className={styles.Concept__Explanation}>
-        <div className={styles.Concept__Explanation__text}>
-          <h2>Extra-Resto, la meilleure solution pour recruter des Extras ou CDI</h2>
-          <h3>« Recevez une réponse de profil en 3 min en moyenne  »</h3>
-          <h3>« Taux de satisfaction de 92% des managers sur les jobs effectués »</h3>
-          <p>Pour vos recrutements en hôtellerie-restauration, Extra-Resto est la solution idéale ! Vous avez besoin d’une serveuse en CDI, d’un cuisinier en extra pour ce soir ou d’un préparateur de commande pour la semaine prochaine ? Nous vous proposons du personnel qualifié à tous les postes en salle, bar, et cuisine. Inscrivez-vous sur notre site pour trouver du personnel en France en un claquement de doigts !</p>
-          <h3>Le recrutement en Hôtellerie-restauration. Vous cherchez à recruter des extras ou des CDI ?</h3>
-        </div>
-      </div>
       <div className={styles.Concept__thumbnail}>
         <div className={styles.Concept__thumbnail__title}>
-          <h2>Le concept</h2>
         </div>
         <div className={styles.Concept__thumbnail__cards}>
           <div className={styles.Concept__thumbnail__cards__image}>
@@ -107,6 +97,14 @@ const Home = () => {
             <h3>En recherche de job ?</h3>
             <h4>Touver un extra qui vous correspond parmis nos nombreuses propositions d'extra ou CDI</h4>
           </div>
+        </div>
+      </div>
+      <div className={styles.Concept__Explanation}>
+        <div className={styles.Concept__Explanation__text}>
+          <h2>Extra-Resto, la meilleure solution pour recruter des Extras ou CDI</h2>
+          <h3>« Taux de satisfaction de 92% des managers sur les jobs effectués »</h3>
+          <p>Pour vos recrutements en hôtellerie-restauration, Extra-Resto est la solution idéale ! <br /> Vous avez besoin d’une serveuse en CDI ou d’un cuisinier en extra pour ce soir ? <br /> Nous vous proposons du personnel qualifié à tous les postes en salle, bar, et cuisine.</p>
+          <h3>Le recrutement en Hôtellerie-restauration. Vous cherchez à recruter des extras ou des CDI ?</h3>
         </div>
       </div>
     </Layout>

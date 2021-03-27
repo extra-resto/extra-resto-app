@@ -1,19 +1,48 @@
-.FormCandidateSignup {
-	width: 500px;
-	display: flex;
-	flex-direction: column;
+@import "styles/colors";
 
-	input {
-		margin: 0 10px 10px 10px;
-		padding: 10px;
-	}
-	label {
-		margin-left: 10px;
-		padding-bottom: 4px;
-	}
-	button {
-		width: 150px;
-		padding: 10px;
-		align-self: center;
-	}
+.FormCandidateSignup {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+
+  input {
+    box-sizing: content-box;
+    margin: 15px 10px 30px 10px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    &:focus {
+      box-sizing: content-box;
+      outline: none;
+      box-shadow: 0px 0px 24px 6px rgba(142, 213, 232, 0.75);
+      -webkit-box-shadow: 0px 0px 24px 6px rgba(142, 213, 232, 0.75);
+      -moz-box-shadow: 0px 0px 24px 6px rgba(142, 213, 232, 0.75);
+    }
+  }
+  input[type="file"] {
+    display: none;
+  }
+  &__CV {
+    background-color: $orange;
+    display: inline-block;
+    padding: 10px 10px;
+    width: 200px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 10px;
+    color: white;
+    margin-bottom: 20px;
+    &:hover {
+      background-color: $green;
+    }
+  }
+
+  label {
+    margin-left: 15px;
+  }
+  button {
+    width: 150px;
+    padding: 10px;
+    align-self: center;
+  }
 }
