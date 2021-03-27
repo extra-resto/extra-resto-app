@@ -11,9 +11,11 @@ import ModalUpdateBusiness from 'components/ModalUpdateBusiness';
 import ModalUpdateEvent from 'components/ModalUpdateEvent';
 import ModalDeleteEvent from 'components/ModalDeleteEvent';
 import config from 'config/config.json';
+import { useRouter } from 'next/router';
 
 const EmployerHome = ({ userInfos, token }) => {
   const [eventList, setEventList] = useState([]);
+  const router = useRouter();
 
   const getEventsList = () => {
     //convert object into array without the key
@@ -40,6 +42,7 @@ const EmployerHome = ({ userInfos, token }) => {
   }
 
   useEffect(() => {
+    if (userInfos === undefined) router.push('/');
     getEventsList()
   }, [userInfos])
 
@@ -92,7 +95,9 @@ const EmployerHome = ({ userInfos, token }) => {
   );
 }
 
-export const getServerSideProps = async ({req}) =>  {
+export const getServerSideProps = async ({req, res}) =>  {
+
+  if (!req.headers.cookie) return res.writeHead(302, { Location: '/api/login' });
 
   const {token, id} = cookie.parse(req.headers.cookie);
   

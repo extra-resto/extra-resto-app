@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { motion } from "framer-motion";
 import config from 'config/config.json';
+import Image from 'next/image';
+import Button from 'components/Button';
 
 const customStyles = {
   content : {
@@ -22,8 +24,6 @@ Modal.setAppElement('#__next');
 
 const ModalNewEvent = ({ userInfos, token }) => {
   const [modalIsOpen,setIsOpen] = useState(false);
-
-
   const dispatch = useDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({name: '', date: '', description: ''});
@@ -123,32 +123,34 @@ const ModalNewEvent = ({ userInfos, token }) => {
         >
           <div className={styles.ModalNewEvent__Modal}>
             <h2>Nouvel Evenement</h2>
+            <Image src="/images/icons/bill-svgrepo-com (1).svg" height={250} width={250} />
             <form className={styles.ModalNewEvent__Modal__form} onSubmit={handleSubmit}>
-              <label htmlFor="name">Nom de l'évenement</label>
+              
               <input 
                 name="name" 
                 type="text" 
                 autoComplete="name" 
-                onChange={handleChange} 
+                onChange={handleChange}
+                placeHolder="Nom de l'évenement" 
                 required 
               />
-              <label htmlFor="date">Date de l'évenement</label>
               <input 
                 name="date" 
                 type="date" 
                 autoComplete="name"
+                placeHolder="Date de l'évenement"
                 onChange={handleChange} 
                 required 
               />
-              <label htmlFor="description">Description de l'évenement</label>
               <textarea 
                 name="description" 
                 type="text"
                 autoComplete="description" 
+                placeHolder="Description de l'évenement"
                 onChange={handleChange} 
                 required 
               />
-              <button type="submit">Nouvel evenement</button>
+              <Button type="submit" content="Nouvel evenement" />
             </form>
           </div>
         </Modal>
