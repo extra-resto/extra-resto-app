@@ -21,7 +21,7 @@ const FormCandidateSignup = () => {
   });
   const [pdf, setPdf] = useState(null)
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState({password: '', phone_number: ''});
+  const [errors, setErrors] = useState({password: '', phone_number: '', cv: ''});
   const router = useRouter();
   
   const createPresignedUrl = async(file, byte_size, checksum) => {
@@ -50,7 +50,7 @@ const FormCandidateSignup = () => {
 
   useEffect(() => {
     if (isSubmitting) {
-      if (errors.password === '' && errors.phone_number === '' /*&& errors.cv === ''*/) {
+      if (errors.password === '' && errors.phone_number === '' && errors.cv === '') {
         registerUser();
       }
       else {
@@ -113,7 +113,7 @@ const FormCandidateSignup = () => {
 
   const validate = () => {
 
-    let err = { password: '', phone_number: '' };
+    let err = { password: '', phone_number: '', cv: '' };
 
     if(form.password !== form.password_confirmation) {
       err.password = 'Password and confirmation password are different'
@@ -121,9 +121,9 @@ const FormCandidateSignup = () => {
     if(form.phone_number.match(/^\d+$/) === null) {
       err.phone_number = 'Veuillez entrer un numéro valide'
     }
-    //if ( pdf.type !== 'application/pdf' ) {
-    //  err.cv = 'Veuillez Selectionner un fichier au format Pdf'
-    //}
+    if ( pdf.type !== 'application/pdf' ) {
+      err.cv = 'Veuillez Selectionner un fichier au format Pdf'
+    }
     return err;
   }
 
@@ -134,9 +134,10 @@ const FormCandidateSignup = () => {
           <h1>Candidat</h1>
           <Image src="/images/icons/waitress-svgrepo-com.svg" height={250} width={250} />
         </div>
+        <div className={styles.Login__background__form}>
         {errors.password ? <p>La confirmation de mot de passe est différente du mot de passse</p> : null}
         {errors.phone_number ? <p>Veuillez entrer un numéro de téléphone valide</p> : null}
-        <div className={styles.Login__background__form}>
+        {errors.cv ? <p>Veuillez Selectionner un fichier au format Pdf</p> : null}
           <form onSubmit={handleSubmit}>
             <div className={styles.Login__background__form__align}>
               <label htmlFor="first_name"></label>
