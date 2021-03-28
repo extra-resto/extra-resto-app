@@ -50,11 +50,7 @@ const FormCandidateSignup = () => {
 
   useEffect(() => {
     if (isSubmitting) {
-<<<<<<< HEAD
-      if (errors.password === '' && errors.phone_number === '') {
-=======
       if (errors.password === '' && errors.phone_number === '' && errors.cv === '') {
->>>>>>> develop
         registerUser();
       }
       else {
@@ -125,12 +121,9 @@ const FormCandidateSignup = () => {
     if(form.phone_number.match(/^\d+$/) === null) {
       err.phone_number = 'Veuillez entrer un numéro valide'
     }
-<<<<<<< HEAD
-=======
     if ( pdf.type !== 'application/pdf' ) {
       err.cv = 'Veuillez Selectionner un fichier au format Pdf'
     }
->>>>>>> develop
     return err;
   }
 
