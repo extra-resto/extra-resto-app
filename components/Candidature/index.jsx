@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import {useRouter} from 'next/router';
 import Image from 'next/image';
 
-const Candidature = ({ event, candidature, candidate, token }) => {
+const Candidature = ({ event, candidature, candidate, token, role }) => {
   const router = useRouter();
   const [form, setForm] = useState({
     job_id: candidature.job_id, 
@@ -37,7 +37,7 @@ const Candidature = ({ event, candidature, candidate, token }) => {
 
   return (
     <div className={styles.Candidature}>
-      {form.hired===true && 
+      {form.hired===true && role === 'employer' &&
         <button className={styles.Candidature__hired} onClick={handleHire}>
           <Image
             src="/images/Button/validated.svg"
@@ -47,7 +47,7 @@ const Candidature = ({ event, candidature, candidate, token }) => {
           />
         </button>
       }
-      {form.hired===false && 
+      {form.hired===false && role === 'employer' &&
         <button className={styles.Candidature__nothired} onClick={handleHire}>
           <Image
             src="/images/Button/valid.svg"
@@ -57,9 +57,34 @@ const Candidature = ({ event, candidature, candidate, token }) => {
           />
         </button>
       }
-      <Link href={`/user/${candidate.id}`}>
-        <a>{candidate && `${candidate.first_name} ${candidate.last_name}`}</a>
-      </Link>
+      {form.hired===true && role === 'candidate' &&
+        <div className={styles.Candidature__hired} >
+          <Image
+            src="/images/Button/validated.svg"
+            height={20} 
+            width={20} 
+            alt="waiting validation tick"
+          />
+        </div>
+      }
+      {form.hired===false && role === 'candidate' &&
+        <div className={styles.Candidature__nothired} >
+          <Image
+            src="/images/Button/valid.svg"
+            height={20} 
+            width={20} 
+            alt="validated plain tick"
+          />
+        </div>
+      }
+      { role === 'employer' &&
+        <Link href={`/user/${candidate.id}`}>
+          <a>{candidate && `${candidate.first_name} ${candidate.last_name}`}</a>
+        </Link>
+      } 
+      { role === 'candidate' &&
+        <p>{candidate && `${candidate.first_name} ${candidate.last_name}`}</p> 
+      }
     </div>
   );
 }

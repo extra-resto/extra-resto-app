@@ -13,7 +13,7 @@ import config from 'config/config.json';
 
 
 const Event = ({ event, id }) => {
-  const { token } = useSelector(state => state);
+  const { token, role } = useSelector(state => state);
 
   return (
     
@@ -60,7 +60,7 @@ const Event = ({ event, id }) => {
                 <div className={styles.Event__joblist__item__candidates}>
                   <h2>Candidatures:</h2>
                   {job.candidatures && job.candidatures.map((candidature) => (
-                    <Candidature event={event} candidature={candidature} candidate={candidature.user} token={token} />
+                    <Candidature event={event} candidature={candidature} candidate={candidature.user} token={token} role={role} />
                   ))}
                 </div>
               </li>
