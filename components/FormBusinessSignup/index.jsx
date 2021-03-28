@@ -41,7 +41,7 @@ const FormBusinessSignup = () => {
         body: JSON.stringify(form)
       })
       const result = await req.json();
-      router.push("/");
+      router.push("/employer_home");
       
     } catch (error) {
       console.log(error)
