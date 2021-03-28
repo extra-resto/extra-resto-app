@@ -1,72 +1,87 @@
 import React from 'react';
-import Layout from 'components/Layout';
 import Head from 'next/head';
+import styles from './CandidateHome.module.scss'
 import cookie from 'cookie';
-import styles from './CandidateHome.module.scss';
+import Navbar from 'components/Navbar';
+import Footer from 'components/Footer';
 import Link from 'next/link';
-import config from 'config/config.json';
+import dayjs from 'dayjs';
+import 'dayjs/locale/fr';
 
-const CandidateHome = ({jobListe}) => {
-  
-    return (
-        <Layout>
-            <Head>
-                <title>Candidate home page</title>
-            </Head>
-            <div className={styles.bg}></div>
-        <div className={styles.CandidateHome}>
-          {console.log(jobListe)}
-            <h1>Liste des emplois</h1>
+const CandidateHome = ({ userCandidatures }) => {
+  console.log(userCandidatures)
+  dayjs.locale('fr')
+  const hiredFalse = userCandidatures.filter(candidature => candidature.hired === false)
+  const hiredTrue = userCandidatures.filter(candidature => candidature.hired === true)
+  return (
+    <>
+      <div className={styles.main}>
+        <Head>
+          <title>extra-resto - S'enregistrer</title>
+          <link rel='icon' href='/favicon.svg' />
+        </Head>
+        <Navbar />
+
+        <div className={styles.candidatures}>
+          <div className={styles.candidature__listcontainer}>
+            <h1>Vos emplois en attante de confirmation</h1>
             <ul>
-
-          <div className={styles.main}>
-                {jobListe && 
-                jobListe.map((job) => (
-                  
-                <li key={job.id} className={styles.card}>
-                  <div className={styles.card__header}>
-                    <h2>{job.name}</h2>
-                  </div>
-
-                  <div className={styles.card__body}>
-                    <p>Nombre de place restante: {job.free_stead}</p>
-                  </div>
-                  
-                  <div className={styles.card__footer}>
-                    <Link  href="/candidate_home/job/[id]" as={`/candidate_home/job/${job.id}`} passHref >
-                      <button>Voir le job</button>
-                    </Link>
-                  </div>
-                </li>
-          
-                ))
-                }
-            </div>
+              {hiredFalse && hiredFalse.map((candidature) => (
+                <Link href="/job/[id]" as={`/job/${candidature.job.id}`} passHref>
+                  <a>
+                    <li key={candidature.id} className={styles.card}>
+                      <div className={styles.card__header}>
+                        <h2>Nom: {candidature.job.name}</h2>
+                        <p>Date de création: {dayjs(candidature.job.date).format('DD MMMM YYYY')}</p>
+                      </div>
+                    </li>
+                  </a>
+                </Link>
+              ))}
             </ul>
-        </div> 
-        </Layout>
-
-    )
+          </div>
+          <div className={styles.candidature__listcontainer}>
+            <h1>Vos emplois confirmés</h1>
+            <ul>
+              {hiredTrue && hiredTrue.map((candidature) => (
+                <Link href="/job/[id]" as={`/job/${candidature.job.id}`} passHref>
+                  <a>
+                    <li key={candidature.job.id} className={styles.card}>
+                      <div className={styles.card__header}>
+                        <h2>Nom: {candidature.job.name}</h2>
+                        <p>Date de création: {dayjs(candidature.job.date).format('DD MMMM YYYY')}</p>
+                      </div>
+                    </li>
+                  </a>
+                </Link>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </>
+  );
 };
 
 export const getServerSideProps = async ({ req }) => {
-  const { token, id } = cookie.parse(req.headers.cookie);
-  const jobResponse = await fetch(`${config.SERVER_URL}/jobs`, {
-    method: "get",
+  const { token } = cookie.parse(req.headers.cookie);
+  const candidatures = await fetch(`http://localhost:3000/api/candidatures/userCandidatures`, {
+    method: 'get',
     headers: {
-      Authorization: token,
-      "Content-Type": "application/json",
-    },
-  });
-  const jobListe = await jobResponse.json();
+      'Authorization': token,
+      'Content-Type': 'application/json'
+    }
+
+  })
+  const userCandidatures = await candidatures.json();
 
   return {
     props: {
-      jobListe,
-      token,
-      id,
-    },
-  };
-};
+      userCandidatures
+    }
+  }
+}
+
 
 export default CandidateHome;

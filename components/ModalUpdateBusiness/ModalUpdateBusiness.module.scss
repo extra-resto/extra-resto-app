@@ -1,21 +1,31 @@
 @import "styles/colors.scss";
 
+
 .ModalUpdateBusiness {
   button {
     border-radius: 50%;
+    width: 35px;
+    height: 35px;
     padding: 7px;
-    margin: 10px;
+    margin: 5px;
+    margin-left: 20px;
     border: 0.5px solid lightgrey;
-    background: none;
+    background: white;
     text-align: center;
-    vertical-align: center;
-    font-size : 15px;
+    font-size : 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   button:hover {
     background: lightgrey;
     cursor: pointer;
   }
+  &__newEvent {
+    width: 100%;
+  }
   &__Modal {
+    background-color: rgba(255, 255, 255, 0.295);
     height: 70vh;
     width: 90vw;
     max-width: 700px;
@@ -23,23 +33,39 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    h2 {
+      color: $orange;
+    }
     &__form {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      
+      align-items: center;
+      width: 100%;
       input, textarea {
         margin: 10px;
         padding: 10px;
-        min-width: 500px;
+        max-width: 500px;
+        width: 80%;
+        &::placeholder {
+            color: #4f8c9c;
+          }
+        &:focus {
+            outline: none;
+            box-shadow: 0px 0px 24px 6px rgba(138, 187, 188, 0.75);
+            -webkit-box-shadow: 0px 0px 24px 6px rgba(138, 187, 188, 0.75);
+            -moz-box-shadow: 0px 0px 24px 6px rgba(138, 187, 188, 0.75);
+          }
+      }
+      input, textarea {
+        border: none;
+        border-bottom: 2px solid $green;
+        border-radius: 10px;
       }
       label {
         margin-left: 10px;
       }
-      button {
-        padding: 10px;
-        margin: 10px;
-        align-self: center;
+      Button {
+        margin-top: 20px;
       }
     }
   }

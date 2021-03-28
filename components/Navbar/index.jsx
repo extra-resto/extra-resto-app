@@ -5,7 +5,7 @@ import Logout from 'components/Logout';
 import { useSelector } from 'react-redux';
 
 export const Navbar = () => {
-  const {token, role} = useSelector(state => state);
+  const { token, role } = useSelector(state => state);
   
 
   return (
@@ -27,6 +27,13 @@ export const Navbar = () => {
             <a>Mon espace</a>
           </Link>
         }
+        
+        {role !== 'employer' && 
+          <Link href='/jobs'>
+            <a>Les jobs</a>
+          </Link>
+        }
+
         {role === 'candidate' && 
           <Link href='/candidate_home'>
             <a>Mon espace</a>

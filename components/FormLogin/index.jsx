@@ -8,6 +8,7 @@ import config from 'config/config.json';
 
 const FormLogin = () => {
   const dispatch = useDispatch();
+  const [failed, setFailed] = useState('');
   const [form, setForm] = useState({ 
     email: '',
     password: ''
@@ -37,6 +38,10 @@ const FormLogin = () => {
       })
       const token = req.headers.get('Authorization');
       const result = await req.json();
+      if(result.error) {
+        setFailed(result.error);
+        return;
+      }
       dispatch(setUser(token, result.data.attributes.role, result.data.id));
       Router.push("/");
 
@@ -63,8 +68,8 @@ const FormLogin = () => {
 
     let err = { email: '' };
 
-    if(form.email.match(/^[A-z-.]+@[A-z-.]+[A-z-.]*.[A-z-.]+$/) === null) {
-      err.email = 'Veuillez entrer une adresse email valide'
+    if(!form.email) {
+      err.email = 'Veuillez entrer un email'
     }
 
     return err;
@@ -72,7 +77,8 @@ const FormLogin = () => {
 
   return (
     <>
-    {errors.email ? <p>Veuillez entrer une adresse email valide</p> : null}
+    {errors.email ? <p>Veuillez entrer un email</p> : null}
+    {failed ? <p className={styles.error}>Veuillez entrer une adresse email valide</p> : null}
     <form className={styles.FormLogin} onSubmit={handleSubmit}>
       <label htmlFor="email">Email</label>
       <input 

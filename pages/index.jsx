@@ -1,24 +1,14 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Layout from 'components/Layout';
 import styles from './Home.module.scss';
-import Cookie from 'js-cookie';
 import Button from 'components/Button';
 import Image from 'next/image';
 
 
 const Home = () => {
-  const [role, setRole] = useState(Cookie.get('role'));
-  const router = useRouter()
-
-  useEffect(() => {
-    if (role == 'employer') router.push('/employer_home');
-    if (role == null) router.push('/');
-  }, [role])
-
-  
+  const router = useRouter();
 
   const goToCandidate = (e) => {
     e.preventDefault()
@@ -34,15 +24,15 @@ const Home = () => {
     <Layout>
       <Head>
         <title>extra-resto - Home</title>
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/favicon.svg' />
       </Head>
       <div className={styles.Home}>
-          <h1 className={styles.Home__title}>Le recrutement en
-            hôtellerie-restauration ?
-          </h1>
-      <div className={styles.Concept__Hero}>
-        <div className={styles.Concept__Hero__cta}>
-          <h2 className={styles.Concept__Hero__cta__title}>
+        <h1 className={styles.Home__title}>Le recrutement en
+          hôtellerie-restauration ?
+        </h1>
+        <div className={styles.Concept__Hero}>
+          <div className={styles.Concept__Hero__cta}>
+            <h2 className={styles.Concept__Hero__cta__title}>
             Trouvez votre personnel ou un emploi
             avec <span className={styles.Concept__Hero__cta__title__blue}>Extra-</span><span className={styles.Concept__Hero__cta__title__orange}>Resto</span>
           </h2>
@@ -52,28 +42,17 @@ const Home = () => {
               en Extra ou CDI en moins de 3 minutes !
           </h3>
           <div className={styles.Concept__Hero__cta__buttons}>
-          <Button content="Espace Candidat" href={goToCandidate}/>
-          <Button content="Espace Recruteur" href={goToEmployer}/>
+            <Button content="Espace Candidat" href={goToCandidate}/>
+            <Button content="Espace Recruteur" href={goToEmployer}/>
           </div>
-
         </div>
         <div className={styles.Concept__Hero__image}>
           <Image src="/images/icons/waiter-svgrepo-com.svg" alt="barman waiter drawing" height={500} width={350} />
         </div>
       </div>
       </div>
-      <div className={styles.Concept__Explanation}>
-        <div className={styles.Concept__Explanation__text}>
-          <h2>Extra-Resto, la meilleure solution pour recruter des Extras ou CDI</h2>
-          <h3>« Recevez une réponse de profil en 3 min en moyenne  »</h3>
-          <h3>« Taux de satisfaction de 92% des managers sur les jobs effectués »</h3>
-          <p>Pour vos recrutements en hôtellerie-restauration, Extra-Resto est la solution idéale ! Vous avez besoin d’une serveuse en CDI, d’un cuisinier en extra pour ce soir ou d’un préparateur de commande pour la semaine prochaine ? Nous vous proposons du personnel qualifié à tous les postes en salle, bar, et cuisine. Inscrivez-vous sur notre site pour trouver du personnel en France en un claquement de doigts !</p>
-          <h3>Le recrutement en Hôtellerie-restauration. Vous cherchez à recruter des extras ou des CDI ?</h3>
-        </div>
-      </div>
       <div className={styles.Concept__thumbnail}>
         <div className={styles.Concept__thumbnail__title}>
-          <h2>Le concept</h2>
         </div>
         <div className={styles.Concept__thumbnail__cards}>
           <div className={styles.Concept__thumbnail__cards__image}>
@@ -89,9 +68,9 @@ const Home = () => {
             </div>
           <div className={styles.Concept__thumbnail__cards__image}>
             <Image 
-              src="/images/Navbar/eye.svg"
-              height={150} 
-              width={150} 
+              src="/images/icons/tick.svg"
+              height={145} 
+              width={145} 
               alt="extra-resto logo"
             />
             <h3>Des profils vérifiés</h3>
@@ -107,6 +86,14 @@ const Home = () => {
             <h3>En recherche de job ?</h3>
             <h4>Touver un extra qui vous correspond parmis nos nombreuses propositions d'extra ou CDI</h4>
           </div>
+        </div>
+      </div>
+      <div className={styles.Concept__Explanation}>
+        <div className={styles.Concept__Explanation__text}>
+          <h2>Extra-Resto, la meilleure solution pour recruter des Extras ou CDI</h2>
+          <h3>« Taux de satisfaction de 92% des managers sur les jobs effectués »</h3>
+          <p>Pour vos recrutements en hôtellerie-restauration, Extra-Resto est la solution idéale ! <br /> Vous avez besoin d’une serveuse en CDI ou d’un cuisinier en extra pour ce soir ? <br /> Nous vous proposons du personnel qualifié à tous les postes en salle, bar, et cuisine.</p>
+          <h3>Le recrutement en Hôtellerie-restauration. Vous cherchez à recruter des extras ou des CDI ?</h3>
         </div>
       </div>
     </Layout>

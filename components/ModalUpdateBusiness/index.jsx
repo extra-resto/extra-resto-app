@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import config from 'config/config.json';
+import Image from 'next/image';
+import Button from 'components/Button';
 
 const customStyles = {
   content : {
@@ -116,45 +118,46 @@ const ModalUpdateBusiness = ({ business, token }) => {
         >
 
           <div className={styles.ModalUpdateBusiness__Modal}>
+            <Image src="/images/icons/bill-svgrepo-com (1).svg" height={250} width={250} />
             <h2>Modifier mon entreprise</h2>
             <form className={styles.ModalUpdateBusiness__Modal__form} onSubmit={handleSubmit}>
-              <label htmlFor="name">Nom de l'établissement</label>
               <input 
                 name="name" 
                 type="text" 
                 autoComplete="name" 
                 value={form.name}
+                placeHolder="Nom de l'établissement"
                 onChange={handleChange} 
                 required 
               />
-              <label htmlFor="address">Adresse</label>
               <input 
                 name="address"
                 type="text"
                 autoComplete="address"
                 value={form.address}
+                placeHolder="Adresse"
                 onChange={handleChange}
                 required
               />
-              <label htmlFor="postal_code">Code postal</label>
               <input 
                 name="postal_code"
                 type="text"
                 autoComplete="postal_code"
                 value={form.postal_code}
+                placeHolder="Code postal"
                 onChange={handleChange}
                 required
               />
-              <label htmlFor="city">Ville</label>
               <input 
                 name="city"
                 type="city" 
                 autoComplete="city"
                 onChange={handleChange} 
                 value={form.city}
+                placeHolder="Ville"
                 required 
               />
-              <button type="submit">Enregister</button>
+              <Button type="submit" content="Enregister" />
             </form>
           </div>
         </Modal>

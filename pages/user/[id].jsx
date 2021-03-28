@@ -3,28 +3,41 @@ import styles from './user.module.scss';
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import config from 'config/config.json';
+import Head from 'next/head';
 
 const Profil = ({ userProfil }) => {
   return (
     <>
-      <Navbar />
+      <Head>
+        <title>Profil candidat</title>
+        <link rel='icon' href='/favicon.svg' />
+      </Head>
+
       <div className={styles.user}>
-        <h1>Profil Candidat</h1>
-        <h2>{userProfil.first_name}</h2>
-        <h2>{userProfil.last_name}</h2>
-        <h2>{userProfil.email}</h2>
-        <h2>{userProfil.phone_number}</h2>
-        <embed
-          style={{
-            width: '100%',
-            height: '1000px', 
-          }}
-          type='application/pdf'
-          src={userProfil.resume_url}
-        />
+        <Navbar />
+        <div className={styles.user__info}>
+          <h1>Profil Candidat</h1>
+          <div className={styles.user__info__desc}>
+            <p>Prénom : {userProfil.first_name}</p>
+            <p>Nom : {userProfil.last_name}</p>
+            <p>Email : {userProfil.email}</p>
+            <p>Téléphone : {userProfil.phone_number}</p>
+          </div>
+          <h2>CV de {userProfil.first_name}</h2>
+          <embed
+            style={{
+              width: '100%',
+              height: '1000px', 
+            }}
+            type='application/pdf'
+            src={userProfil.resume_url}
+          />
+        </div>
+
+        <Footer />
       </div>
-      <Footer />
     </>
+    
   )
 };
 

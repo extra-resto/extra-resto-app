@@ -7,7 +7,7 @@
   }
   &__Modal {
     display: flex;
-    height: 70vh;
+    height: 50vh;
     &__employer,
     &__candidate {
       width: 70%;
@@ -15,21 +15,24 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      margin: 10px;
       &__text {
         text-align: center;
       }
     }
     &__candidate {
       background-color: $green;
+      color: $backgound;
     }
     &__candidate:hover {
       background-color: $lightgreen;
     }
     &__employer {
       background-color: $orange;
+      color: $backgound;
     }
     &__employer:hover {
-      background-color: $lightorange;
+      background-color: rgb(192, 93, 0);
     }
   }
 }

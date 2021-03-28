@@ -1,0 +1,123 @@
+@import "styles/colors";
+
+.CandidateHome {
+  margin-bottom: 0;
+  min-height: 80vh;
+  width: 100%;
+  text-align: center;
+  background-color: rgb(252, 250, 241);
+  background-image: url("/images/icons/wave (18).svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: local;
+  background-position: top;
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  -o-background-size: 100%;
+  background-size: 100%;
+  margin-top: 10px;
+  input {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    width: 300px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    border: 1px solid $green;
+    background-color: $backgound;
+    padding-left: 10px;
+    &::placeholder {
+      padding-left: 5px;
+      color: $lightgreen;
+      font-size: 16px;
+      font-style: italic;
+    }
+    &:focus {
+      outline: none;
+      box-shadow: 0px 0px 24px 6px rgba(138, 187, 188, 0.75);
+      -webkit-box-shadow: 0px 0px 24px 6px rgba(138, 187, 188, 0.75);
+      -moz-box-shadow: 0px 0px 24px 6px rgba(138, 187, 188, 0.75);
+    }
+  }
+  &__display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+  }
+  h1 {
+    color: $backgound;
+  }
+}
+
+.main {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: $backgound;
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  width: 350px;
+  padding: 15px;
+  margin: 0 auto;
+  border: 0.2px solid $green;
+  border-radius: 10px;
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+  &:hover {
+    transition: all 0.7s ease-in-out;
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+    -webkit-transition: all 0.7s ease-in-out;
+    -moz-transition: all 0.7s ease-in-out;
+    -ms-transition: all 0.7s ease-in-out;
+    -o-transition: all 0.7s ease-in-out;
+  }
+  &__header {
+    display: flex;
+    justify-content: center;
+    h2 {
+      margin-top: 0;
+      font-size: 30px;
+      color: $lightgreen;
+      margin-bottom: 15px;
+    }
+  }
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: rgb(53, 53, 53);
+    i {
+      margin-bottom: 20px;
+      color: $orange;
+    }
+    p {
+      margin-bottom: 0;
+    }
+    &__rate {
+      font-size: 20px;
+    }
+  }
+  &__footer {
+    width: 100%;
+    margin: 25px 0 0 0;
+    display: flex;
+    justify-content: center;
+    button {
+      padding: 15px;
+    }
+  }
+}

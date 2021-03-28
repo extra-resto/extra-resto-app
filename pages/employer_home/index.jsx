@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import Layout from 'components/Layout';
 import styles from './EmployerHome.module.scss';
@@ -11,9 +11,11 @@ import ModalUpdateBusiness from 'components/ModalUpdateBusiness';
 import ModalUpdateEvent from 'components/ModalUpdateEvent';
 import ModalDeleteEvent from 'components/ModalDeleteEvent';
 import config from 'config/config.json';
+import { useRouter } from 'next/router';
 
 const EmployerHome = ({ userInfos, token }) => {
   const [eventList, setEventList] = useState([]);
+  const router = useRouter();
 
   const getEventsList = () => {
     //convert object into array without the key
@@ -40,6 +42,7 @@ const EmployerHome = ({ userInfos, token }) => {
   }
 
   useEffect(() => {
+    if (userInfos === undefined) router.push('/');
     getEventsList()
   }, [userInfos])
 
@@ -48,7 +51,7 @@ const EmployerHome = ({ userInfos, token }) => {
     <div className={styles.EmployerHome}>
       <Head>
         <title>extra-resto - Employer Home</title>
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/favicon.svg' />
       </Head>
       <div className={styles.EmployerHome__titlecontainer}>
         <div className={styles.EmployerHome__titlecontainer__titlebloc}>
@@ -92,7 +95,9 @@ const EmployerHome = ({ userInfos, token }) => {
   );
 }
 
-export const getServerSideProps = async ({req}) =>  {
+export const getServerSideProps = async ({req, res}) =>  {
+  
+  if (!req.headers.cookie) return res.writeHead(302, { Location: '/api/login' });
 
   const {token, id} = cookie.parse(req.headers.cookie);
   
@@ -105,7 +110,14 @@ export const getServerSideProps = async ({req}) =>  {
 
   })
   const userInfos = await eventResponse.json();
-
+  if(userInfos.businesses.length === 0) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/employer/business'
+      }
+    }
+  }
   return {
     props: {
       userInfos,

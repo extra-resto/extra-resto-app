@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { fileChecksum } from 'lib/checksum';
 import Button from 'components/Button';
 import config from 'config/config.json';
+import Image from 'next/image';
 
 const FormCandidateSignup = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const FormCandidateSignup = () => {
   });
   const [pdf, setPdf] = useState(null)
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState({password: '', phone_number: ''});
+  const [errors, setErrors] = useState({password: '', phone_number: '', cv: ''});
   const router = useRouter();
   
   const createPresignedUrl = async(file, byte_size, checksum) => {
@@ -49,7 +50,7 @@ const FormCandidateSignup = () => {
 
   useEffect(() => {
     if (isSubmitting) {
-      if (errors.password === '' && errors.phone_number === '') {
+      if (errors.password === '' && errors.phone_number === '' && errors.cv === '') {
         registerUser();
       }
       else {
@@ -112,7 +113,7 @@ const FormCandidateSignup = () => {
 
   const validate = () => {
 
-    let err = { password: '', phone_number: '' };
+    let err = { password: '', phone_number: '', cv: '' };
 
     if(form.password !== form.password_confirmation) {
       err.password = 'Password and confirmation password are different'
@@ -120,72 +121,99 @@ const FormCandidateSignup = () => {
     if(form.phone_number.match(/^\d+$/) === null) {
       err.phone_number = 'Veuillez entrer un numéro valide'
     }
-    
+    if ( pdf.type !== 'application/pdf' ) {
+      err.cv = 'Veuillez Selectionner un fichier au format Pdf'
+    }
     return err;
   }
 
   return (
-    <>
-      {errors.password ? <p>La confirmation de mot de passe est différente du mot de passse</p> : null}
-      {errors.phone_number ? <p>Veuillez entrer un numéro de téléphone valide</p> : null}
-      <form className={styles.FormCandidateSignup} onSubmit={handleSubmit}>
-        <label htmlFor="first_name">Prénom</label>
-        <input 
-          name="first_name" 
-          type="text" 
-          autoComplete="first_name" 
-          onChange={handleChange} 
-          required 
-        />
-        <label htmlFor="last_name">Nom de Famille</label>
-        <input 
-          name="last_name"
-          type="text"
-          autoComplete="last_name"
-          onChange={handleChange}
-          required
-        />
-        <label htmlFor="phone_number">n° de Téléphone</label>
-        <input 
-          name="phone_number"
-          type="text"
-          autoComplete="phone_number"
-          onChange={handleChange}
-          required
-        />
-        <label htmlFor="email">Email</label>
-        <input 
-          name="email" 
-          type="email" 
-          autoComplete="email" 
-          onChange={handleChange} 
-          required 
-        />
-        <label htmlFor="cv">CV</label>
-        <input 
-          name="cv" 
-          type="file"
-          onChange={handleFile} 
-          required 
-        />
-        <label htmlFor="password">Mot de passe</label>
-        <input 
-          name="password" 
-          type="password" 
-          onChange={handleChange} 
-          required 
-        />
-        <label htmlFor="password">Confirmation de mot de passe</label>
-        <input 
-          name="password_confirmation" 
-          type="password" 
-          onChange={handleChange} 
-          required 
-        />
-        <Button type="submit" content="S'enregistrer"/>
-      </form>
-    </>
-  )
+    <div className={styles.Login}>
+      <div className={styles.Login__background}>
+        <div className={styles.Login__background__img}>
+          <h1>Candidat</h1>
+          <Image src="/images/icons/waitress-svgrepo-com.svg" height={250} width={250} />
+        </div>
+        <div className={styles.Login__background__form}>
+        {errors.password ? <p>La confirmation de mot de passe est différente du mot de passse</p> : null}
+        {errors.phone_number ? <p>Veuillez entrer un numéro de téléphone valide</p> : null}
+        {errors.cv ? <p>Veuillez Selectionner un fichier au format Pdf</p> : null}
+          <form onSubmit={handleSubmit}>
+            <div className={styles.Login__background__form__align}>
+              <label htmlFor="first_name"></label>
+              <input 
+                placeholder="Prénom"
+                name="first_name" 
+                type="text" 
+                autoComplete="first_name" 
+                onChange={handleChange} 
+                required 
+              />
+              <label htmlFor="last_name"></label>
+              <input 
+                placeholder="Nom de Famille"
+                name="last_name"
+                type="text"
+                autoComplete="last_name"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className={styles.Login__background__form__align}>
+              <label htmlFor="phone_number"></label>
+              <input 
+                placeholder="Téléphone"
+                name="phone_number"
+                type="text"
+                autoComplete="phone_number"
+                onChange={handleChange}
+                required
+              />
+              <label htmlFor="email"></label>
+              <input 
+                placeholder="Email"
+                name="email" 
+                type="email" 
+                autoComplete="email" 
+                onChange={handleChange} 
+                required 
+              />
+            </div>
+            <label htmlFor="cv" className={styles.Login__background__form__CV}>
+              <input  
+                name="cv" 
+                id="cv"
+                type="file"
+                accept=".pdf"
+                onChange={handleFile} 
+                required 
+              />
+              Ajouter votre CV
+            </label>
+            <div className={styles.Login__background__form__align}>
+              <label htmlFor="password"></label>
+              <input 
+                placeholder="Mot de passe"
+                name="password" 
+                type="password" 
+                onChange={handleChange} 
+                required 
+              />
+              <label htmlFor="password"></label>
+              <input 
+                placeholder="Confirmation de mot de passe"
+                name="password_confirmation" 
+                type="password" 
+                onChange={handleChange} 
+                required 
+              />
+            </div>
+            <Button type="submit" content="S'enregistrer"/>
+          </form>
+        </div>
+      </div>
+    </div>
+)
 }
 
 export default FormCandidateSignup;
