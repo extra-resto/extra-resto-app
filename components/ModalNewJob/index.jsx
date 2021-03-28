@@ -3,6 +3,10 @@ import Modal from 'react-modal';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import { motion } from "framer-motion";
+import config from 'config/config.json';
+import Button from 'components/Button';
+import Image from 'next/image';
 
 const customStyles = {
   content : {
@@ -87,7 +91,7 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
 
   const registerJob = async () => {
     try {
-      const req = await fetch(`${process.env.API_ROOT}jobs`, {
+      const req = await fetch(`${config.SERVER_URL}jobs`, {
           method: 'POST',
           headers: {
             'Authorization': token,
@@ -105,11 +109,16 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
 
   return (
   	<div className={styles.ModalNewJob}>
-
       <div className={styles.ModalNewJob__newJob}>
-    	<button onClick={openModal}>Ajouter un Job</button>
+    	 <button onClick={openModal}>
+        <motion.p
+          whileHover={{ scale: 1.5 }}
+          whileTap={{ scale: 0.8 }}
+        >
+          +
+        </motion.p>
+       </button>
       </div>
-
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
@@ -117,56 +126,56 @@ const ModalNewEvent = ({ eventId, token, eventDate }) => {
           style={customStyles}
           contentLabel="Example Modal"
         >
-
           <div className={styles.ModalNewJob__Modal}>
+            <Image src="/images/Button/job.svg" height={250} width={250} />
             <h2>Nouvel Emploi</h2>
             <form className={styles.ModalNewJob__Modal__form} onSubmit={handleSubmit}>
-                <label htmlFor="name">Nom de l'emploi</label>
                 <input 
                 name="name" 
                 type="text" 
                 autoComplete="name" 
                 onChange={handleChange} 
+                placeHolder="Nom de l'emploi"
                 required 
                 />
-                <label htmlFor="description">Description de l'emploi</label>
                 <textarea 
                 name="description" 
                 type="text"
                 autoComplete="description" 
-                onChange={handleChange} 
+                onChange={handleChange}
+                placeHolder="Description de l'emploi"
                 required 
                 />
-                <label htmlFor="dresscode">Dresscode de l'emploi</label>
                 <textarea 
                 name="dresscode" 
                 type="text"
                 autoComplete="dresscode" 
-                onChange={handleChange} 
+                onChange={handleChange}
+                placeHolder="Dresscode de l'emploi"
                 required 
                 />
-                <label htmlFor="duration">Durée de l'emploi /h</label>
                 <input 
                 name="duration" 
                 type="number"
-                onChange={handleChange} 
+                onChange={handleChange}
+                placeHolder="Durée de l'emploi (h)"
                 required 
                 />
-                <label htmlFor="rate">Prix de l'heure /€</label>
                 <input 
                 name="rate" 
                 type="number"
-                onChange={handleChange} 
+                onChange={handleChange}
+                placeHolder="Salaire horaire (€)"
                 required 
                 />
-                <label htmlFor="free_stead">Places disponibles</label>
                 <input 
                 name="free_stead" 
                 type="number"
                 onChange={handleChange} 
+                placeHolder="Places disponibles"
                 required 
                 />
-              <button type="submit">Nouvel emploi</button>
+              <Button type="submit" content="Poster" />
             </form>
           </div>
         </Modal>

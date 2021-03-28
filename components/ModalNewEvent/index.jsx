@@ -4,6 +4,10 @@ import { useState, useEffect } from 'react';
 import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import { motion } from "framer-motion";
+import config from 'config/config.json';
+import Image from 'next/image';
+import Button from 'components/Button';
 
 const customStyles = {
   content : {
@@ -20,8 +24,6 @@ Modal.setAppElement('#__next');
 
 const ModalNewEvent = ({ userInfos, token }) => {
   const [modalIsOpen,setIsOpen] = useState(false);
-
-
   const dispatch = useDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({name: '', date: '', description: ''});
@@ -83,7 +85,7 @@ const ModalNewEvent = ({ userInfos, token }) => {
 
   const registerEvent = async () => {
     try {
-      const req = await fetch(`${process.env.API_ROOT}events`, {
+      const req = await fetch(`${config.SERVER_URL}events`, {
           method: 'POST',
           headers: {
             'Authorization': token,
@@ -103,10 +105,15 @@ const ModalNewEvent = ({ userInfos, token }) => {
   	<div className={styles.ModalNewEvent}>
 
       <div className={styles.ModalNewEvent__newEvent}>
-    	<button onClick={openModal}>Ajouter un Evenement</button>
+    	 <button onClick={openModal}>
+        <motion.p
+          whileHover={{ scale: 1.5 }}
+          whileTap={{ scale: 0.8 }}
+        >
+          +
+        </motion.p>
+       </button>
       </div>
-
-
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
@@ -114,35 +121,36 @@ const ModalNewEvent = ({ userInfos, token }) => {
           style={customStyles}
           contentLabel="Example Modal"
         >
-
           <div className={styles.ModalNewEvent__Modal}>
             <h2>Nouvel Evenement</h2>
+            <Image src="/images/icons/bill-svgrepo-com (1).svg" height={250} width={250} />
             <form className={styles.ModalNewEvent__Modal__form} onSubmit={handleSubmit}>
-              <label htmlFor="name">Nom de l'évenement</label>
+              
               <input 
                 name="name" 
                 type="text" 
                 autoComplete="name" 
-                onChange={handleChange} 
+                onChange={handleChange}
+                placeHolder="Nom de l'évenement" 
                 required 
               />
-              <label htmlFor="date">Date de l'évenement</label>
               <input 
                 name="date" 
                 type="date" 
                 autoComplete="name"
+                placeHolder="Date de l'évenement"
                 onChange={handleChange} 
                 required 
               />
-              <label htmlFor="description">Description de l'évenement</label>
               <textarea 
                 name="description" 
                 type="text"
                 autoComplete="description" 
+                placeHolder="Description de l'évenement"
                 onChange={handleChange} 
                 required 
               />
-              <button type="submit">Nouvel evenement</button>
+              <Button type="submit" content="Poster" />
             </form>
           </div>
         </Modal>

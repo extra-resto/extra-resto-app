@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './ModalCandidateEmployer.module.scss';
 import Link from 'next/link';
 import Modal from 'react-modal';
@@ -10,6 +10,8 @@ const customStyles = {
     left                  : '50%',
     right                 : 'auto',
     bottom                : 'auto',
+    borderRadius          : '10px',
+    border                : 'none',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)'
   }

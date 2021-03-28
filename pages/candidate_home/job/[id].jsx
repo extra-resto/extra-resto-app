@@ -4,6 +4,7 @@ import Head from 'next/head';
 import cookie from 'cookie';
 import styles from './job.module.scss';
 import {useRouter} from 'next/router';
+import config from 'config/config.json';
 
 const Job = ({jobInfos, id, token}) => {
 
@@ -13,7 +14,7 @@ const Job = ({jobInfos, id, token}) => {
         const data = {
           jobs_id: jobId
         }
-        const response = await fetch(`http://localhost:3000/api/candidatures`, {
+        const response = await fetch(`${config.SERVER_URL}candidatures`, {
           method: 'POST',
           headers: {
             'Authorization': token,
@@ -28,7 +29,7 @@ const Job = ({jobInfos, id, token}) => {
       const handleCandidateRemove = async (candidatures) => {
         const cadidatureId = candidatures.filter(candidature => candidature.user_id === parseInt(id))
     
-        const response = await fetch(`http://localhost:3000/api/candidatures/${cadidatureId[0].id}`, {
+        const response = await fetch(`${config.SERVER_URL}candidatures/${cadidatureId[0].id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': token,
@@ -40,12 +41,9 @@ const Job = ({jobInfos, id, token}) => {
 
   return (
       <Layout>
-       
-          <Head>
-            <title>show job</title>
-          </Head>
-        {console.log(jobInfos)}
-
+        <Head>
+          <title>show job</title>
+        </Head>
         <div className={styles.main}>
             <div className={styles.business}>
                 <h1>Entreprise: {jobInfos.businesses[0].name}</h1>
@@ -72,7 +70,7 @@ const Job = ({jobInfos, id, token}) => {
 export const getServerSideProps = async ({params, req}) =>  {
     const jobId = params.id
     const {token, id} = cookie.parse(req.headers.cookie);
-    const jobResponse = await fetch(`${process.env.API_ROOT}/jobs/${jobId}`, {
+    const jobResponse = await fetch(`${config.SERVER_URL}/jobs/${jobId}`, {
       method: 'get',
       headers: {
         'Authorization': token,

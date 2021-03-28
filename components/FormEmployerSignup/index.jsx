@@ -1,8 +1,10 @@
 import styles from './FormEmployerSignup.module.scss';
 import { useState, useEffect } from 'react';
-import { setUser, setEmployer, setCandidate } from 'store/User/userAction';
+import { setUser } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
 import Button from 'components/Button';
+import config from 'config/config.json';
+import Image from 'next/image';
 
 const FormEmployerSignup = ({setStep}) => {
   const dispatch = useDispatch();
@@ -31,7 +33,7 @@ const FormEmployerSignup = ({setStep}) => {
 
   const registerUser = async () => {
     try {
-      const req = await fetch(`${process.env.API_ROOT}signup`, {
+      const req = await fetch(`${config.SERVER_URL}signup`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -76,59 +78,80 @@ const FormEmployerSignup = ({setStep}) => {
   }
 
   return (
-    <>
+    <div className={styles.Login}>
+        <div className={styles.Login__background}>
+          <div className={styles.Login__background__img}>
+            <h1>Employeur</h1>
+            <Image src="/images/icons/bill-svgrepo-com (1).svg" height={250} width={250} />
+          </div>
       {errors.password ? <p>La confirmation de mot de passe est différente du mot de passse</p> : null}
       {errors.phone_number ? <p>Veuillez entrer un numéro de téléphone valide</p> : null}
-      <form className={styles.FormEmployerSignup} onSubmit={handleSubmit}>
-        <label htmlFor="first_name">Prénom</label>
+      <div className={styles.Login__background__form}>
+      <form onSubmit={handleSubmit}>
+        <div className={styles.Login__background__form__align}>
+        <label htmlFor="first_name"></label>
         <input 
+          placeholder="Prénom"
           name="first_name" 
           type="text" 
           autoComplete="first_name" 
           onChange={handleChange} 
           required 
         />
-        <label htmlFor="last_name">Nom de Famille</label>
+        
+        <label htmlFor="last_name"></label>
         <input 
+          placeholder="Nom de Famille"
           name="last_name"
           type="text"
           autoComplete="last_name"
           onChange={handleChange}
           required
         />
-        <label htmlFor="phone_number">n° de Téléphone</label>
+        </div>
+        <div className={styles.Login__background__form__align}>
+        <label htmlFor="phone_number"></label>
         <input 
+          placeholder="Téléphone"
           name="phone_number"
           type="text"
           autoComplete="phone_number"
           onChange={handleChange}
           required
         />
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email"></label>
         <input 
+          placeholder="Email"
           name="email" 
           type="email" 
           autoComplete="email" 
           onChange={handleChange} 
           required 
         />
-        <label htmlFor="password">Mot de passe</label>
+        </div>
+        <div className={styles.Login__background__form__align}>
+        <label htmlFor="password"></label>
         <input 
+          placeholder="Mot de passe"
           name="password" 
           type="password" 
           onChange={handleChange} 
           required 
         />
-        <label htmlFor="password">Confirmation de mot de passe</label>
+        <label htmlFor="password"></label>
         <input 
+          placeholder="Confirmation de mot de passe"
           name="password_confirmation" 
           type="password" 
           onChange={handleChange} 
           required 
         />
+        </div>
         <Button type="submit" content="S'enregistrer"/>
       </form>
-    </>
+      </div>
+    </div>
+    </div>
   )
 }
 

@@ -9,7 +9,7 @@ const SignUp = () => {
     <div className={styles.SignUp}>
       <Head>
         <title>extra-resto - S'enregistrer</title>
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/favicon.svg' />
       </Head>
       <h1>S'enregistrer</h1>
       <a>Je suis employeur</a>

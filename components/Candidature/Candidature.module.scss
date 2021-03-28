@@ -1,0 +1,26 @@
+.Candidature {
+	display: flex;
+	align-items: center;
+	a {
+	 padding: 10px;
+	}
+	&__nothired {
+		border-radius: 50%;
+		border: 1px solid lightgrey;
+		width: 30px;
+		padding: 5px;
+	}
+	&__nothired:hover {
+		background-color: lightgrey;
+	}
+	&__hired {
+		border: 1px solid lightgrey;
+		background-color: lightgreen;
+		border-radius: 50%;
+		width: 30px;
+		padding: 5px;
+	}
+	&__hired:hover {
+		background-color: lightgrey;
+	}
+}

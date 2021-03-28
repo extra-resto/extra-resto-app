@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import styles from './FormBusinessSignup.module.scss';
+import config from 'config/config.json';
+import Image from 'next/image';
+import Button from 'components/Button';
 
 const FormBusinessSignup = () => {
   const token = useSelector(state => state.token);
@@ -29,7 +32,7 @@ const FormBusinessSignup = () => {
 
   const registerBusiness = async () => {
     try {
-      const req = await fetch(`${process.env.API_ROOT}businesses`, {
+      const req = await fetch(`${config.SERVER_URL}businesses`, {
         method: 'POST',
         headers: {
           'Authorization': token,
@@ -71,45 +74,56 @@ const FormBusinessSignup = () => {
   }
 
   return (
-    <>
-      {errors.name ? <p>La confirmation de mot de passe est différente du mot de passse</p> : null}
-      <h2>Mon entreprise</h2>
-      <form className={styles.SignupEmployer} onSubmit={handleSubmit}>
-        <label htmlFor="name">Nom de l'établissement</label>
-        <input 
-          name="name" 
-          type="text" 
-          autoComplete="name" 
-          onChange={handleChange} 
-          required 
-        />
-        <label htmlFor="address">Adresse</label>
-        <input 
-          name="address"
-          type="text"
-          autoComplete="address"
-          onChange={handleChange}
-          required
-        />
-        <label htmlFor="postal_code">Code postal</label>
-        <input 
-          name="postal_code"
-          type="text"
-          autoComplete="postal_code"
-          onChange={handleChange}
-          required
-        />
-        <label htmlFor="city">Ville</label>
-        <input 
-          name="city"
-          type="city" 
-          autoComplete="city" 
-          onChange={handleChange} 
-          required 
-        />
-        <button type="submit">Enregistrer</button>
-      </form>
-    </>
+    <div className={styles.Login}>
+      <div className={styles.Login__background}>
+        <div className={styles.Login__background__img}>
+          <h1>Entreprise</h1>
+          <Image src="/images/icons/restaurant-store-svgrepo-com.svg" height={250} width={250} />
+        </div>
+        {errors.name ? <p>La confirmation de mot de passe est différente du mot de passse</p> : null}
+        <div className={styles.Login__background__form}>
+          <form className={styles.SignupEmployer} onSubmit={handleSubmit}>
+            <label htmlFor="name"></label>
+            <input 
+              placeholder="Nom de l'établissement"
+              name="name" 
+              type="text" 
+              autoComplete="name" 
+              onChange={handleChange} 
+              required 
+            />
+            <label htmlFor="address"></label>
+            <input 
+              placeholder="Adresse"
+              name="address"
+              type="text"
+              autoComplete="address"
+              onChange={handleChange}
+              required
+            />
+            <label htmlFor="postal_code"></label>
+            <input 
+              placeholder="Code postal"
+              name="postal_code"
+              type="text"
+              autoComplete="postal_code"
+              onChange={handleChange}
+              required
+            />
+            <label htmlFor="city"></label>
+            <input 
+              placeholder="Ville"
+              name="city"
+              type="city" 
+              autoComplete="city" 
+              onChange={handleChange} 
+              required 
+            />
+            <Button type="submit" content="Valider" />
+          </form>
+        </div>
+      </div>
+    </div>
   )
 };
 

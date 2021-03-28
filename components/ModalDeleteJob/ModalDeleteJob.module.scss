@@ -3,11 +3,21 @@
 
 .ModalDeleteJob {
   button {
-    padding: 10px;
-    margin: 10px;
-    background: red;
+    border-radius: 50%;
+    padding: 5px;
+    margin: 5px;
+    border: 0.5px solid lightgrey;
+    background: white;
+    text-align: center;
+    font-size : 10px;
+  }
+  button:hover {
+    background: lightgrey;
   }
   &__Modal {
+    h2 {
+      color: $orange;
+    }
     height: 70vh;
     width: 90vw;
     max-width: 700px;
@@ -15,6 +25,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    &__choices {
+      display: flex;
+      &__delete, &__cancel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
     
     button {
       padding: 10px;

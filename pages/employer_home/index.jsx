@@ -10,15 +10,17 @@ import Link from 'next/link';
 import ModalUpdateBusiness from 'components/ModalUpdateBusiness';
 import ModalUpdateEvent from 'components/ModalUpdateEvent';
 import ModalDeleteEvent from 'components/ModalDeleteEvent';
+import config from 'config/config.json';
+import { useRouter } from 'next/router';
 
 const EmployerHome = ({ userInfos, token }) => {
   const [eventList, setEventList] = useState([]);
+  const router = useRouter();
 
   const getEventsList = () => {
-
     //convert object into array without the key
     const neweventsArr = [];
-    const eventsArr = Object.entries(userInfos.events);
+    const eventsArr = Object.entries(userInfos.businesses[0].events);
     eventsArr.map(event => neweventsArr.push(event[1]));
     
     //sort array by date
@@ -40,7 +42,8 @@ const EmployerHome = ({ userInfos, token }) => {
   }
 
   useEffect(() => {
-    if(userInfos.events) getEventsList()
+    if (userInfos === undefined) router.push('/');
+    getEventsList()
   }, [userInfos])
 
   return (
@@ -48,17 +51,18 @@ const EmployerHome = ({ userInfos, token }) => {
     <div className={styles.EmployerHome}>
       <Head>
         <title>extra-resto - Employer Home</title>
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/favicon.svg' />
       </Head>
       <div className={styles.EmployerHome__titlecontainer}>
-
-        {console.log(userInfos)}
-        <div className={styles.EmployerHome__titlebloc}>
-          <h1>Mon entreprise</h1>
+        <div className={styles.EmployerHome__titlecontainer__titlebloc}>
+          <div className={styles.EmployerHome__titlecontainer__titlebloc__title}>
+            <h1>Mon entreprise</h1>
+            <ModalUpdateBusiness business={userInfos.businesses[0]} token={token} />
+          </div>
           <h3>{userInfos.businesses[0].name}</h3>
           <h3>{userInfos.businesses[0].address}</h3>
           <h3>{userInfos.businesses[0].postal_code} {userInfos.businesses[0].city}</h3>
-          <ModalUpdateBusiness business={userInfos.businesses[0]} token={token} />
+          
         </div>
       </div>
       <div className={styles.EmployerHome__Modal}>
@@ -68,6 +72,10 @@ const EmployerHome = ({ userInfos, token }) => {
       <ul className={styles.EmployerHome__eventlist}>
       {eventList && eventList.map(event => (
         <li key={event.id} className={styles.EmployerHome__eventlist__item}>
+          <div className={styles.EmployerHome__eventlist__item__buttons}>
+            <ModalUpdateEvent event={event} token={token} />
+            <ModalDeleteEvent event={event} token={token} />
+          </div>
           <p>{formattedDate(new Date(event.date))}</p>
           <Link
           href={{
@@ -79,10 +87,6 @@ const EmployerHome = ({ userInfos, token }) => {
               <CardEvent event={event} />
             </a>
           </Link>
-          <div className={styles.EmployerHome__eventlist__item__buttons}>
-            <ModalUpdateEvent event={event} token={token} />
-            <ModalDeleteEvent event={event} token={token} />
-          </div>
         </li>
         ))}
       </ul>
@@ -91,11 +95,13 @@ const EmployerHome = ({ userInfos, token }) => {
   );
 }
 
-export const getServerSideProps = async ({req}) =>  {
+export const getServerSideProps = async ({req, res}) =>  {
+
+  if (!req.headers.cookie) return res.writeHead(302, { Location: '/api/login' });
 
   const {token, id} = cookie.parse(req.headers.cookie);
   
-  const eventResponse = await fetch(`${process.env.API_ROOT}/users/${id}`, {
+  const eventResponse = await fetch(`${config.SERVER_URL}/users/${id}`, {
     method: 'get',
     headers: {
       'Authorization': token,
