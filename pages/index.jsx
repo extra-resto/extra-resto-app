@@ -1,23 +1,14 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Layout from 'components/Layout';
 import styles from './Home.module.scss';
-import Cookie from 'js-cookie';
 import Button from 'components/Button';
 import Image from 'next/image';
 
 
 const Home = () => {
-  const [role, setRole] = useState(Cookie.get('role'));
   const router = useRouter();
-
-  useEffect(() => {
-    if (role == 'employer') router.push('/employer_home');
-  }, [role])
-
-  
 
   const goToCandidate = (e) => {
     e.preventDefault()

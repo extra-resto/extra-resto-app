@@ -18,7 +18,7 @@ const CandidateHome = ({ jobListe }) => {
   const handleSearch = (e) => {
     setSearch(e.target.value);
     if(e.target.value) {
-      const research = jobListe.filter(job => job.name.toLowerCase().includes(search))
+      const research = jobListe.filter(job => job.name.toLowerCase().includes(search.toLowerCase()))
       setJob(research)
     } else setJob(jobListe)
   }

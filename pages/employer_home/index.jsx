@@ -96,7 +96,7 @@ const EmployerHome = ({ userInfos, token }) => {
 }
 
 export const getServerSideProps = async ({req, res}) =>  {
-
+  
   if (!req.headers.cookie) return res.writeHead(302, { Location: '/api/login' });
 
   const {token, id} = cookie.parse(req.headers.cookie);
@@ -110,7 +110,14 @@ export const getServerSideProps = async ({req, res}) =>  {
 
   })
   const userInfos = await eventResponse.json();
-
+  if(userInfos.businesses.length === 0) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/employer/business'
+      }
+    }
+  }
   return {
     props: {
       userInfos,
