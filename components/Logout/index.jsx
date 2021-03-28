@@ -23,7 +23,7 @@ const Logout = () => {
   }
   return (
     <div className={styles.Logout}>
-    <button type="button" onClick={userLogout}>Se deconnecter</button>
+      <button type="button" onClick={userLogout}>Se deconnecter</button>
     </div>
   );
 };

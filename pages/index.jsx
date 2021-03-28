@@ -36,12 +36,12 @@ const Home = () => {
         <link rel='icon' href='/favicon.svg' />
       </Head>
       <div className={styles.Home}>
-          <h1 className={styles.Home__title}>Le recrutement en
-            hôtellerie-restauration ?
-          </h1>
-      <div className={styles.Concept__Hero}>
-        <div className={styles.Concept__Hero__cta}>
-          <h2 className={styles.Concept__Hero__cta__title}>
+        <h1 className={styles.Home__title}>Le recrutement en
+          hôtellerie-restauration ?
+        </h1>
+        <div className={styles.Concept__Hero}>
+          <div className={styles.Concept__Hero__cta}>
+            <h2 className={styles.Concept__Hero__cta__title}>
             Trouvez votre personnel ou un emploi
             avec <span className={styles.Concept__Hero__cta__title__blue}>Extra-</span><span className={styles.Concept__Hero__cta__title__orange}>Resto</span>
           </h2>
@@ -51,10 +51,9 @@ const Home = () => {
               en Extra ou CDI en moins de 3 minutes !
           </h3>
           <div className={styles.Concept__Hero__cta__buttons}>
-          <Button content="Espace Candidat" href={goToCandidate}/>
-          <Button content="Espace Recruteur" href={goToEmployer}/>
+            <Button content="Espace Candidat" href={goToCandidate}/>
+            <Button content="Espace Recruteur" href={goToEmployer}/>
           </div>
-
         </div>
         <div className={styles.Concept__Hero__image}>
           <Image src="/images/icons/waiter-svgrepo-com.svg" alt="barman waiter drawing" height={500} width={350} />
