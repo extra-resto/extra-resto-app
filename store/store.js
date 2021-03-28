@@ -1,16 +1,9 @@
-import userReducer from "./User/userReducer";
+import userReducer,{ initialState} from "./User/userReducer";
 import { useMemo } from 'react'
 import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import Cookies from 'js-cookie';
 
 export let store
-
-export const initialState = {
-  token: Cookies.get('token'),
-  role: Cookies.get('role'),
-  id: Cookies.get('id')
-}
 
 function initStore(preloadedState = initialState) {
   return createStore(
