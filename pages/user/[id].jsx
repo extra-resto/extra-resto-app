@@ -6,25 +6,30 @@ import config from 'config/config.json';
 
 const Profil = ({ userProfil }) => {
   return (
-    <>
-      <Navbar />
       <div className={styles.user}>
-        <h1>Profil Candidat</h1>
-        <h2>{userProfil.first_name}</h2>
-        <h2>{userProfil.last_name}</h2>
-        <h2>{userProfil.email}</h2>
-        <h2>{userProfil.phone_number}</h2>
-        <embed
-          style={{
-            width: '100%',
-            height: '1000px', 
-          }}
-          type='application/pdf'
-          src={userProfil.resume_url}
-        />
-      </div>
+        <Navbar />
+        <div className={styles.user__info}>
+          <h1>Profil Candidat</h1>
+          <div className={styles.user__info__desc}>
+            <p>Nom : {userProfil.first_name}</p>
+            <p>Prénom : {userProfil.last_name}</p>
+            <p>Email : {userProfil.email}</p>
+            <p>Téléphone : {userProfil.phone_number}</p>
+          </div>
+          <h2>CV</h2>
+          <embed
+            style={{
+              width: '100%',
+              height: '1000px', 
+            }}
+            type='application/pdf'
+            src={userProfil.resume_url}
+          />
+        </div>
+
       <Footer />
-    </>
+    </div>
+    
   )
 };
 

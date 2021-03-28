@@ -1,4 +1,44 @@
+@import "styles/colors";
+
 .user {
-  margin-bottom: 0;
-  padding: 0;
+  background-color: $green;
+  &__info {
+    background-color: rgb(252, 250, 241);
+    background-image: url("/images/icons/wave (18).svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: local;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    padding: 0px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h1 {
+      color: $backgound;
+    }
+    h2 {
+      color: $lightgreen;
+      font-size: 30px;
+      margin-bottom: 50px;
+    }
+    p {
+      font-size: 25px;
+    }
+    &__desc {
+      color: $textcolor;
+      margin: 30px;
+      margin-bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px;
+      padding: 10px 30px 30px 30px;
+      background-color: rgba(255, 255, 255, 0.295);
+      box-shadow: 1px 0px 39px 0px rgba(138, 187, 188, 0.75);
+      -webkit-box-shadow: 1px 0px 39px 0px rgba(138, 187, 188, 0.75);
+      -moz-box-shadow: 1px 0px 39px 0px rgba(138, 187, 188, 0.75);
+    }
+  }
 }
