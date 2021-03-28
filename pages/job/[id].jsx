@@ -1,7 +1,6 @@
 import React from 'react';
 import Layout from 'components/Layout';
 import Head from 'next/head';
-import cookie from 'cookie';
 import styles from './job.module.scss';
 import {useRouter} from 'next/router';
 import config from 'config/config.json';
@@ -33,7 +32,7 @@ const Job = ({ jobInfos }) => {
       }
 
       const handleCandidateRemove = async (candidatures) => {
-        const cadidatureId = candidatures.filter(candidature => candidature.user_id === parseInt(id))
+        const cadidatureId = candidatures.filter(candidature => candidature.user_id === parseInt(user.id))
     
         const response = await fetch(`${config.SERVER_URL}candidatures/${cadidatureId[0].id}`, {
           method: 'DELETE',
@@ -52,31 +51,41 @@ const Job = ({ jobInfos }) => {
         </Head>
         <div className={styles.main}>
           <div className={styles.main__display}>
-            <div className={styles.business}>
-                <h1>Entreprise: {jobInfos.businesses[0].name}</h1>
-                <p>Adresse: {jobInfos.businesses[0].address}</p>
-                <p>Ville: {jobInfos.businesses[0].city}</p>
-                <p>Code postal: {jobInfos.businesses[0].postal_code}</p>
-            </div>
-
-            <div className={styles.event}>
-                <h1>{jobInfos.event.name}</h1>
-                <p>{jobInfos.event.description}</p>
-            </div>
-
-            <div className={styles.job}>
-                <h2>Nom du job: {jobInfos.name}</h2>
-                <p>{dayjs(jobInfos.date).format('DD MMMM YYYY')}</p>
-                <p>Description: {jobInfos.description}</p>
-                <p>Le dresscode: {jobInfos.dresscode}</p>
-                <p>prix: {jobInfos.rate}</p>
-                <p>Temps: {jobInfos.duration}</p>
-                <p>Nombre de place restante: {jobInfos.free_stead}</p>
+            <div className={styles.main__display__headers}>
+              <div>
+                <h1>{jobInfos.name}</h1>
+                <h2>{jobInfos.businesses[0].name}</h2>
+                <p className={styles.main__display__headers__city}>{jobInfos.businesses[0].city}</p>
+                <p className={styles.main__display__headers__date}>{dayjs(jobInfos.date).format('DD MMMM YYYY')}</p>
+                <p className={styles.main__display__headers__rate}>{jobInfos.rate}€/h</p>
+              </div>
+              <div>
                 {jobInfos.candidatures && user.id && jobInfos.candidatures.some(candidature => candidature.user_id == parseInt(user.id)) ?  
-                <Button href={() => handleCandidateRemove(jobInfos.candidatures)} content="Annuler ma candidature"/>
-                : 
-                <Button href={() => handleCandidateApply(jobInfos.id)} content="Postuler" />}
+                  <Button className={styles.main__display__headers__button} href={() => handleCandidateRemove(jobInfos.candidatures)} content="Annuler ma candidature"/>
+                  : 
+                  <Button className={styles.main__display__headers__button} href={() => handleCandidateApply(jobInfos.id)} content="Postuler" />}
+              </div>
             </div>
+            
+            <div className={styles.main__display__body}>
+              <div className={styles.main__display__body__event}>
+                <h2>Evenement associé</h2>
+                <h3>{jobInfos.event.name}</h3>
+                <p>{jobInfos.event.description}</p>
+              </div>
+              <div className={styles.main__display__body__line}></div>
+              <div className={styles.main__display__body__job}>
+                <h2>Le Job</h2>
+                <p>Description : {jobInfos.description}</p>
+                <p>Le dresscode : {jobInfos.dresscode}</p>           
+                <p>Temps de travail : {jobInfos.duration}</p>
+                <p>Nombre de place restante : {jobInfos.free_stead}</p>               
+                <p>Adresse : {jobInfos.businesses[0].address} {jobInfos.businesses[0].postal_code} {jobInfos.businesses[0].city}</p>
+              </div>
+            </div>
+
+            
+                
           </div>
         </div>
     </Layout>
