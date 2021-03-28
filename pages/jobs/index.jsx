@@ -49,7 +49,7 @@ const CandidateHome = ({ jobListe }) => {
                     </div>
                     
                     <div className={styles.card__footer}>
-                      <Link  href="/candidate_home/job/[id]" as={`/candidate_home/job/${job.id}`} passHref >
+                      <Link  href="/job/[id]" as={`/job/${job.id}`} passHref >
                         <a><Button content="Voir le job" /></a>
                       </Link>
                     </div>
@@ -65,12 +65,10 @@ const CandidateHome = ({ jobListe }) => {
     )
 };
 
-export const getServerSideProps = async ({ req }) => {
-  const { token, id } = cookie.parse(req.headers.cookie);
+export const getServerSideProps = async () => {
   const jobResponse = await fetch(`${config.SERVER_URL}/jobs`, {
     method: "get",
     headers: {
-      Authorization: token,
       "Content-Type": "application/json",
     },
   });
@@ -78,9 +76,7 @@ export const getServerSideProps = async ({ req }) => {
 
   return {
     props: {
-      jobListe,
-      token,
-      id,
+      jobListe
     },
   };
 };

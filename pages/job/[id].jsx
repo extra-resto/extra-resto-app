@@ -10,19 +10,20 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/fr';
 import { useSelector } from 'react-redux';
 
-const Job = ({jobInfos, id, token}) => {
-  const role = useSelector(state => state.role);
-
+const Job = ({ jobInfos }) => {
+  const user = useSelector(state => state);
     dayjs.locale('fr')
     const router = useRouter();
+
     const handleCandidateApply = async (jobId) => {
+        if (!user.token) return router.replace("/login");
         const data = {
           jobs_id: jobId
         }
         const response = await fetch(`${config.SERVER_URL}candidatures`, {
           method: 'POST',
           headers: {
-            'Authorization': token,
+            'Authorization': user.token,
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(data)
@@ -47,7 +48,7 @@ const Job = ({jobInfos, id, token}) => {
   return (
       <Layout>
         <Head>
-          <title>show job</title>
+          <title>{jobInfos.name}</title>
         </Head>
         <div className={styles.main}>
           <div className={styles.main__display}>
@@ -71,8 +72,7 @@ const Job = ({jobInfos, id, token}) => {
                 <p>prix: {jobInfos.rate}</p>
                 <p>Temps: {jobInfos.duration}</p>
                 <p>Nombre de place restante: {jobInfos.free_stead}</p>
-                
-                {jobInfos.candidatures && jobInfos.candidatures.some(candidature => candidature.user_id == parseInt(id)) ?  
+                {jobInfos.candidatures && user.id && jobInfos.candidatures.some(candidature => candidature.user_id == parseInt(user.id)) ?  
                 <Button href={() => handleCandidateRemove(jobInfos.candidatures)} content="Annuler ma candidature"/>
                 : 
                 <Button href={() => handleCandidateApply(jobInfos.id)} content="Postuler" />}
@@ -83,24 +83,19 @@ const Job = ({jobInfos, id, token}) => {
   )
 };
 
-export const getServerSideProps = async ({params, req}) =>  {
-    const jobId = params.id
-    const {token, id} = cookie.parse(req.headers.cookie);
+export const getServerSideProps = async ({ params }) =>  {
+    const jobId = params.id;
     const jobResponse = await fetch(`${config.SERVER_URL}/jobs/${jobId}`, {
       method: 'get',
       headers: {
-        'Authorization': token,
         'Content-Type': 'application/json'
       }
-  
     })
     const jobInfos = await jobResponse.json();
   
     return {
       props: {
-        jobInfos,
-        id,
-        token
+        jobInfos
       }
     }
   }
