@@ -6,6 +6,12 @@ import config from 'config/config.json';
 
 const Profil = ({ userProfil }) => {
   return (
+    <>
+      <Head>
+      <title>Profil candidat</title>
+      <link rel='icon' href='/favicon.svg' />
+      </Head>
+
       <div className={styles.user}>
         <Navbar />
         <div className={styles.user__info}>
@@ -27,8 +33,9 @@ const Profil = ({ userProfil }) => {
           />
         </div>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
     
   )
 };
