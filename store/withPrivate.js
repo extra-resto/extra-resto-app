@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import Login from '../pages/login';
 import { useEffect } from 'react';
 
 const withPrivate = Component => {
