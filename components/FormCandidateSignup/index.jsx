@@ -50,7 +50,7 @@ const FormCandidateSignup = () => {
 
   useEffect(() => {
     if (isSubmitting) {
-      if (errors.password === '' && errors.phone_number === '') {
+      if (errors.password === '' && errors.phone_number === '' /*&& errors.cv === ''*/) {
         registerUser();
       }
       else {
@@ -121,7 +121,9 @@ const FormCandidateSignup = () => {
     if(form.phone_number.match(/^\d+$/) === null) {
       err.phone_number = 'Veuillez entrer un numéro valide'
     }
-    
+    //if ( pdf.type !== 'application/pdf' ) {
+    //  err.cv = 'Veuillez Selectionner un fichier au format Pdf'
+    //}
     return err;
   }
 
@@ -181,6 +183,7 @@ const FormCandidateSignup = () => {
                 name="cv" 
                 id="cv"
                 type="file"
+                accept=".pdf"
                 onChange={handleFile} 
                 required 
               />

@@ -2,12 +2,14 @@ import styles from './FormEmployerSignup.module.scss';
 import { useState, useEffect } from 'react';
 import { setUser } from 'store/User/userAction';
 import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router'
 import Button from 'components/Button';
 import config from 'config/config.json';
 import Image from 'next/image';
 
-const FormEmployerSignup = ({setStep}) => {
+const FormEmployerSignup = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [form, setForm] = useState({ 
     first_name: '',
     last_name: '',
@@ -43,7 +45,7 @@ const FormEmployerSignup = ({setStep}) => {
       const token = req.headers.get('Authorization');
       const result = await req.json();
       dispatch(setUser(token, result.role, result.id))
-      setStep(2);
+      router.push('/employer/business')
     } catch (error) {
       console.log(error)
     }
