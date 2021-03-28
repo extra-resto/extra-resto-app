@@ -22,12 +22,14 @@
     }
     &__candidate {
       background-color: $green;
+      color: $backgound;
     }
     &__candidate:hover {
       background-color: $lightgreen;
     }
     &__employer {
       background-color: $orange;
+      color: $backgound;
     }
     &__employer:hover {
       background-color: rgb(192, 93, 0);
