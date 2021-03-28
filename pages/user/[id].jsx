@@ -3,13 +3,14 @@ import styles from './user.module.scss';
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import config from 'config/config.json';
+import Head from 'next/head';
 
 const Profil = ({ userProfil }) => {
   return (
     <>
       <Head>
-      <title>Profil candidat</title>
-      <link rel='icon' href='/favicon.svg' />
+        <title>Profil candidat</title>
+        <link rel='icon' href='/favicon.svg' />
       </Head>
 
       <div className={styles.user}>
@@ -17,12 +18,12 @@ const Profil = ({ userProfil }) => {
         <div className={styles.user__info}>
           <h1>Profil Candidat</h1>
           <div className={styles.user__info__desc}>
-            <p>Nom : {userProfil.first_name}</p>
-            <p>Prénom : {userProfil.last_name}</p>
+            <p>Prénom : {userProfil.first_name}</p>
+            <p>Nom : {userProfil.last_name}</p>
             <p>Email : {userProfil.email}</p>
             <p>Téléphone : {userProfil.phone_number}</p>
           </div>
-          <h2>CV</h2>
+          <h2>CV de {userProfil.first_name}</h2>
           <embed
             style={{
               width: '100%',
