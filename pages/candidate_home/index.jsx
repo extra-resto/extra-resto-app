@@ -8,7 +8,6 @@ import config from 'config/config.json';
 import dayjs from 'dayjs';
 import 'dayjs/locale/fr';
 import Button from 'components/Button';
-import Image from 'next/image';
 
 const CandidateHome = ({ jobListe }) => {
   const [job, setJob] = useState(jobListe);
@@ -16,7 +15,7 @@ const CandidateHome = ({ jobListe }) => {
   dayjs.locale('fr')
 
   const handleSearch = (e) => {
-    setSearch(e.target.value);
+    setSearch(e.target.value.toLowerCase());
     if(e.target.value) {
       const research = jobListe.filter(job => job.name.toLowerCase().includes(search))
       setJob(research)

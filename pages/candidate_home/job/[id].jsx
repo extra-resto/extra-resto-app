@@ -5,10 +5,15 @@ import cookie from 'cookie';
 import styles from './job.module.scss';
 import {useRouter} from 'next/router';
 import config from 'config/config.json';
+import Button from 'components/Button';
+import dayjs from 'dayjs';
+import 'dayjs/locale/fr';
+import { useSelector } from 'react-redux';
 
 const Job = ({jobInfos, id, token}) => {
+  const role = useSelector(state => state.role);
 
-
+    dayjs.locale('fr')
     const router = useRouter();
     const handleCandidateApply = async (jobId) => {
         const data = {
@@ -45,6 +50,7 @@ const Job = ({jobInfos, id, token}) => {
           <title>show job</title>
         </Head>
         <div className={styles.main}>
+          <div className={styles.main__display}>
             <div className={styles.business}>
                 <h1>Entreprise: {jobInfos.businesses[0].name}</h1>
                 <p>Adresse: {jobInfos.businesses[0].address}</p>
@@ -52,16 +58,26 @@ const Job = ({jobInfos, id, token}) => {
                 <p>Code postal: {jobInfos.businesses[0].postal_code}</p>
             </div>
 
+            <div className={styles.event}>
+                <h1>{jobInfos.event.name}</h1>
+                <p>{jobInfos.event.description}</p>
+            </div>
+
             <div className={styles.job}>
                 <h2>Nom du job: {jobInfos.name}</h2>
+                <p>{dayjs(jobInfos.date).format('DD MMMM YYYY')}</p>
                 <p>Description: {jobInfos.description}</p>
-                <p>Le desscode: {jobInfos.dresscode}</p>
+                <p>Le dresscode: {jobInfos.dresscode}</p>
+                <p>prix: {jobInfos.rate}</p>
+                <p>Temps: {jobInfos.duration}</p>
                 <p>Nombre de place restante: {jobInfos.free_stead}</p>
+                
                 {jobInfos.candidatures && jobInfos.candidatures.some(candidature => candidature.user_id == parseInt(id)) ?  
-                <button onClick={() => handleCandidateRemove(jobInfos.candidatures)}>Annuler</button>
+                <Button href={() => handleCandidateRemove(jobInfos.candidatures)} content="Annuler ma candidature"/>
                 : 
-                <button onClick={() => handleCandidateApply(jobInfos.id)}>Participer</button>}
+                <Button href={() => handleCandidateApply(jobInfos.id)} content="Postuler" />}
             </div>
+          </div>
         </div>
     </Layout>
   )
