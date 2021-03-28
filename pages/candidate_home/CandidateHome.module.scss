@@ -1,10 +1,9 @@
 .main {
-    margin-bottom: 0;
-    min-height: 80vh;
+    min-height: 90vh;
     width: 100%;
     text-align: center;
     background-color: rgb(252, 250, 241);
-    background-image: url("/images/icons/wave (16).svg");
+    background-image: url("/images/icons/wave (18).svg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: local;
@@ -14,4 +13,18 @@
     -o-background-size: 100%;
     background-size: 100%;
     margin-top: 10px;
+
+}
+
+.candidatures {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+    align-items: center ;
+    margin: 60px auto 0 auto;
+    width: 80%;
+    .card {
+        list-style: none;
+    }
 }
