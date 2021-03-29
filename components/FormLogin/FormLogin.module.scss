@@ -4,11 +4,11 @@
 }
 
 .FormLogin {
-  width: 400px;
   display: flex;
   flex-direction: column;
 
   input {
+    width: 260px;
     box-sizing: content-box;
     margin: 15px 10px 30px 10px;
     border: none;
