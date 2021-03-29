@@ -74,23 +74,43 @@ const Event = ({ event, id }) => {
 };
 
 export const getServerSideProps = async ({params, req}) =>  {
-    const id = params.id
-    const {token} = cookie.parse(req.headers.cookie);
-    const eventResponse = await fetch(`${config.SERVER_URL}/events/${id}`, {
-      method: 'get',
-      headers: {
-        'Authorization': token,
-        'Content-Type': 'application/json'
-      }
-  
-    })
-    const event = await eventResponse.json();
-  
+
+  if (!req.headers.cookie) {
     return {
-      props: {
-        event,
-        id
+      redirect: {
+        permanent: false,
+        destination: '/login'
       }
     }
   }
+
+  const id = params.id
+  const { token, role } = cookie.parse(req.headers.cookie);
+
+  if (role !== "employer") {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/'
+      }
+    }
+  }
+
+  const eventResponse = await fetch(`${config.SERVER_URL}/events/${id}`, {
+    method: 'get',
+    headers: {
+      'Authorization': token,
+      'Content-Type': 'application/json'
+    }
+
+  })
+  const event = await eventResponse.json();
+
+  return {
+    props: {
+      event,
+      id
+    }
+  }
+}
 export default Event;

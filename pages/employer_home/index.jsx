@@ -94,9 +94,25 @@ const EmployerHome = ({ userInfos, token }) => {
 
 export const getServerSideProps = async ({req, res}) =>  {
   
-  if (!req.headers.cookie) return res.writeHead(302, { Location: '/api/login' });
+  if (!req.headers.cookie) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/login'
+      }
+    }
+  }
 
-  const {token, id} = cookie.parse(req.headers.cookie);
+  const { token, id, role } = cookie.parse(req.headers.cookie);
+
+  if (role !== 'employer') {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/'
+      }
+    }
+  }
   
   const eventResponse = await fetch(`${config.SERVER_URL}/users/${id}`, {
     method: 'get',
