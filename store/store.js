@@ -1,4 +1,4 @@
-import userReducer,{ initialState} from "./User/userReducer";
+import userReducer, { initialState} from "./User/userReducer";
 import { useMemo } from 'react'
 import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'

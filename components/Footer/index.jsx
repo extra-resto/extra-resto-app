@@ -1,17 +1,18 @@
 import styles from './Footer.module.scss';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
     <div className={styles.Footer}>
       <ul>
-	      <li><a href="">A propos de nous</a></li> 
-	      <li><a href="">Nous contacter</a></li>
+      
+	      <li><Link href='/'><a href="">A propos de nous</a></Link></li> 
       </ul>
 
-  &copy; 2021 THP Team.
+  &copy; 2021 La Bande
 
     <address>
-      Email: <a href="mailto:youform@mail.com">@addresse</a>
+      <a href="mailto:hello@extra-resto.fr">hello@extra-resto.fr</a>
     </address>
   </div>
   );

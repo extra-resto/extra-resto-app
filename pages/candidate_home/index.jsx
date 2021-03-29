@@ -67,7 +67,26 @@ const CandidateHome = ({ userCandidatures }) => {
 };
 
 export const getServerSideProps = async ({ req }) => {
+  if (!req.headers.cookie) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/login'
+      }
+    }
+  }
+
   const { token } = cookie.parse(req.headers.cookie);
+
+  if (role !== "candidate") {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/'
+      }
+    }
+  }
+
   const candidatures = await fetch(`${config.SERVER_URL}candidatures/userCandidatures`, {
     method: 'get',
     headers: {
