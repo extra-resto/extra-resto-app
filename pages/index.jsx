@@ -40,7 +40,7 @@ const Home = () => {
       </Head>
       <div className={styles.Home}>
         <h1 className={styles.Home__title}>Le recrutement en
-          hôtellerie-restauration ?
+          hôtellerie-restauration !
         </h1>
         <div className={styles.Concept__Hero}>
           <div className={styles.Concept__Hero__cta}>
@@ -49,9 +49,9 @@ const Home = () => {
             avec <span className={styles.Concept__Hero__cta__title__blue}>Extra-</span><span className={styles.Concept__Hero__cta__title__orange}>Resto</span>
           </h2>
           <h3>Extra-Resto
-              Met en relation de profils qualifiés
-              avec les Restaurants, Bars, Traiteurs ... 
-              en Extra ou CDI en moins de 3 minutes !
+              met en relation des profils qualifiés
+              avec les Restaurants, Bars, Traiteurs ...
+              en Extra ou CDI en quelques clics !
           </h3>
           {!role &&
           <div className={styles.Concept__Hero__cta__buttons}>
