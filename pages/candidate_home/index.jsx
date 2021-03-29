@@ -7,6 +7,7 @@ import Footer from 'components/Footer';
 import Link from 'next/link';
 import dayjs from 'dayjs';
 import 'dayjs/locale/fr';
+import config from 'config/config.json';
 
 const CandidateHome = ({ userCandidatures }) => {
   console.log(userCandidatures)
@@ -66,7 +67,7 @@ const CandidateHome = ({ userCandidatures }) => {
 
 export const getServerSideProps = async ({ req }) => {
   const { token } = cookie.parse(req.headers.cookie);
-  const candidatures = await fetch(`http://localhost:3000/api/candidatures/userCandidatures`, {
+  const candidatures = await fetch(`${config.SERVER_URL}candidatures/userCandidatures`, {
     method: 'get',
     headers: {
       'Authorization': token,
