@@ -15,26 +15,33 @@
   -o-background-size: 100%;
   background-size: 100%;
   margin-top: 10px;
+  h1 {
+    color: $textcolor;
+  }
 }
 
 .candidatures {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   list-style: none;
+  flex-wrap: wrap;
   align-items: flex-start;
   margin: 60px auto 0 auto;
-  width: 80%;
+
   &__listcontainer {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 50%;
   }
   .card {
-    margin: 30px;
+    width: 400px;
+    margin-bottom: 10px;
     justify-content: space-evenly;
     border-radius: 10px;
-    padding: 10px 30px 30px 30px;
+    padding: 10px 30px 20px 30px;
     background-color: rgba(255, 255, 255, 0.425);
     box-shadow: 1px 0px 39px 0px rgba(138, 187, 188, 0.75);
     -webkit-box-shadow: 1px 0px 39px 0px rgba(138, 187, 188, 0.75);
@@ -46,6 +53,9 @@
       margin-top: 5px;
       font-size: 30px;
       color: $lightgreen;
+    }
+    &:hover {
+      border: 1px solid $lightgreen;
     }
   }
 }
