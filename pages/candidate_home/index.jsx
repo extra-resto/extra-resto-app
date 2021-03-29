@@ -76,7 +76,7 @@ export const getServerSideProps = async ({ req }) => {
     }
   }
 
-  const { token } = cookie.parse(req.headers.cookie);
+  const { token, role } = cookie.parse(req.headers.cookie);
 
   if (role !== "candidate") {
     return {
