@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import {useRouter} from 'next/router';
 import Image from 'next/image';
+import config from 'config/config.json';
 
 const Candidature = ({ event, candidature, candidate, token }) => {
   const router = useRouter();
@@ -21,7 +22,7 @@ const Candidature = ({ event, candidature, candidate, token }) => {
 
   const handleCandidature = async () => {
     try {
-      const req = await fetch(`http://localhost:3000/api/candidatures/${candidature.id}`, {
+      const req = await fetch(`${config.SERVER_URL}candidatures/${candidature.id}`, {
           method: 'PUT',
           headers: {
             'Authorization': token,
@@ -37,7 +38,7 @@ const Candidature = ({ event, candidature, candidate, token }) => {
 
   return (
     <div className={styles.Candidature}>
-      {form.hired===true && 
+      {form.hired===!true && 
         <button className={styles.Candidature__hired} onClick={handleHire}>
           <Image
             src="/images/Button/validated.svg"
@@ -47,7 +48,7 @@ const Candidature = ({ event, candidature, candidate, token }) => {
           />
         </button>
       }
-      {form.hired===false && 
+      {form.hired===!false && 
         <button className={styles.Candidature__nothired} onClick={handleHire}>
           <Image
             src="/images/Button/valid.svg"
