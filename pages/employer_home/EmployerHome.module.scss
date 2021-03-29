@@ -53,6 +53,9 @@
     &__item {
       list-style: none;
       margin: 0 20px;
+      p {
+        color: $orange;
+      }
       &__buttons {
         position: relative;
         top: 100px;

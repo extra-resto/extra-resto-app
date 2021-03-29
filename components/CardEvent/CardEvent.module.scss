@@ -4,6 +4,9 @@
   border: 1px solid $green;
   border-radius: 10px;
   &__head {
+    h3 {
+      color: $lightgreen;
+    }
     padding: 10px;
     min-width: 380px;
     background-color: white;
