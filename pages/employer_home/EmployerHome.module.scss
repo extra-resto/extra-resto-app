@@ -58,8 +58,9 @@
       }
       &__buttons {
         position: relative;
+        width: 100px;
         top: 100px;
-        left: 140px;
+        left: 280px;
         display: flex;
         justify-content: center;
         &__modify,
