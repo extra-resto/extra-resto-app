@@ -1,42 +1,66 @@
+@import "styles/colors";
+
 .EmployerHome {
   min-height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width:100%;
+  width: 100%;
+  background-color: rgb(252, 250, 241);
+  background-image: url("/images/icons/wave (18).svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: local;
+  background-position: top;
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  -o-background-size: 100%;
+  background-size: 100%;
   &__titlecontainer {
-  	background-color: white;
-  	width: 100%;
-  	display: flex;
-  	justify-content: center;
     &__titlebloc {
-      margin: 10px;
-      padding: 10px;
-      border: 2px solid black;
-      border-radius: 15px;
-      &__title {
-        display: flex;
-        align-items: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      h1 {
+        color: $backgound;
+        margin-bottom: 0;
+      }
+      h3 {
+        color: $orange;
+        font-style: italic;
+        margin-bottom: 15px;
       }
     }
   }
   &__Modal {
-  	width: 100%;
-  	text-align: center;
+    width: 80%;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: $textcolor;
+  }
+  &__display {
+    width: 100%;
+    margin-top: 30px;
   }
   &__eventlist {
-  	&__item {
-  		list-style: none;
+    margin-top: 0;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    &__item {
+      list-style: none;
+      margin: 0 20px;
       &__buttons {
         position: relative;
         top: 100px;
-        left: 120px;
+        left: 140px;
         display: flex;
         justify-content: center;
-        &__modify, &__delete {
+        &__modify,
+        &__delete {
           margin: 0 10px;
           padding: 10px;
         }
@@ -47,6 +71,6 @@
           background: red;
         }
       }
-  	}
+    }
   }
 }
