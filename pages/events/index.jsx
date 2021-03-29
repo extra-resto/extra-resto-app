@@ -66,7 +66,6 @@ const Events = ({ events, token }) => {
       <ul className={styles.Events__eventlist}>
       {eventList && eventList.map(event => (
         <li key={event.id} className={styles.Events__eventlist__item}>
-          {console.log(event)}
           <p>{formattedDate(new Date(event.date))}</p>
           <Link
           href={{

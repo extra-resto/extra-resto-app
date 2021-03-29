@@ -9,11 +9,12 @@ import ModalUpdateEvent from 'components/ModalUpdateEvent';
 import ModalDeleteJob from 'components/ModalDeleteJob';
 import ModalUpdateJob from 'components/ModalUpdateJob';
 import Candidature from 'components/Candidature';
+import Application from 'components/Application';
 import config from 'config/config.json';
 
 
-const Event = ({ event, id }) => {
-  const { token } = useSelector(state => state);
+const Event = ({ event, event_id }) => {
+  const { token, id } = useSelector(state => state);
 
   return (
     
@@ -29,25 +30,17 @@ const Event = ({ event, id }) => {
                 <h1>{event.name}</h1>
                 <h3>{event.description}</h3>
               </div>
-              <div className={styles.Event__presentation__container__button}>
-                <ModalUpdateEvent event={event} token={token} />
-              </div>
             </div>
           </div>
           <div className={styles.Event__jobtitle}>
             <h2>Jobs</h2>
-            <ModalNewJob eventId={id} eventDate={event.date} />
           </div>
           <ul className={styles.Event__joblist}>
             {event && 
             event.jobs.map((job) => (
-              <li className={styles.Event__joblist__item} key={job.id}>
+              <li className={styles.Event__joblist__item} key={job.event_id}>
                 <div className={styles.Event__joblist__item__title}>
                   <h2>{job.free_stead} x {job.name}</h2>
-                  <div className={styles.Event__joblist__item__title__buttons}>
-                    <ModalUpdateJob event={event} job={job} token={token} />
-                    <ModalDeleteJob event={event} job={job} token={token} />
-                  </div>
                 </div>
                 <div className={styles.Event__joblist__item__body}>
                   <p>Description: {job.description}</p>
@@ -58,10 +51,8 @@ const Event = ({ event, id }) => {
                 </div>
                 
                 <div className={styles.Event__joblist__item__candidates}>
-                  <h2>Candidatures:</h2>
-                  {job.candidatures && job.candidatures.map((candidature) => (
-                    <Candidature event={event} candidature={candidature} candidate={candidature.user} token={token} />
-                  ))}
+                  <h3>Nombre de candidatures: {job.candidatures && job.candidatures.length}</h3>
+                  <Application job={job} token={token} user_id={id}/>
                 </div>
               </li>
             ))
@@ -74,9 +65,9 @@ const Event = ({ event, id }) => {
 };
 
 export const getServerSideProps = async ({params, req}) =>  {
-    const id = params.id
+    const event_id = params.id
     const {token} = cookie.parse(req.headers.cookie);
-    const eventResponse = await fetch(`${config.SERVER_URL}/events/${id}`, {
+    const eventResponse = await fetch(`${config.SERVER_URL}/events/${event_id}`, {
       method: 'get',
       headers: {
         'Authorization': token,
@@ -89,7 +80,7 @@ export const getServerSideProps = async ({params, req}) =>  {
     return {
       props: {
         event,
-        id
+        event_id
       }
     }
   }

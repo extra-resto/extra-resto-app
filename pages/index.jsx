@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 import Head from 'next/head';
 import Layout from 'components/Layout';
 import styles from './Home.module.scss';
@@ -8,11 +9,22 @@ import Image from 'next/image';
 
 
 const Home = () => {
+  const { role } = useSelector(state => state); 
   const router = useRouter();
 
   const goToCandidate = (e) => {
     e.preventDefault()
     router.push("/signup/candidate")
+  }
+
+  const goToJobs = (e) => {
+    e.preventDefault()
+    router.push("/jobs")
+  }
+
+  const goToEmployerHome = (e) => {
+    e.preventDefault()
+    router.push("/employer_home")
   }
 
   const goToEmployer = (e) => {
@@ -41,10 +53,22 @@ const Home = () => {
               avec les Restaurants, Bars, Traiteurs ... 
               en Extra ou CDI en moins de 3 minutes !
           </h3>
+          {!role &&
           <div className={styles.Concept__Hero__cta__buttons}>
-            <Button content="Espace Candidat" href={goToCandidate}/>
-            <Button content="Espace Recruteur" href={goToEmployer}/>
+            <Button content="Je suis Candidat" href={goToCandidate}/>
+            <Button content="Je suis Recruteur" href={goToEmployer}/>
           </div>
+          }
+          {role==='candidate' &&
+          <div className={styles.Concept__Hero__cta__buttons}>
+            <Button content="Voir les jobs du moment" href={goToJobs}/>
+          </div>
+          }
+          {role==='employer' &&
+          <div className={styles.Concept__Hero__cta__buttons}>
+            <Button content="Voir mes annonces" href={goToEmployerHome}/>
+          </div>
+          }
         </div>
         <div className={styles.Concept__Hero__image}>
           <Image src="/images/icons/waiter-svgrepo-com.svg" alt="barman waiter drawing" height={500} width={350} />
