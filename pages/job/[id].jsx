@@ -47,7 +47,8 @@ const Job = ({ jobInfos }) => {
   return (
       <Layout>
         <Head>
-          <title>{jobInfos.name}</title>
+          <title>extra-resto - {jobInfos.name}</title>
+          <link rel='icon' href='/favicon.svg' />
         </Head>
         <div className={styles.main}>
           <div className={styles.main__display}>

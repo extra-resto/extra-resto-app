@@ -22,7 +22,7 @@
     flex-direction: column;
     align-items: center;
     &__container {
-      width: 500px;
+      width: 400px;
       margin: 10px;
       margin-left: 35px;
       display: flex;
@@ -33,6 +33,7 @@
       h1 {
         text-align: center;
         color: $backgound;
+
       }
       h3 {
         text-align: center;
@@ -41,7 +42,8 @@
     }
   }
   &__jobtitle {
-    width: 500px;
+
+    width: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,7 +61,7 @@
       position: relative;
       right: 20px;
       background-color: rgba(255, 255, 255, 0.295);
-      width: 500px;
+      width: 400px;
       &__title {
         color: $textcolor;
         padding: 10px;

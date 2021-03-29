@@ -51,7 +51,7 @@ const Home = () => {
           <h3>Extra-Resto
               met en relation des profils qualifiés
               avec les Restaurants, Bars, Traiteurs ...
-              en Extra ou CDI en quelques clics !
+              en Extra ou CDI <br /> en quelques clics !
           </h3>
           {!role &&
           <div className={styles.Concept__Hero__cta__buttons}>
@@ -84,7 +84,7 @@ const Home = () => {
             src="/images/icons/chef-svgrepo-com (2).svg"
             height={150} 
             width={150} 
-            alt="extra-resto logo"
+            alt="chef drawing"
             />
             <h3>Besoin de personnel en extra ?</h3>
             <h4>Nous vous mettons en relation avec des profils qualifiés
@@ -95,7 +95,7 @@ const Home = () => {
               src="/images/icons/tick.svg"
               height={145} 
               width={145} 
-              alt="extra-resto logo"
+              alt="image of check"
             />
             <h3>Des profils vérifiés</h3>
             <h4>Nous vérifions une à une leurs expériences avant de les valider</h4>
@@ -105,7 +105,7 @@ const Home = () => {
             src="/images/icons/barman-waiter.svg"
             height={150} 
             width={150} 
-            alt="extra-resto logo"
+            alt="barman waiter drawing"
             />
             <h3>En recherche de job ?</h3>
             <h4>Touver un extra qui vous correspond parmis nos nombreuses propositions d'extra ou CDI</h4>

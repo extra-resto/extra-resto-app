@@ -10,7 +10,7 @@ const Bussiness = () => {
         <>
         <div className={styles.SignUp}>
           <Head>
-            <title>extra-resto - S'enregistrer</title>
+            <title>extra-resto - ajouter un business</title>
             <link rel='icon' href='/favicon.svg' />
           </Head>
           <Navbar /> 
