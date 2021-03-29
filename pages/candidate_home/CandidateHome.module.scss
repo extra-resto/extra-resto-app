@@ -1,0 +1,51 @@
+@import "styles/colors";
+.main {
+    min-height: 90vh;
+    width: 100%;
+    text-align: center;
+    background-color: rgb(252, 250, 241);
+    background-image: url("/images/icons/wave (18).svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: local;
+    background-position: top;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    margin-top: 10px;
+
+}
+
+.candidatures {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+    align-items: flex-start ;
+    margin: 60px auto 0 auto;
+    width: 80%;
+    &__listcontainer {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
+    .card {
+        margin: 30px;
+        justify-content: space-evenly;
+        border-radius: 10px;
+        padding: 10px 30px 30px 30px;
+        background-color: rgba(255, 255, 255, 0.425);
+        box-shadow: 1px 0px 39px 0px rgba(138, 187, 188, 0.75);
+        -webkit-box-shadow: 1px 0px 39px 0px rgba(138, 187, 188, 0.75);
+        -moz-box-shadow: 1px 0px 39px 0px rgba(138, 187, 188, 0.75);
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        h2 {
+            margin-top: 5px;
+            font-size: 30px;
+            color: $green;
+          }
+    }
+}

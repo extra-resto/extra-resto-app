@@ -27,9 +27,16 @@ export const Navbar = () => {
             <a>Mon espace</a>
           </Link>
         }
+        
         {role !== 'employer' && 
           <Link href='/jobs'>
             <a>Les jobs</a>
+          </Link>
+        }
+
+        {role === 'candidate' && 
+          <Link href='/candidate_home'>
+            <a>Mon espace</a>
           </Link>
         }
 
