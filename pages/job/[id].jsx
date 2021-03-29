@@ -32,9 +32,9 @@ const Job = ({ jobInfos }) => {
       }
 
       const handleCandidateRemove = async (candidatures) => {
-        const cadidatureId = candidatures.filter(candidature => candidature.user_id === parseInt(user.id))
+        const candidatureId = candidatures.filter(candidature => candidature.user_id === parseInt(user.id))
     
-        const response = await fetch(`${config.SERVER_URL}candidatures/${cadidatureId[0].id}`, {
+        const response = await fetch(`${config.SERVER_URL}candidatures/${candidatureId[0].id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': token,
