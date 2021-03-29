@@ -37,7 +37,7 @@ const Job = ({ jobInfos }) => {
         const response = await fetch(`${config.SERVER_URL}candidatures/${candidatureId[0].id}`, {
           method: 'DELETE',
           headers: {
-            'Authorization': token,
+            'Authorization': user.token,
             'Content-Type': 'application/json'
           },
         })
@@ -82,10 +82,7 @@ const Job = ({ jobInfos }) => {
                 <p>Nombre de place restante : {jobInfos.free_stead}</p>               
                 <p>Adresse : {jobInfos.businesses[0].address} {jobInfos.businesses[0].postal_code} {jobInfos.businesses[0].city}</p>
               </div>
-            </div>
-
-            
-                
+            </div>     
           </div>
         </div>
     </Layout>

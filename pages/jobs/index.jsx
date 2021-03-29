@@ -33,27 +33,30 @@ const CandidateHome = ({ jobListe }) => {
             <div className={styles.CandidateHome__display}>
               <ul className={styles.main}>
                 {job && job.map((job) => (
+                  <Link  href="/job/[id]" as={`/job/${job.id}`} passHref >
+                    <a>
+                      <li key={job.id} className={styles.card}>
+                        {console.log(job)}
+                        <div className={styles.card__header}>
+                          <h2>{job.name}</h2>
+                        </div>
 
-                  <li key={job.id} className={styles.card}>
-                    {console.log(job)}
-                    <div className={styles.card__header}>
-                      <h2>{job.name}</h2>
-                    </div>
-
-                    <div className={styles.card__body}>
-                      <i>{dayjs(job.date).format('DD MMMM YYYY')}</i>
-                      <p className={styles.card__body__rate}>{job.rate}€/h</p>
-                      <p>Place restante : {job.free_stead}</p>
-                      <p>Postulants : {job.candidatures.length}</p>
-                      <p>{job.description.substring(0,40)}...</p>
-                    </div>
-                    
-                    <div className={styles.card__footer}>
-                      <Link  href="/job/[id]" as={`/job/${job.id}`} passHref >
-                        <a><Button content="Voir le job" /></a>
-                      </Link>
-                    </div>
-                  </li>
+                        <div className={styles.card__body}>
+                          <i>{dayjs(job.date).format('DD MMMM YYYY')}</i>
+                          <p className={styles.card__body__rate}>{job.rate}€/h</p>
+                          <p>Place restante : {job.free_stead}</p>
+                          <p>Postulants : {job.candidatures.length}</p>
+                          <p>{job.description.substring(0,40)}...</p>
+                        </div>
+                        
+                        <div className={styles.card__footer}>
+                          <Link  href="/job/[id]" as={`/job/${job.id}`} passHref >
+                            <a><Button content="Voir le job" /></a>
+                          </Link>
+                        </div>
+                      </li>
+                    </a>
+                  </Link>
           
                 ))}
               </ul>
