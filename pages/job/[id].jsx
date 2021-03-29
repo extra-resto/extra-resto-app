@@ -94,7 +94,7 @@ const Job = ({ jobInfos }) => {
 
 export const getServerSideProps = async ({ params }) =>  {
     const jobId = params.id;
-    const jobResponse = await fetch(`${config.SERVER_URL}/jobs/${jobId}`, {
+    const jobResponse = await fetch(`${config.SERVER_URL}jobs/${jobId}`, {
       method: 'get',
       headers: {
         'Content-Type': 'application/json'
