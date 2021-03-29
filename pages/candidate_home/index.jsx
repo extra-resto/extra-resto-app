@@ -25,6 +25,7 @@ const CandidateHome = ({ userCandidatures }) => {
         <div className={styles.candidatures}>
           <div className={styles.candidature__listcontainer}>
             <h1>Vos emplois en attente de confirmation</h1>
+            
             <ul>
               {hiredFalse && hiredFalse.map((candidature) => (
                 <Link href="/job/[id]" as={`/job/${candidature.job.id}`} passHref>
