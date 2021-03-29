@@ -9,7 +9,7 @@ const CardEvent = ({ event }) => {
 	    <div className={styles.CardEvent__body}>
 	    	<ul className={styles.CardEvent__body}>
 	    		{event.jobs && event.jobs.map(job => (
-					<li>{job.free_stead} x {job.name} {job.candidatures.length===1 && `(1 candidate)`}{job.candidatures.length>1 && `(${job.candidatures.length} candidates)`}</li>
+					<li key={job.id} >{job.free_stead} x {job.name} {job.candidatures.length===1 && `(1 candidate)`}{job.candidatures.length>1 && `(${job.candidatures.length} candidates)`}</li>
 	    		))}
 	      	</ul>
 	    </div>
