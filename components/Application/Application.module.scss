@@ -1,0 +1,25 @@
+.Application {
+	display: flex;
+	align-items: center;
+	a {
+	 padding: 10px;
+	}
+	&__nothired {
+		border-radius: 15px;
+		border: 1px solid lightgrey;
+		padding: 10px;
+		background-color: lightgreen;
+	}
+	&__nothired:hover {
+		background-color: lightgrey;
+	}
+	&__waiting {
+		border: 1px solid lightgrey;
+		background-color: orange;
+		border-radius: 15px;
+		padding: 10px;
+	}
+	&__waiting:hover {
+		background-color: lightgrey;
+	}
+}

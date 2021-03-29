@@ -55,51 +55,64 @@ const EmployerHome = ({ userInfos, token }) => {
       </Head>
       <div className={styles.EmployerHome__titlecontainer}>
         <div className={styles.EmployerHome__titlecontainer__titlebloc}>
-          <div className={styles.EmployerHome__titlecontainer__titlebloc__title}>
-            <h1>Mon entreprise</h1>
-            <ModalUpdateBusiness business={userInfos.businesses[0]} token={token} />
-          </div>
-          <h3>{userInfos.businesses[0].name}</h3>
-          <h3>{userInfos.businesses[0].address}</h3>
-          <h3>{userInfos.businesses[0].postal_code} {userInfos.businesses[0].city}</h3>
-          
+          <h1>{userInfos.businesses[0].name}</h1>
+          <h3>{userInfos.businesses[0].address} {userInfos.businesses[0].postal_code} {userInfos.businesses[0].city}</h3>
+          <ModalUpdateBusiness business={userInfos.businesses[0]} token={token} />
         </div>
       </div>
-      <div className={styles.EmployerHome__Modal}>
-        <h2>Evenements à venir:</h2>
-        <ModalNewEvent userInfos={userInfos} token={token} />
+      <div className={styles.EmployerHome__display}>
+        <div className={styles.EmployerHome__Modal}>
+          <h2>Evenements à venir :</h2>
+          <ModalNewEvent userInfos={userInfos} token={token} />
+        </div>
+        <ul className={styles.EmployerHome__eventlist}>
+          {eventList && eventList.map(event => (
+            <li key={event.id} className={styles.EmployerHome__eventlist__item}>
+              <div className={styles.EmployerHome__eventlist__item__buttons}>
+                <ModalUpdateEvent event={event} token={token} />
+                <ModalDeleteEvent event={event} token={token} />
+              </div>
+              <p>{formattedDate(new Date(event.date))}</p>
+              <Link
+                href={{
+                  pathname: '/employer_home/event/[slug]',
+                  query: { slug: event.id },
+                }}
+              >
+                <a>
+                  <CardEvent event={event} />
+                </a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        </div>
       </div>
-      <ul className={styles.EmployerHome__eventlist}>
-      {eventList && eventList.map(event => (
-        <li key={event.id} className={styles.EmployerHome__eventlist__item}>
-          <div className={styles.EmployerHome__eventlist__item__buttons}>
-            <ModalUpdateEvent event={event} token={token} />
-            <ModalDeleteEvent event={event} token={token} />
-          </div>
-          <p>{formattedDate(new Date(event.date))}</p>
-          <Link
-          href={{
-            pathname: '/employer_home/event/[slug]',
-            query: { slug: event.id },
-          }}
-          >
-            <a>
-              <CardEvent event={event} />
-            </a>
-          </Link>
-        </li>
-        ))}
-      </ul>
-    </div>
     </Layout>
   );
 }
 
 export const getServerSideProps = async ({req, res}) =>  {
   
-  if (!req.headers.cookie) return res.writeHead(302, { Location: '/api/login' });
+  if (!req.headers.cookie) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/login'
+      }
+    }
+  }
 
-  const {token, id} = cookie.parse(req.headers.cookie);
+  const { token, id, role } = cookie.parse(req.headers.cookie);
+
+  if (role !== 'employer') {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/'
+      }
+    }
+  }
   
   const eventResponse = await fetch(`${config.SERVER_URL}/users/${id}`, {
     method: 'get',

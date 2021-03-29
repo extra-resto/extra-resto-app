@@ -42,7 +42,24 @@ const Profil = ({ userProfil }) => {
 };
 
 export const getServerSideProps = async ({ req, params }) => {
-  const { token, id } = cookie.parse(req.headers.cookie);
+
+  if (!req.headers.cookie) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/login'
+      }
+    }
+  }
+  const { token, role } = cookie.parse(req.headers.cookie);
+  if (role !== "employer") {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/'
+      }
+    }
+  }
   const user = await fetch(`${config.SERVER_URL}users/${params.id}`, {
     method: "get",
     headers: {
