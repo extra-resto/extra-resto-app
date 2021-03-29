@@ -188,7 +188,7 @@ const FormCandidateSignup = () => {
                 onChange={handleFile} 
                 required 
               />
-              Ajouter votre CV
+              {pdf ? pdf.name : 'Ajouter votre CV'}
             </label>
             <div className={styles.Login__background__form__align}>
               <label htmlFor="password"></label>
