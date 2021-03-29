@@ -10,48 +10,55 @@ export const Navbar = () => {
 
   return (
       <nav className={styles.Navbar}>
-        <Link href='/'>
-  	      <a>
-            <Image
-              src="/images/Navbar/extra-logo.png"
-              height="73px"
-              width="189px"
-              quality="100"
-              alt="extra-resto logo"
-            />
-          </a>
-        </Link>
-
-        {role === 'employer' && 
-          <Link href='/employer_home'>
-            <a>Mon espace</a>
+        <div className={styles.Navbar__left}>
+          <Link href='/'>
+            <a>
+              <Image
+                src="/images/Navbar/extra-logo.png"
+                height="73px"
+                width="189px"
+                quality="100"
+                alt="extra-resto logo"
+              />
+            </a>
           </Link>
-        }
-        
-        {role !== 'employer' && 
-          <Link href='/jobs'>
-            <a>Les jobs</a>
-          </Link>
-        }
 
-        {role === 'candidate' && 
-          <Link href='/candidate_home'>
-            <a>Mon espace</a>
-          </Link>
-        }
+          {role !== 'employer' && 
+            <Link href='/jobs'>
+              <a>Les jobs</a>
+            </Link>
+          }
+        </div>
 
-        {token ? (
-          <div>
+        <div className={styles.Navbar__right}>
+
+          {role === 'employer' && 
+            <Link href='/employer_home'>
+              <a>Mon espace</a>
+            </Link>
+          }
+
+          {role === 'candidate' && 
+            <Link href='/candidate_home'>
+              <a>Mon espace</a>
+            </Link>
+          }
+
+          {token ? (
             <Logout />
-          </div>
-        ):
-        (
-          <div>
+        ) : (
+
             <Link href='/login'>
               <a>Se Connecter</a>
             </Link>
-          </div>
+
         )}
+        </div>
+        
+
+        
+
+        
       </nav>
   )
 }

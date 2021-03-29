@@ -18,14 +18,14 @@ const CandidateHome = ({ userCandidatures }) => {
     <Layout>
       <div className={styles.main}>
         <Head>
-          <title>extra-resto - S'enregistrer</title>
+          <title>extra-resto - espace candidat</title>
           <link rel='icon' href='/favicon.svg' />
         </Head>
         
 
         <div className={styles.candidatures}>
           <div className={styles.candidature__listcontainer}>
-            <h1>Vos emplois en attente de confirmation</h1>
+            <h1>Emplois en attente</h1>
             
             <ul>
               {hiredFalse && hiredFalse.map((candidature) => (
@@ -43,7 +43,7 @@ const CandidateHome = ({ userCandidatures }) => {
             </ul>
           </div>
           <div className={styles.candidature__listcontainer}>
-            <h1>Vos emplois confirmés</h1>
+            <h1>Emplois confirmés</h1>
             <ul>
               {hiredTrue && hiredTrue.map((candidature) => (
                 <Link href="/job/[id]" as={`/job/${candidature.job.id}`} passHref>

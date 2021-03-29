@@ -25,7 +25,8 @@ const CandidateHome = ({ jobListe }) => {
     return (
       <Layout>
         <Head>
-          <title>Candidate home page</title>
+          <title>extra-resto - les jobs</title>
+          <link rel='icon' href='/favicon.svg' />
         </Head>
           <div className={styles.CandidateHome}>
             <h1>Liste des emplois</h1>
