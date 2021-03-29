@@ -18,7 +18,7 @@ const CandidateHome = ({ userCandidatures }) => {
     <Layout>
       <div className={styles.main}>
         <Head>
-          <title>extra-resto - mon espace</title>
+          <title>extra-resto - espace candidat</title>
           <link rel='icon' href='/favicon.svg' />
         </Head>
         
