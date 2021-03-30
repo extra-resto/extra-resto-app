@@ -33,6 +33,10 @@ The app allows business owners to post events, and fill their staff needs, and c
 
 ## Potential Improvements
 
+- Facebook / Gmail login
+- Geolocalization
+- Instant Chat
+- More animations (Framer Motion)
 
 ## Contributors
 
@@ -40,3 +44,4 @@ The app allows business owners to post events, and fill their staff needs, and c
 - [:deciduous_tree: Stephen Toulouse](https://github.com/stephen2790022)
 - [:evergreen_tree: Gaëtan Altier](https://github.com/Badgaga23)
 - [:seedling: Mathieu Joly](https://github.com/mathieu-superpose)
+- [:seedling: Yanis JACOB](https://github.com/Yanis763)
